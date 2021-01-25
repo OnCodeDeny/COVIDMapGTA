@@ -8,11 +8,6 @@ public class AnimateTo : MonoBehaviour
 {
     MapSceneOfLocationAndZoomLevel BaycrestHealthSciences = new MapSceneOfLocationAndZoomLevel(new LatLon(43.729967, -79.434236), 17.0f);
 
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
-
     [SerializeField]
     private MapRenderer _map = null;
 
@@ -21,8 +16,13 @@ public class AnimateTo : MonoBehaviour
         Debug.Assert(_map != null);
     }
 
-    public void AnimateCentreTo()
+    public void AnimateCentreTo(MapSceneOfLabelAndZoomLevel labelAndZoomLevel)
     {
-        _map.SetMapScene(BaycrestHealthSciences);
+        _map.SetMapScene(labelAndZoomLevel);
+    }
+
+    public void AnimateCentreTo(MapSceneOfLocationAndZoomLevel locationAndZoomLevel)
+    {
+        _map.SetMapScene(locationAndZoomLevel);
     }
 }
