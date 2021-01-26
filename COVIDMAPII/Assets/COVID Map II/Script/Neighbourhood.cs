@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Neighbourhood : Place
 {
-    public Neighbourhood(string name, double lon, double lat)
+    public Neighbourhood(string name, double lat, double lon)
     {
         displayName = name;
-        longitude = lon;
         latitude = lat;
+        longitude = lon;
     }
 
     //Store neighbourhood-specific info

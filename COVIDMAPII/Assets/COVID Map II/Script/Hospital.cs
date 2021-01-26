@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class Hospital : Place
 {
-    public Hospital(string name, double lon, double lat){
+    public Hospital(string name, double lat, double lon)
+    {
         displayName = name;
-        longitude = lon;
         latitude = lat;
+        longitude = lon;
     }
 
     //Store hospital-specific info
-    int currentICUCOVIDCaseNumber;
+    public int currentICUCOVIDCaseNumber;
 }

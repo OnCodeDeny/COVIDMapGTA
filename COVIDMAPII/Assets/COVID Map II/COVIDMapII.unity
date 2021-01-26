@@ -130,8 +130,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6071588}
+  - component: {fileID: 6071589}
   m_Layer: 0
-  m_Name: Manager
+  m_Name: Loader
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -145,12 +146,24 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6071587}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.15, z: -0.002000004}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6071589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6071587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6aa0b52e0a3d7a84f8008efb33a6aa77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6432573
 GameObject:
   m_ObjectHideFlags: 0
@@ -851,7 +864,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 2049072595}
   m_Direction: 0
   m_Value: 0
-  m_Size: 1
+  m_Size: 0.9575
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1620,7 +1633,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HorizontalFit: 0
+  m_HorizontalFit: 2
   m_VerticalFit: 2
 --- !u!114 &801896751
 MonoBehaviour:
@@ -1642,10 +1655,10 @@ MonoBehaviour:
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 1
-  m_CellSize: {x: 400, y: 100}
+  m_CellSize: {x: 400, y: 50}
   m_Spacing: {x: 0, y: 0}
-  m_Constraint: 0
-  m_ConstraintCount: 2
+  m_Constraint: 1
+  m_ConstraintCount: 1
 --- !u!1 &816825776
 GameObject:
   m_ObjectHideFlags: 0
@@ -1739,7 +1752,6 @@ GameObject:
   - component: {fileID: 891002283}
   - component: {fileID: 891002282}
   - component: {fileID: 891002284}
-  - component: {fileID: 891002285}
   m_Layer: 0
   m_Name: MapMain
   m_TagString: Untagged
@@ -1953,19 +1965,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _urlFormatString: https://api.mapbox.com/v4/zipc.37pb71mo/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiemlwYyIsImEiOiJja2dnNmJ5cWUweWlmMnhwZHI2Z2x1YTcxIn0.A91cAQJMXDgvUkRl23XEwQ
   _subdomains: []
---- !u!114 &891002285
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 891002273}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2bd0e7c6f679f3147a179ac6cc041427, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _map: {fileID: 0}
 --- !u!1 &899507885
 GameObject:
   m_ObjectHideFlags: 0
@@ -3331,11 +3330,11 @@ RectTransform:
   m_Father: {fileID: 66973464}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 120.1, y: 0}
-  m_SizeDelta: {x: -1142.8643, y: 79.561646}
-  m_Pivot: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: -420, y: 0}
+  m_SizeDelta: {x: 241, y: 80}
+  m_Pivot: {x: 1, y: 1}
 --- !u!1 &1419114288
 GameObject:
   m_ObjectHideFlags: 0
@@ -4531,6 +4530,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2053820260}
+  - component: {fileID: 2053820261}
   m_Layer: 5
   m_Name: Hospital List (Toronto)
   m_TagString: Untagged
@@ -4559,6 +4559,23 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 400, y: 400}
   m_Pivot: {x: 1, y: 1}
+--- !u!114 &2053820261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2053820259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f371379b57a8fdc46a0f0218fafe027c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hospitalListButtonPrefab: {fileID: 7735653230492244486, guid: 8b91dc3236904014f88e34016b7328be,
+    type: 3}
+  populatingSpace: {fileID: 801896749}
+  localDatabase: {fileID: 6071589}
+  controllingMap: {fileID: 891002279}
 --- !u!1 &2070745171
 GameObject:
   m_ObjectHideFlags: 0
