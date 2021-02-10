@@ -7,6 +7,7 @@ public class Place
 {
     //Store place info
     public string displayName;
+    int id;
     //Map data
     public double latitude;
     public double longitude;

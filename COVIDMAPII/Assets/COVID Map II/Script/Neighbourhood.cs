@@ -13,4 +13,8 @@ public class Neighbourhood : Place
 
     //Store neighbourhood-specific info
     int population;
+    float ratePer100000PeopleCumulative;
+    int caseCountCumulative;
+    float ratePer100000PeopleRecent;
+    int caseCountRecent;
 }
