@@ -9,18 +9,19 @@ public class NeighbourhoodListManager : MonoBehaviour
 {
     public GameObject neighbourhoodListButtonPrefab;
     public Transform populatingSpace;
-    public LocalDataLoader localDatabase;
     public MapRenderer controllingMap;
+    public GameObject caseDatumList;
 
     // Start is called before the first frame update
     void Start()
     {
-        foreach (var neighbourhood in localDatabase.neighbourhoods)
+        foreach (Neighbourhood neighbourhood in Neighbourhood.allNeighbourhoods)
         {
-            GameObject button = Instantiate(neighbourhoodListButtonPrefab, populatingSpace.transform);
-            button.transform.GetComponentInChildren<TextMeshProUGUI>().text = neighbourhood.displayName;
-            button.transform.GetComponent<MapMover>().defaultTarget = new MapSceneOfLocationAndZoomLevel(neighbourhood.locationLatLon, 14f);
-            button.transform.GetComponent<MapMover>().map = controllingMap;
+            GameObject button = Instantiate(neighbourhoodListButtonPrefab, populatingSpace);
+            NeighbourhoodListButton neighbourhoodListButton = button.transform.GetComponent<NeighbourhoodListButton>();
+            neighbourhoodListButton.neighbourhoodRepresenting = neighbourhood;
+            neighbourhoodListButton.mapToBeAnimated = controllingMap;
+            neighbourhoodListButton.datumListToBePopulated = caseDatumList;
         }
     }
 }

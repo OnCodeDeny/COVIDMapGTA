@@ -3,17 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using Microsoft.Geospatial;
 
-public class Place
+public abstract class Place
 {
     //Store place info
     public string displayName;
-    int id;
     //Map data
     public double latitude;
     public double longitude;
     //COVID data
-    public int totalCOVIDCaseNumber;
-    public int activeCOVIDCaseNumber;
+    public int cumulativeCaseCount;
+    public int everHospitalizedCaseCount;
+    public int everInICUCaseCount;
+    public int everIntubatedCaseCount;
+
+    public int activeCaseCount;
+    public int currentlyHospitalizedCaseCount;
+    public int currentlyInICUCaseCount;
+    public int currentlyIntubatedCaseCount;
 
     public LatLon locationLatLon
     {

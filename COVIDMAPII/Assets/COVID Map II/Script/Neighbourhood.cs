@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class Neighbourhood : Place
 {
@@ -12,9 +13,10 @@ public class Neighbourhood : Place
     }
 
     //Store neighbourhood-specific info
-    int population;
-    float ratePer100000PeopleCumulative;
-    int caseCountCumulative;
-    float ratePer100000PeopleRecent;
-    int caseCountRecent;
+    public static Neighbourhood westHumberClairville = new Neighbourhood("West Humber-Clairville", 43.713170, -79.595020);
+    public static Neighbourhood eringateCentennialWestDeane = new Neighbourhood("Eringate-Centennial-West Deane", 43.657600, -79.580521);
+    public static Neighbourhood[] allNeighbourhoods = new Neighbourhood[]{
+    westHumberClairville,
+    eringateCentennialWestDeane
+    };
 }

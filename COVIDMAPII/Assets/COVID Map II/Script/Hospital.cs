@@ -12,5 +12,4 @@ public class Hospital : Place
     }
 
     //Store hospital-specific info
-    public int currentICUCOVIDCaseNumber;
 }
