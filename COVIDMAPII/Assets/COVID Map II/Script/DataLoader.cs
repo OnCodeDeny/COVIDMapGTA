@@ -40,33 +40,23 @@ public class DataLoader : MonoBehaviour
     //Cumulative case datum fetch
     public void FetchNeighbourhoodCumulativeCase(Neighbourhood neighbourhood)
     {
-        string[] filters = new string[]
-        {
-            $"\"Neighbourhood Name\":\"{neighbourhood.displayName}\"",
-            "\"Classification\":\"CONFIRMED\""
-        };
-        StartCoroutine(GetCaseDatum(filters, (number) => { neighbourhood.cumulativeCaseCount = number; }));
+        string filter = "{\"Neighbourhood Name\":\"" + neighbourhood.displayName + "\",\"Classification\":\"CONFIRMED\"}";
+        StartCoroutine(GetCaseDatum(filter, (number) => { neighbourhood.cumulativeCaseCount = number; }));
     }
 
     //Active case datum fetch
     public void FetchNeighbourhoodActiveCase(Neighbourhood neighbourhood)
     {
-        string[] filters = new string[]
-        {
-            $"\"Neighbourhood Name\":\"{neighbourhood.displayName}\"",
-            "\"Classification\":\"CONFIRMED\"",
-            "\"Outcome\":\"ACTIVE\""
-        };
-        StartCoroutine(GetCaseDatum(filters, (number) => { neighbourhood.activeCaseCount = number; }));
+        string filter = "{\"Neighbourhood Name\":\"" + neighbourhood.displayName + "\",\"Classification\":\"CONFIRMED\",\"Outcome\":\"ACTIVE\"}";
+        StartCoroutine(GetCaseDatum(filter, (number) => { neighbourhood.activeCaseCount = number; }));
     }
 
-    public IEnumerator GetCaseDatum(string[] filters, Action<int> callbackOnFinish)
+    public IEnumerator GetCaseDatum(string filter, Action<int> callbackOnFinish)
     {
         WWWForm requestForm = new WWWForm();
         requestForm.AddField("resource_id", "e5bf35bc-e681-43da-b2ce-0242d00922ad");
         requestForm.AddField("limit", "0");
-        string filtersJoined = "{" + string.Join(",", filters) + "}";
-        requestForm.AddField("filters", filtersJoined);
+        requestForm.AddField("filters", filter);
         UnityWebRequest searchRequest = UnityWebRequest.Post("http://ckan0.cf.opendata.inter.prod-toronto.ca/api/3/action/datastore_search", requestForm);
         yield return searchRequest.SendWebRequest();
         if (searchRequest.isNetworkError || searchRequest.isHttpError)
