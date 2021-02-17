@@ -21,6 +21,8 @@ public abstract class Place
     public int currentlyInICUCaseCount;
     public int currentlyIntubatedCaseCount;
 
+    public int deceasedCaseCount;
+
     public LatLon locationLatLon
     {
         get => new LatLon(latitude, longitude);

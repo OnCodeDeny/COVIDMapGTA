@@ -10,7 +10,7 @@ public class NeighbourhoodListManager : MonoBehaviour
     public GameObject neighbourhoodListButtonPrefab;
     public Transform populatingSpace;
     public MapRenderer controllingMap;
-    public GameObject caseDatumList;
+    public CaseDatumListManager caseDatumList;
 
     // Start is called before the first frame update
     void Start()

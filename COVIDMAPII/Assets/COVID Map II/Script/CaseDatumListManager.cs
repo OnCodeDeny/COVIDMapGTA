@@ -16,11 +16,15 @@ public class CaseDatumListManager : MonoBehaviour
             Destroy(child.gameObject);
         }
 
+        //abstract for future: dictionary+keyvaluepairs.
         string[] data = new string[] {
         "Cumulative Case: "+neighbourhood.cumulativeCaseCount,
         "Ever Hospitalized: "+neighbourhood.everHospitalizedCaseCount,
         "Ever in ICU: "+neighbourhood.everInICUCaseCount,
         "Ever Intubated: "+neighbourhood.everIntubatedCaseCount,
+
+        "Deceased: "+neighbourhood.deceasedCaseCount,
+
         "Active Case: "+neighbourhood.activeCaseCount,
         "Currently Hospitalized: "+neighbourhood.currentlyHospitalizedCaseCount,
         "Currently in ICU: "+neighbourhood.currentlyInICUCaseCount,
@@ -31,5 +35,7 @@ public class CaseDatumListManager : MonoBehaviour
         {
             Instantiate(CaseDatumListTextPrefab, populatingSpace).GetComponent<TextMeshProUGUI>().text = datum;
         }
+
+        gameObject.SetActive(true);
     }
 }

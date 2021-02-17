@@ -611,7 +611,7 @@ MonoBehaviour:
     type: 3}
   populatingSpace: {fileID: 358217336}
   controllingMap: {fileID: 891002279}
-  caseDatumList: {fileID: 1803906120}
+  caseDatumList: {fileID: 1803906122}
 --- !u!1 &175715486
 GameObject:
   m_ObjectHideFlags: 0
@@ -5329,7 +5329,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1803906121
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5348,7 +5348,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 1, y: -500}
-  m_SizeDelta: {x: 1000, y: 200}
+  m_SizeDelta: {x: 1000, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1803906122
 MonoBehaviour:
