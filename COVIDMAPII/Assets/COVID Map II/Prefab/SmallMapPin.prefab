@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4787549681579734}
   - component: {fileID: 33129128449071882}
   - component: {fileID: 23800032307151600}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: MapPinStem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 1129522993810948}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.65, z: 0}
-  m_LocalScale: {x: 0.05, y: 0.55, z: 0.05}
+  m_LocalScale: {x: 0.15, y: 1.3829268, z: 0.15}
   m_Children: []
   m_Father: {fileID: 4538093146654690}
   m_RootOrder: 2
@@ -39,7 +39,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1129522993810948}
-  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &23800032307151600
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -58,7 +58,7 @@ MeshRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 77658f8cd24b1044d9c7672606523a2c, type: 2}
+  - {fileID: 2100000, guid: 7f63c2be20cade14dada8d6e8f42c3eb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -90,13 +90,13 @@ GameObject:
   - component: {fileID: 4242274339127028}
   - component: {fileID: 33290273293180674}
   - component: {fileID: 23169215748939422}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4242274339127028
 Transform:
   m_ObjectHideFlags: 0
@@ -171,7 +171,7 @@ GameObject:
   - component: {fileID: 8485608606784131832}
   - component: {fileID: 5278864850003405192}
   - component: {fileID: 7252637114426209728}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SmallMapPin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -298,7 +298,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4538093146654690}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -334,7 +334,7 @@ GameObject:
   - component: {fileID: 5834456297681937167}
   - component: {fileID: 4965686013016767895}
   - component: {fileID: 8042597523268217699}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TextMeshPro
   m_TagString: Untagged
   m_Icon: {fileID: 0}
