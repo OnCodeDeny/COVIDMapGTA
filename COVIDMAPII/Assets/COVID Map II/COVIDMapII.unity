@@ -2627,7 +2627,7 @@ MonoBehaviour:
   _mapPins:
     _list: []
   _isClusteringEnabled: 1
-  _clusterThreshold: 2
+  _clusterThreshold: 140
   _clusterMapPinPrefab: {fileID: 114898586744110094, guid: 8599d835c5dd50045bfbe191f496eebd,
     type: 3}
 --- !u!1 &899507885
