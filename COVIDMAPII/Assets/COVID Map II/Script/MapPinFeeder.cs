@@ -33,7 +33,7 @@ public class MapPinFeeder : MonoBehaviour
             mapPin.Location = new LatLon(neighbourhood.latitude, neighbourhood.longitude);
             _mapPinLayer.MapPins.Add(mapPin);
 
-            mapPin.GetComponentInChildren<TextMeshPro>().text = neighbourhood.activeCaseCount.ToString();
+            mapPin.GetComponent<NeighbourhoodPin>().neighbourhoodRepresenting = neighbourhood;
         }
     }
 }

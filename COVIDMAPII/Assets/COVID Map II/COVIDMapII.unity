@@ -2580,7 +2580,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b43805b646baceb4d9f28507342754b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _urlFormatString: https://api.mapbox.com/styles/v1/zipc/ckgslxp3l1oc419s0trfp28jm/draft/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiemlwYyIsImEiOiJja2dnNmJ5cWUweWlmMnhwZHI2Z2x1YTcxIn0.A91cAQJMXDgvUkRl23XEwQ
+  _urlFormatString: https://api.mapbox.com/styles/v1/zipc/ckm38vcw02xhc17qrz4psvfe6/draft/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiemlwYyIsImEiOiJja2dnNmJ5cWUweWlmMnhwZHI2Z2x1YTcxIn0.A91cAQJMXDgvUkRl23XEwQ
   _subdomains: []
 --- !u!114 &891002285
 MonoBehaviour:
