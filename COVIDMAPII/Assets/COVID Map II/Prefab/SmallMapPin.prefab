@@ -169,7 +169,6 @@ GameObject:
   - component: {fileID: 4545156311932626}
   - component: {fileID: 114401410002030188}
   - component: {fileID: 8485608606784131832}
-  - component: {fileID: -6969831806815839526}
   - component: {fileID: 5278864850003405192}
   - component: {fileID: 7252637114426209728}
   m_Layer: 0
@@ -249,18 +248,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23862c6b28b2c4e4da5cb1c1f3bb0e95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &-6969831806815839526
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1452448874978094}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 640888791a51286498b083b38ab9cc57, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &5278864850003405192
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -273,11 +260,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eac5fceb29eb90443b777a4663acfe99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mapToBeAnimated: {fileID: 0}
   OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: -6969831806815839526}
-        m_MethodName: Zoom
+      - m_Target: {fileID: 5278864850003405192}
+        m_MethodName: MoveMapCentreToTarget
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

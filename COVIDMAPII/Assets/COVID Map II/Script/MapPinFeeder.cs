@@ -33,7 +33,9 @@ public class MapPinFeeder : MonoBehaviour
             mapPin.Location = new LatLon(neighbourhood.latitude, neighbourhood.longitude);
             _mapPinLayer.MapPins.Add(mapPin);
 
-            mapPin.GetComponent<NeighbourhoodPin>().neighbourhoodRepresenting = neighbourhood;
+            NeighbourhoodPin neighbourhoodPin = mapPin.GetComponent<NeighbourhoodPin>();
+            neighbourhoodPin.neighbourhoodRepresenting = neighbourhood;
+            neighbourhoodPin.mapToBeAnimated = GetComponent<MapRenderer>();
         }
     }
 }

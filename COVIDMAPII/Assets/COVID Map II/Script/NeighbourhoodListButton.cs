@@ -9,18 +9,18 @@ public class NeighbourhoodListButton : MonoBehaviour
     public Neighbourhood neighbourhoodRepresenting;
 
     public MapRenderer mapToBeAnimated;
-    public MapSceneOfLocationAndZoomLevel targetLocationOnMap;
+    private MapSceneOfLocationAndZoomLevel _targetLocationOnMap;
     public CaseDatumListManager datumListToBePopulated;
 
     private void Start()
     {
         transform.GetComponentInChildren<TextMeshProUGUI>().text = neighbourhoodRepresenting.displayName;
-        targetLocationOnMap = new MapSceneOfLocationAndZoomLevel(neighbourhoodRepresenting.locationLatLon, 14f);
+        _targetLocationOnMap = new MapSceneOfLocationAndZoomLevel(neighbourhoodRepresenting.locationLatLon, 14f);
     }
 
     public void MoveMapCentreToTarget()
     {
-        mapToBeAnimated.SetMapScene(targetLocationOnMap);
+        mapToBeAnimated.SetMapScene(_targetLocationOnMap);
     }
 
     public void DisplayCaseData()
