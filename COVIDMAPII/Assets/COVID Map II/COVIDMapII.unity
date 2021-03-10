@@ -1641,7 +1641,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 891002284}
+      - m_Target: {fileID: 0}
         m_MethodName: set_enabled
         m_Mode: 0
         m_Arguments:
@@ -2357,18 +2357,21 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 891002281}
+  - component: {fileID: 891002274}
   - component: {fileID: 891002280}
   - component: {fileID: 891002279}
   - component: {fileID: 891002278}
   - component: {fileID: 891002277}
   - component: {fileID: 891002276}
+  - component: {fileID: 891002285}
   - component: {fileID: 891002275}
-  - component: {fileID: 891002274}
   - component: {fileID: 891002283}
   - component: {fileID: 891002282}
   - component: {fileID: 891002284}
+  - component: {fileID: 891002287}
+  - component: {fileID: 891002286}
   m_Layer: 0
-  m_Name: MapMain
+  m_Name: Map
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2443,7 +2446,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _imageryType: 1
   _areRoadsEnabled: 1
-  _areLabelsEnabled: 1
+  _areLabelsEnabled: 0
   _isHillShadingEnabled: 1
   _imageryStyle: 0
 --- !u!114 &891002279
@@ -2464,9 +2467,9 @@ MonoBehaviour:
   _mapEdgeColorFadeDistance: 0.02
   _detailOffset: 0
   _center:
-    _latitude: 43.6791660693792
-    _longitude: -79.3552294153796
-  _zoomLevel: 14.280027
+    _latitude: 43.7441866218995
+    _longitude: -79.3863759227723
+  _zoomLevel: 10.14001
   _minimumZoomLevel: 1
   _maximumZoomLevel: 20
   _mapTerrainType: 0
@@ -2521,8 +2524,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1712549012}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2573,13 +2575,61 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 891002273}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b43805b646baceb4d9f28507342754b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _urlFormatString: https://api.mapbox.com/v4/zipc.37pb71mo/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiemlwYyIsImEiOiJja2dnNmJ5cWUweWlmMnhwZHI2Z2x1YTcxIn0.A91cAQJMXDgvUkRl23XEwQ
+  _urlFormatString: https://api.mapbox.com/styles/v1/zipc/ckm38vcw02xhc17qrz4psvfe6/draft/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiemlwYyIsImEiOiJja2dnNmJ5cWUweWlmMnhwZHI2Z2x1YTcxIn0.A91cAQJMXDgvUkRl23XEwQ
   _subdomains: []
+--- !u!114 &891002285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 891002273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1161150876, guid: f58183a31672bf641bbeeaef3d4759c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mapLabelPrefab: {fileID: 114148349346486096, guid: 2421f6047c928504488bdcc6d7d6e719,
+    type: 3}
+--- !u!114 &891002286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 891002273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbacf7d0bf824e9429fff1af03caffaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mapPinLayer: {fileID: 891002287}
+  _mapPinPrefab: {fileID: 114401410002030188, guid: 261b26b55d6094847bd1c13743c5f073,
+    type: 3}
+--- !u!114 &891002287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 891002273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d8a6459eb3010b4f9751de03dca135a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _layerName: Neighbourhood Pin Layer
+  _mapPins:
+    _list: []
+  _isClusteringEnabled: 1
+  _clusterThreshold: 2
+  _clusterMapPinPrefab: {fileID: 114898586744110094, guid: 8599d835c5dd50045bfbe191f496eebd,
+    type: 3}
 --- !u!1 &899507885
 GameObject:
   m_ObjectHideFlags: 0
@@ -5050,144 +5100,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1673659066}
   m_CullTransparentMesh: 0
---- !u!1 &1712549007
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1712549012}
-  - component: {fileID: 1712549011}
-  - component: {fileID: 1712549010}
-  - component: {fileID: 1712549009}
-  - component: {fileID: 1712549008}
-  m_Layer: 0
-  m_Name: Capsule
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &1712549008
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1712549007}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0bb87916f59f52349b237e7ce66a84a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _location:
-    _latitude: 43.6604538901411
-    _longitude: -79.3875723880584
-  _altitude: 180
-  _altitudeReference: 2
-  IsLayerSynchronized: 1
-  UseRealWorldScale: 1
-  ScaleCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0.012334585
-      value: 0.0016845334
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 30.07265
-      value: 0.009391993
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 0
-    m_PostInfinity: 2
-    m_RotationOrder: 4
---- !u!136 &1712549009
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1712549007}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!23 &1712549010
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1712549007}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
---- !u!33 &1712549011
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1712549007}
-  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &1712549012
-Transform:
-  m_ObjectHideFlags: 8
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1712549007}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.4992245, y: 0.34136015, z: -0.3993036}
-  m_LocalScale: {x: 0.00000094380727, y: 0.00000094380727, z: 0.00000094380727}
-  m_Children: []
-  m_Father: {fileID: 891002281}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1734204427
 GameObject:
   m_ObjectHideFlags: 0
