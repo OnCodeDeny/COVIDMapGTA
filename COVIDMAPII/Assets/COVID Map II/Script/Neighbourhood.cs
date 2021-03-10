@@ -12,10 +12,17 @@ public class Neighbourhood : Place
     }
 
     //Store neighbourhood-specific info
-    public static Neighbourhood westHumberClairville = new Neighbourhood("West Humber-Clairville", 43.713170, -79.595020);
-    public static Neighbourhood eringateCentennialWestDeane = new Neighbourhood("Eringate-Centennial-West Deane", 43.657600, -79.580521);
-    public static Neighbourhood[] allNeighbourhoods = new Neighbourhood[]{
+    public static Neighbourhood westHumberClairville = new Neighbourhood("West Humber-Clairville", 43.713165, -79.595016);
+    public static Neighbourhood eringateCentennialWestDeane = new Neighbourhood("Eringate-Centennial-West Deane", 43.65760040283203, -79.58052062988281);
+    //public static Neighbourhood mountOliveSilverstoneJamestown = new Neighbourhood("Mount Olive-Silverstone-Jamestown", 43.657600, -79.580521);
+    //public static Neighbourhood thistletownBeaumondHeights = new Neighbourhood("Thistletown-Beaumond Heights", 43.657600, -79.580521);
+    //public static Neighbourhood rexdaleKipling = new Neighbourhood("Rexdale-Kipling", 43.657600, -79.580521);
+
+    public static Neighbourhood[] allNeighbourhoods = {
     westHumberClairville,
-    eringateCentennialWestDeane
+    eringateCentennialWestDeane,
+    //mountOliveSilverstoneJamestown,
+    //thistletownBeaumondHeights,
+    //rexdaleKipling
     };
 }

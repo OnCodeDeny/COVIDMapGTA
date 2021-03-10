@@ -5,6 +5,9 @@ using Microsoft.Geospatial;
 
 public abstract class Place
 {
+    //Fast query the location(lat,long) from BingMaps REST service:
+    //http://dev.virtualearth.net/REST/v1/Locations/CA/ON/Toronto/{AddressBeforeSpace}%20{AddressAfterSpace}?key={BingMapsAPIKey}
+
     //Store place info
     public string displayName;
     //Map data
