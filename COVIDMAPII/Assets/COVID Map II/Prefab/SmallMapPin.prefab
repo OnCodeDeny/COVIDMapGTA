@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 4787549681579734}
   - component: {fileID: 33129128449071882}
   - component: {fileID: 23800032307151600}
+  - component: {fileID: 5713014289760685513}
+  - component: {fileID: 8627329241609093141}
   m_Layer: 0
   m_Name: MapPinStem
   m_TagString: Untagged
@@ -79,6 +81,41 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!136 &5713014289760685513
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1129522993810948}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.5000002
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0.00000005960465, y: 0, z: -0.00000008940698}
+--- !u!114 &8627329241609093141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1129522993810948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7000faad9697944db1ae3516fcd576f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnHover:
+    m_PersistentCalls:
+      m_Calls: []
+  OnEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  OnExit:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1339640369366546
 GameObject:
   m_ObjectHideFlags: 0
@@ -90,6 +127,8 @@ GameObject:
   - component: {fileID: 4242274339127028}
   - component: {fileID: 33290273293180674}
   - component: {fileID: 23169215748939422}
+  - component: {fileID: 3910502946215970434}
+  - component: {fileID: 2398742353385716218}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -158,6 +197,55 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &3910502946215970434
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1339640369366546}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.0000001, z: 1.0000001}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2398742353385716218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1339640369366546}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf2f22815f771d544b912629d1145274, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  neighbourhoodPin: {fileID: 5278864850003405192}
+  OnHover:
+    m_PersistentCalls:
+      m_Calls: []
+  OnEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  OnExit:
+    m_PersistentCalls:
+      m_Calls: []
+  OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5278864850003405192}
+        m_MethodName: MoveMapCentreToTarget
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1452448874978094
 GameObject:
   m_ObjectHideFlags: 0
@@ -170,7 +258,6 @@ GameObject:
   - component: {fileID: 114401410002030188}
   - component: {fileID: 8485608606784131832}
   - component: {fileID: 5278864850003405192}
-  - component: {fileID: 7252637114426209728}
   m_Layer: 0
   m_Name: SmallMapPin
   m_TagString: Untagged
@@ -261,34 +348,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapToBeAnimated: {fileID: 0}
-  OnClick:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5278864850003405192}
-        m_MethodName: MoveMapCentreToTarget
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!136 &7252637114426209728
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1452448874978094}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 0.008521028
-  m_Height: 0.017042056
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.1251969, z: 0}
 --- !u!1 &1748168262977102
 GameObject:
   m_ObjectHideFlags: 0

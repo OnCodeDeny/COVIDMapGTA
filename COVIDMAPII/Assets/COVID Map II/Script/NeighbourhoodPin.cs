@@ -23,11 +23,4 @@ public class NeighbourhoodPin : MonoBehaviour
     {
         mapToBeAnimated.SetMapScene(_targetLocationOnMap);
     }
-
-    public UnityEvent OnClick = new UnityEvent();
-    private void OnMouseUpAsButton()
-    {
-        OnClick.Invoke();
-        Debug.Log(neighbourhoodRepresenting.displayName);
-    }
 }
