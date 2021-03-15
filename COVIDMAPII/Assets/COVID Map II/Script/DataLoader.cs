@@ -6,32 +6,28 @@ using UnityEngine.Networking;
 
 public class DataLoader : MonoBehaviour
 {
+    string[] caseRequestFilterSuffix = new string[9];
     private void Awake()
     {
-        foreach (Neighbourhood neighbourhood in Neighbourhood.allNeighbourhoods)
-        {
-            FetchNeighbourhoodCumulativeCase(neighbourhood);
-            FetchNeighbourhoodActiveCase(neighbourhood);
-            FetchNeighbourhoodEverHospitalizedCase(neighbourhood);
-            FetchNeighbourhoodEverInICUCase(neighbourhood);
-            FetchNeighbourhoodEverIntubatedCase(neighbourhood);
-            FetchNeighbourhoodCurrentlyHospitalizedCase(neighbourhood);
-            FetchNeighbourhoodCurrentlyInICUCase(neighbourhood);
-            FetchNeighbourhoodCurrentlyIntubatedCase(neighbourhood);
-            FetchNeighbourhoodDeceasedCase(neighbourhood);
-        }
+        caseRequestFilterSuffix[(int)CaseType.Active]= "\",\"Classification\":\"CONFIRMED\",\"Outcome\":\"ACTIVE\"}";
+        caseRequestFilterSuffix[(int)CaseType.Cumulative] = "\",\"Classification\":\"CONFIRMED\"}";
+        caseRequestFilterSuffix[(int)CaseType.EverHospitalized] = "\",\"Classification\":\"CONFIRMED\",\"Ever Hospitalized\":\"Yes\"}";
+        caseRequestFilterSuffix[(int)CaseType.EverInICU] = "\",\"Classification\":\"CONFIRMED\",\"Ever in ICU\":\"Yes\"}";
+        caseRequestFilterSuffix[(int)CaseType.EverIntubated] = "\",\"Classification\":\"CONFIRMED\",\"Ever Intubated\":\"Yes\"}";
+        caseRequestFilterSuffix[(int)CaseType.CurrentlyHospitalized] = "\",\"Classification\":\"CONFIRMED\",\"Currently Hospitalized\":\"Yes\"}";
+        caseRequestFilterSuffix[(int)CaseType.CurrentlyInICU] = "\",\"Classification\":\"CONFIRMED\",\"Currently in ICU\":\"Yes\"}";
+        caseRequestFilterSuffix[(int)CaseType.CurrentlyIntubated] = "\",\"Classification\":\"CONFIRMED\",\"Currently Intubated\":\"Yes\"}";
+        caseRequestFilterSuffix[(int)CaseType.Deceased] = "\",\"Classification\":\"CONFIRMED\",\"Outcome\":\"FATAL\"}";
 
-        /***COMPROMISED FETCHING INTERFACE***
-        FetchCaseData("https://drive.google.com/uc?export=download&id=1jzH64LvFQ-UsDibXO0MOtvjbL2CvnV3N");***/
+        foreach (CaseType caseType in Enum.GetValues(typeof(CaseType)))
+        {
+            foreach (Neighbourhood neighbourhood in Neighbourhood.allNeighbourhoods)
+            {
+                RequestNeighbourhoodCaseData(neighbourhood, caseType);
+            }
+        }
     }
 
-    /***COMPROMISED FETCHING INTERFACE***
-    public void FetchCaseData(string url)
-    {
-        WebClient client = new WebClient();
-        client.DownloadFile(url, Application.persistentDataPath+@"\CaseData.xlsx");
-
-    }***/
     [System.Serializable]
     public struct Result
     {
@@ -44,70 +40,15 @@ public class DataLoader : MonoBehaviour
         public Result result;
     }
 
-    //Fetch datum: Cumulative Case
-    public void FetchNeighbourhoodCumulativeCase(Neighbourhood neighbourhood)
+    //Request case datum
+    public void RequestNeighbourhoodCaseData(Neighbourhood neighbourhood, CaseType caseType)
     {
-        string filter = "{\"Neighbourhood Name\":\"" + neighbourhood.displayName + "\",\"Classification\":\"CONFIRMED\"}";
-        StartCoroutine(GetCaseDatum(filter, (number) => { neighbourhood.cumulativeCaseCount = number; }));
+        int caseTypeIndex = (int)caseType;
+        string filter = "{\"Neighbourhood Name\":\"" + neighbourhood.displayName + caseRequestFilterSuffix[caseTypeIndex];
+        StartCoroutine(GetCaseDatum(filter, (number) => { neighbourhood.caseCountData[caseTypeIndex] = number; }));
     }
 
-    //Fetch datum: Active Case
-    public void FetchNeighbourhoodActiveCase(Neighbourhood neighbourhood)
-    {
-        string filter = "{\"Neighbourhood Name\":\"" + neighbourhood.displayName + "\",\"Classification\":\"CONFIRMED\",\"Outcome\":\"ACTIVE\"}";
-        StartCoroutine(GetCaseDatum(filter, (number) => { neighbourhood.activeCaseCount = number; }));
-    }
-
-    //Fetch datum: Ever Hospitalized
-    public void FetchNeighbourhoodEverHospitalizedCase(Neighbourhood neighbourhood)
-    {
-        string filter = "{\"Neighbourhood Name\":\"" + neighbourhood.displayName + "\",\"Classification\":\"CONFIRMED\",\"Ever Hospitalized\":\"Yes\"}";
-        StartCoroutine(GetCaseDatum(filter, (number) => { neighbourhood.everHospitalizedCaseCount = number; }));
-    }
-
-    //Fetch datum: Ever in ICU
-    public void FetchNeighbourhoodEverInICUCase(Neighbourhood neighbourhood)
-    {
-        string filter = "{\"Neighbourhood Name\":\"" + neighbourhood.displayName + "\",\"Classification\":\"CONFIRMED\",\"Ever in ICU\":\"Yes\"}";
-        StartCoroutine(GetCaseDatum(filter, (number) => { neighbourhood.everInICUCaseCount = number; }));
-    }
-
-    //Fetch datum: Ever Intubated
-    public void FetchNeighbourhoodEverIntubatedCase(Neighbourhood neighbourhood)
-    {
-        string filter = "{\"Neighbourhood Name\":\"" + neighbourhood.displayName + "\",\"Classification\":\"CONFIRMED\",\"Ever Intubated\":\"Yes\"}";
-        StartCoroutine(GetCaseDatum(filter, (number) => { neighbourhood.everIntubatedCaseCount = number; }));
-    }
-
-    //Fetch datum: Currently Hospitalized
-    public void FetchNeighbourhoodCurrentlyHospitalizedCase(Neighbourhood neighbourhood)
-    {
-        string filter = "{\"Neighbourhood Name\":\"" + neighbourhood.displayName + "\",\"Classification\":\"CONFIRMED\",\"Currently Hospitalized\":\"Yes\"}";
-        StartCoroutine(GetCaseDatum(filter, (number) => { neighbourhood.currentlyHospitalizedCaseCount = number; }));
-    }
-
-    //Fetch datum: Currently in ICU
-    public void FetchNeighbourhoodCurrentlyInICUCase(Neighbourhood neighbourhood)
-    {
-        string filter = "{\"Neighbourhood Name\":\"" + neighbourhood.displayName + "\",\"Classification\":\"CONFIRMED\",\"Currently in ICU\":\"Yes\"}";
-        StartCoroutine(GetCaseDatum(filter, (number) => { neighbourhood.currentlyInICUCaseCount = number; }));
-    }
-
-    //Fetch datum: Currently Intubated
-    public void FetchNeighbourhoodCurrentlyIntubatedCase(Neighbourhood neighbourhood)
-    {
-        string filter = "{\"Neighbourhood Name\":\"" + neighbourhood.displayName + "\",\"Classification\":\"CONFIRMED\",\"Currently Intubated\":\"Yes\"}";
-        StartCoroutine(GetCaseDatum(filter, (number) => { neighbourhood.currentlyIntubatedCaseCount = number; }));
-    }
-
-    //Fetch datum: Deceased
-    public void FetchNeighbourhoodDeceasedCase(Neighbourhood neighbourhood)
-    {
-        string filter = "{\"Neighbourhood Name\":\"" + neighbourhood.displayName + "\",\"Classification\":\"CONFIRMED\",\"Outcome\":\"FATAL\"}";
-        StartCoroutine(GetCaseDatum(filter, (number) => { neighbourhood.deceasedCaseCount = number; }));
-    }
-
-    //Fetch datum
+    //Send data request
     public IEnumerator GetCaseDatum(string filter, Action<int> callbackOnFinish)
     {
         WWWForm requestForm = new WWWForm();
@@ -124,7 +65,15 @@ public class DataLoader : MonoBehaviour
         {
             WebResponse searchResponse = JsonUtility.FromJson<WebResponse>(searchRequest.downloadHandler.text);
             callbackOnFinish(searchResponse.result.total);
-            //Debug.Log(JsonUtility.ToJson(searchResponse));
+            CalculateNeighbourhoodWithMaxCaseData();
+        }
+    }
+
+    public void CalculateNeighbourhoodWithMaxCaseData()
+    {
+        foreach (CaseType caseType in Enum.GetValues(typeof(CaseType)))
+        {
+            Neighbourhood.NeighbourhoodWithMaxCaseCount(caseType, true);
         }
     }
 }

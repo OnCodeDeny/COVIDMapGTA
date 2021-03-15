@@ -11,6 +11,9 @@ GameObject:
   - component: {fileID: 4787549681579734}
   - component: {fileID: 33129128449071882}
   - component: {fileID: 23800032307151600}
+  - component: {fileID: 354351673484441338}
+  - component: {fileID: 8627329241609093141}
+  - component: {fileID: 3542018341105275240}
   m_Layer: 8
   m_Name: MapPinStem
   m_TagString: Untagged
@@ -79,8 +82,8 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!136 &5713014289760685513
-CapsuleCollider:
+--- !u!65 &354351673484441338
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -89,10 +92,9 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.5000002
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.00000005960465, y: 0, z: -0.00000008940698}
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8627329241609093141
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,6 +116,23 @@ MonoBehaviour:
   OnExit:
     m_PersistentCalls:
       m_Calls: []
+  OnClick:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &3542018341105275240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1129522993810948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caa3a2402eb444e47a362501623e087f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heightMultiplier: 3
+  colourMultiplier: 255
 --- !u!1 &1339640369366546
 GameObject:
   m_ObjectHideFlags: 0
@@ -125,13 +144,15 @@ GameObject:
   - component: {fileID: 4242274339127028}
   - component: {fileID: 33290273293180674}
   - component: {fileID: 23169215748939422}
+  - component: {fileID: 3910502946215970434}
+  - component: {fileID: 2398742353385716218}
   m_Layer: 8
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4242274339127028
 Transform:
   m_ObjectHideFlags: 0
@@ -140,7 +161,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1339640369366546}
   m_LocalRotation: {x: 0.44666547, y: 0.50595504, z: 0.08757909, w: 0.7326864}
-  m_LocalPosition: {x: 0, y: 1.25, z: 0}
+  m_LocalPosition: {x: 0, y: 1.449, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children: []
   m_Father: {fileID: 4538093146654690}
@@ -218,7 +239,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf2f22815f771d544b912629d1145274, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  neighbourhoodPin: {fileID: 5278864850003405192}
   OnHover:
     m_PersistentCalls:
       m_Calls: []
@@ -254,7 +274,6 @@ GameObject:
   - component: {fileID: 114401410002030188}
   - component: {fileID: 8485608606784131832}
   - component: {fileID: 5278864850003405192}
-  - component: {fileID: 7252637114426209728}
   m_Layer: 8
   m_Name: SmallMapPin
   m_TagString: Untagged
@@ -344,6 +363,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eac5fceb29eb90443b777a4663acfe99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dataBar: {fileID: 3542018341105275240}
   mapToBeAnimated: {fileID: 0}
 --- !u!1 &1748168262977102
 GameObject:

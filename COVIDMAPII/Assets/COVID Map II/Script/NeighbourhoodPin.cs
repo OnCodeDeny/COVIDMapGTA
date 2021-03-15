@@ -8,6 +8,7 @@ using UnityEngine.EventSystems;
 
 public class NeighbourhoodPin : MonoBehaviour
 {
+    public DataVisualizer dataBar;
     public Neighbourhood neighbourhoodRepresenting;
 
     public MapRenderer mapToBeAnimated;
@@ -15,6 +16,7 @@ public class NeighbourhoodPin : MonoBehaviour
 
     private void Start()
     {
+        dataBar.neighbourhoodRepresenting = neighbourhoodRepresenting;
         _targetLocationOnMap = new MapSceneOfLocationAndZoomLevel(neighbourhoodRepresenting.locationLatLon, 14f);
         //This should happen after data loading, try coroutine?
         //GetComponentInChildren<TextMeshPro>().text = neighbourhoodRepresenting.activeCaseCount.ToString();
