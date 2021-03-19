@@ -4,6 +4,7 @@ using UnityEngine;
 using System.IO;
 using System;
 using UnityEngine.Networking;
+using SimpleJSON;
 
 public class DataLoader : MonoBehaviour
 {
@@ -13,7 +14,7 @@ public class DataLoader : MonoBehaviour
     public struct COVIDCaseData
     {
         public Field[] fields;
-        public string[][] records;
+        public object[][] records;
     }
 
     [Serializable]
@@ -31,12 +32,6 @@ public class DataLoader : MonoBehaviour
         public string type_override;
         public string label;
     }
-
-    //[Serializable]
-    //public struct Record
-    //{
-    //    public object[] common;
-    //}
 
     void Awake()
     {
@@ -66,18 +61,21 @@ public class DataLoader : MonoBehaviour
         if (File.Exists(caseDataFilePath))
         {
             string caseDataFileContents = File.ReadAllText(caseDataFilePath);
-            COVIDCaseData covidCaseData = JsonUtility.FromJson<COVIDCaseData>(caseDataFileContents);
-            Debug.Assert(covidCaseData.records != null);
+            JSONNode covidCaseData = JSON.Parse(caseDataFileContents);
+            //Debug.Log(covidCaseData["records"][0][7].Value);
             FilterCaseData(covidCaseData);
         }
     }
 
-    private void FilterCaseData(COVIDCaseData covidCaseData)
+    private void FilterCaseData(JSONNode covidCaseData)
     {
-        //foreach (object[] objects in covidCaseData.records)
-        //{
-        
-        //}
+        int c = 0;
+        foreach (JSONArray jsonArray in covidCaseData["records"])
+        {
+            if (jsonArray[7].Value == "CONFIRMED")
+                c++;
+        }
+        Debug.Log(c);
     }
 
     ///DEPRECATED///
