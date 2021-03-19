@@ -1,12 +1,88 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 using System;
 using UnityEngine.Networking;
 
 public class DataLoader : MonoBehaviour
 {
-    string[] caseRequestFilterSuffix = new string[9];
+    string caseDataFilePath;
+
+    [Serializable]
+    public struct COVIDCaseData
+    {
+        public Field[] fields;
+        public string[][] records;
+    }
+
+    [Serializable]
+    public struct Field
+    {
+        public string type;
+        public string id;
+        public Info info;
+    }
+
+    [Serializable]
+    public struct Info
+    {
+        public string notes;
+        public string type_override;
+        public string label;
+    }
+
+    //[Serializable]
+    //public struct Record
+    //{
+    //    public object[] common;
+    //}
+
+    void Awake()
+    {
+        caseDataFilePath = Path.Combine(Application.persistentDataPath, "TorontoCOVID19Cases.json");
+        if (File.Exists(caseDataFilePath))
+            ReadCaseDataFile();
+        else
+            StartCoroutine(DownloadCaseDataToFile());
+    }
+
+    IEnumerator DownloadCaseDataToFile()
+    {
+        var unityWebRequest = new UnityWebRequest("https://ckan0.cf.opendata.inter.prod-toronto.ca/datastore/dump/e5bf35bc-e681-43da-b2ce-0242d00922ad?format=json", UnityWebRequest.kHttpVerbGET);
+        unityWebRequest.downloadHandler = new DownloadHandlerFile(caseDataFilePath);
+        yield return unityWebRequest.SendWebRequest();
+        if (unityWebRequest.isNetworkError || unityWebRequest.isHttpError)
+            Debug.LogError(unityWebRequest.error);
+        else
+        {
+            Debug.Log("File successfully downloaded and saved to " + caseDataFilePath);
+            ReadCaseDataFile();
+        }
+    }
+
+    private void ReadCaseDataFile()
+    {
+        if (File.Exists(caseDataFilePath))
+        {
+            string caseDataFileContents = File.ReadAllText(caseDataFilePath);
+            COVIDCaseData covidCaseData = JsonUtility.FromJson<COVIDCaseData>(caseDataFileContents);
+            Debug.Assert(covidCaseData.records != null);
+            FilterCaseData(covidCaseData);
+        }
+    }
+
+    private void FilterCaseData(COVIDCaseData covidCaseData)
+    {
+        //foreach (object[] objects in covidCaseData.records)
+        //{
+        
+        //}
+    }
+
+    ///DEPRECATED///
+    ///Inefficient Precise Data Request Implementation///
+    /*string[] caseRequestFilterSuffix = new string[9];
     private void Awake()
     {
         caseRequestFilterSuffix[(int)CaseType.Active]= "\",\"Classification\":\"CONFIRMED\",\"Outcome\":\"ACTIVE\"}";
@@ -75,5 +151,5 @@ public class DataLoader : MonoBehaviour
         {
             Neighbourhood.NeighbourhoodWithMaxCaseCount(caseType, true);
         }
-    }
+    }*/
 }
