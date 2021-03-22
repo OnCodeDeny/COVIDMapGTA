@@ -8,7 +8,7 @@ public class DataSelectionToggle : MonoBehaviour
     [SerializeField]
     DataVisualizer[] dataBars;
     Toggle toggle;
-    public CaseType caseTypeRepresenting;
+    public CaseAttribute caseTypeRepresenting;
     // Start is called before the first frame update
     void Start()
     {

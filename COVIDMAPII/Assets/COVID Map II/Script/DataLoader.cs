@@ -10,28 +10,189 @@ public class DataLoader : MonoBehaviour
 {
     string caseDataFilePath;
 
-    [Serializable]
-    public struct COVIDCaseData
+    void Awake()
     {
-        public Field[] fields;
-        public object[][] records;
+        caseDataFilePath = Path.Combine(Application.persistentDataPath, "TorontoCOVID19Cases.tsv");
+        if (File.Exists(caseDataFilePath))
+        {
+            ReadCaseDataFile();
+        }
+        else
+            StartCoroutine(DownloadCaseDataToFile());
     }
 
-    [Serializable]
-    public struct Field
+    IEnumerator DownloadCaseDataToFile()
     {
-        public string type;
-        public string id;
-        public Info info;
+        var unityWebRequest = new UnityWebRequest("https://ckan0.cf.opendata.inter.prod-toronto.ca/datastore/dump/e5bf35bc-e681-43da-b2ce-0242d00922ad?format=tsv", UnityWebRequest.kHttpVerbGET);
+        unityWebRequest.downloadHandler = new DownloadHandlerFile(caseDataFilePath);
+        yield return unityWebRequest.SendWebRequest();
+        if (unityWebRequest.isNetworkError || unityWebRequest.isHttpError)
+            Debug.LogError(unityWebRequest.error);
+        else
+        {
+            Debug.Log("File successfully downloaded and saved to " + caseDataFilePath);
+            ReadCaseDataFile();
+        }
     }
 
-    [Serializable]
-    public struct Info
+    private void ReadCaseDataFile()
     {
-        public string notes;
-        public string type_override;
-        public string label;
+        string caseDataFileContents = File.ReadAllText(caseDataFilePath);
+        string[] lines = caseDataFileContents.Split('\n');
+        for (int i = 1; i < lines.Length; i++)
+        {
+            string[] singleCaseData = lines[i].Split('\t');
+            //Legth check
+            if (singleCaseData.Length == 18)
+            {
+                Neighbourhood caseNeighbourhood = CheckCaseNeighbourhood(singleCaseData);
+                if (caseNeighbourhood != null)
+                {
+                    if (IsConfirmed(singleCaseData))
+                    {
+                        caseNeighbourhood.cumulativeCaseCount++;
+
+                        if (IsActive(singleCaseData))
+                        {
+                            caseNeighbourhood.activeCaseCount++;
+                        }
+                        else if (IsDeceased(singleCaseData))
+                        {
+                            caseNeighbourhood.deceasedCaseCount++;
+                        }
+
+                        if (CurrentlyHospitalized(singleCaseData))
+                        {
+                            caseNeighbourhood.currentlyHospitalizedCaseCount++;
+                            caseNeighbourhood.everHospitalizedCaseCount++;
+                        }
+                        else if (EverHospitalized(singleCaseData))
+                        {
+                            caseNeighbourhood.everHospitalizedCaseCount++;
+                        }
+
+                        if (CurrentlyInICU(singleCaseData))
+                        {
+                            caseNeighbourhood.currentlyInICUCaseCount++;
+                            caseNeighbourhood.everInICUCaseCount++;
+                        }
+                        else if (EverInICU(singleCaseData))
+                        {
+                            caseNeighbourhood.everInICUCaseCount++;
+                        }
+
+                        if (CurrentlyIntubated(singleCaseData))
+                        {
+                            caseNeighbourhood.currentlyIntubatedCaseCount++;
+                            caseNeighbourhood.everIntubatedCaseCount++;
+                        }
+                        else if (EverIntubated(singleCaseData))
+                        {
+                            caseNeighbourhood.everIntubatedCaseCount++;
+                        }
+                    }
+                }
+            }
+        }
     }
+
+    private Neighbourhood CheckCaseNeighbourhood(string[] caseData)
+    {
+        foreach (Neighbourhood neighbourhood in Neighbourhood.allNeighbourhoods)
+        {
+            if (caseData[4]==neighbourhood.displayName)
+            {
+                return neighbourhood;
+            }
+        }
+        return null;
+    }
+
+    private bool IsConfirmed(string[] caseData)
+    {
+        if (caseData[7] == "CONFIRMED")
+        {
+            return true;
+        }
+        return false;
+    }
+
+    private bool IsActive(string[] caseData)
+    {
+        if (caseData[11] == "ACTIVE")
+        {
+            return true;
+        }
+        return false;
+    }
+
+    private bool IsDeceased(string[] caseData)
+    {
+        if (caseData[11] == "FATAL")
+        {
+            return true;
+        }
+        return false;
+    }
+
+    private bool CurrentlyHospitalized(string[] caseData)
+    {
+        if (caseData[12] == "Yes")
+        {
+            return true;
+        }
+        return false;
+    }
+
+    private bool CurrentlyInICU(string[] caseData)
+    {
+        if (caseData[13] == "Yes")
+        {
+            return true;
+        }
+        return false;
+    }
+
+    private bool CurrentlyIntubated(string[] caseData)
+    {
+        if (caseData[14] == "Yes")
+        {
+            return true;
+        }
+        return false;
+    }
+
+    private bool EverHospitalized(string[] caseData)
+    {
+        if (caseData[15] == "Yes")
+        {
+            return true;
+        }
+        return false;
+    }
+
+    private bool EverInICU(string[] caseData)
+    {
+        if (caseData[16] == "Yes")
+        {
+            return true;
+        }
+        return false;
+    }
+
+    private bool EverIntubated(string[] caseData)
+    {
+        if (caseData[17] == "Yes")
+        {
+            return true;
+        }
+        return false;
+    }
+
+    ///DEPRECATED///
+    ///Data Request Implementation V.2///
+    ///Impracticable Data Request Implementation(incomplete data, limited JSON file size)///
+    /*string caseDataFilePath;
 
     void Awake()
     {
@@ -62,7 +223,6 @@ public class DataLoader : MonoBehaviour
         {
             string caseDataFileContents = File.ReadAllText(caseDataFilePath);
             JSONNode covidCaseData = JSON.Parse(caseDataFileContents);
-            //Debug.Log(covidCaseData["records"][0][7].Value);
             FilterCaseData(covidCaseData);
         }
     }
@@ -75,11 +235,11 @@ public class DataLoader : MonoBehaviour
             if (jsonArray[7].Value == "CONFIRMED")
                 c++;
         }
-        Debug.Log(c);
-    }
+    }*/
 
     ///DEPRECATED///
-    ///Inefficient Precise Data Request Implementation///
+    ///Data Request Implementation V.1///
+    ///Inefficient Precise Data Request Implementation(too many requests, gateway timeout)///
     /*string[] caseRequestFilterSuffix = new string[9];
     private void Awake()
     {

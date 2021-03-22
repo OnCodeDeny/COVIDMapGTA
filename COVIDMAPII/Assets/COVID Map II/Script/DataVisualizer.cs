@@ -20,17 +20,17 @@ public class DataVisualizer : MonoBehaviour
         
     }
 
-    public void VisualizeDatumByHeight(CaseType caseType)
+    public void VisualizeDatumByHeight(CaseAttribute caseAttribute)
     {
-        int caseTypeIndex = (int)caseType;
-        float height = heightMultiplier * neighbourhoodRepresenting.caseCountData[caseTypeIndex] / Neighbourhood.NeighbourhoodWithMaxCaseCount(caseType, false).caseCountData[caseTypeIndex];
+        int caseTypeIndex = (int)caseAttribute;
+        float height = heightMultiplier * neighbourhoodRepresenting.caseCountData[caseTypeIndex] / Neighbourhood.NeighbourhoodWithMaxCaseCount(caseAttribute, false).caseCountData[caseTypeIndex];
         transform.localScale = new Vector3(transform.localScale.x, height, transform.localScale.z);
         transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.x + transform.localScale.y / 2, transform.localPosition.z);
     }
-    public void VisualizeDatumByColour(CaseType caseType)
+    public void VisualizeDatumByColour(CaseAttribute caseAttribute)
     {
-        int caseTypeIndex = (int)caseType;
-        float colourGB = 1 - ((float)neighbourhoodRepresenting.caseCountData[caseTypeIndex] / (float)Neighbourhood.NeighbourhoodWithMaxCaseCount(caseType, false).caseCountData[caseTypeIndex]);
+        int caseTypeIndex = (int)caseAttribute;
+        float colourGB = 1 - ((float)neighbourhoodRepresenting.caseCountData[caseTypeIndex] / (float)Neighbourhood.NeighbourhoodWithMaxCaseCount(caseAttribute, false).caseCountData[caseTypeIndex]);
         GetComponent<Renderer>().material.color = new Color(1, colourGB, colourGB);
     }
     public void DevisualizeDatum()

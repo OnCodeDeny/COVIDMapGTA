@@ -63,3 +63,13 @@ Update Mode: updateDependencies
 
 The following packages were updated:
   com.unity.timeline from version 1.2.17 to 1.2.18
+
+=== Mon Mar 22 00:16:25 2021
+
+Packages were changed.
+Update Mode: updateDependencies
+
+The following packages were updated:
+  com.unity.xr.arcore from version 2.1.14 to 2.1.16
+  com.unity.xr.arfoundation from version 2.1.14 to 2.1.16
+  com.unity.xr.arkit from version 2.1.14 to 2.1.16
