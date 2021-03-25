@@ -3800,7 +3800,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _imageryType: 1
   _areRoadsEnabled: 1
-  _areLabelsEnabled: 0
+  _areLabelsEnabled: 1
   _isHillShadingEnabled: 1
   _imageryStyle: 0
 --- !u!114 &891002279
@@ -3821,9 +3821,9 @@ MonoBehaviour:
   _mapEdgeColorFadeDistance: 0.02
   _detailOffset: 0
   _center:
-    _latitude: 43.7452500333456
-    _longitude: -79.3764802735322
-  _zoomLevel: 10.339994
+    _latitude: 43.722535133721
+    _longitude: -79.3839759495802
+  _zoomLevel: 10.340018
   _minimumZoomLevel: 1
   _maximumZoomLevel: 20
   _mapTerrainType: 0
