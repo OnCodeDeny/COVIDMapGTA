@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Microsoft.Maps.Unity;
 
 public class DataSelectionToggle : MonoBehaviour
 {
-    [SerializeField]
-    DataVisualizer[] dataBars;
+    public MapPinLayer mapPinLayer;
     Toggle toggle;
-    public CaseAttribute caseTypeRepresenting;
+    public CaseDataType caseDataTypeRepresenting;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,20 +17,19 @@ public class DataSelectionToggle : MonoBehaviour
 
     public void VisualizeData()
     {
-        dataBars = FindObjectsOfType<DataVisualizer>();
         if (toggle.isOn)
         {
-            foreach (DataVisualizer dataBar in dataBars)
+            foreach (MapPin mapPin in mapPinLayer.MapPins)
             {
-                dataBar.VisualizeDatumByHeight(caseTypeRepresenting);
-                dataBar.VisualizeDatumByColour(caseTypeRepresenting);
+                mapPin.gameObject.GetComponent<DataVisualizer>().VisualizeDatumByHeight(caseDataTypeRepresenting);
+                mapPin.gameObject.GetComponent<DataVisualizer>().VisualizeDatumByColour(caseDataTypeRepresenting);
             }
         }
         else
         {
-            foreach (DataVisualizer dataBar in dataBars)
+            foreach (MapPin mapPin in mapPinLayer.MapPins)
             {
-                dataBar.DevisualizeDatum();
+                mapPin.gameObject.GetComponent<DataVisualizer>().DevisualizeDatum();
             }
         }
     }

@@ -19,6 +19,9 @@ public class MapPinFeeder : MonoBehaviour
     [SerializeField]
     private MapPin _mapPinPrefab = null;
 
+    [SerializeField]
+    private CaseDatumListManager caseDatumListManager = null;
+
     private void Awake()
     {
         Debug.Assert(_mapPinLayer != null);
@@ -29,13 +32,14 @@ public class MapPinFeeder : MonoBehaviour
         // Generate a MapPin for each of the locations and add it to the layer.
         foreach (var neighbourhood in Neighbourhood.allNeighbourhoods)
         {
-            var mapPin = Instantiate(_mapPinPrefab);
+            MapPin mapPin = Instantiate(_mapPinPrefab);
             mapPin.Location = new LatLon(neighbourhood.latitude, neighbourhood.longitude);
             _mapPinLayer.MapPins.Add(mapPin);
 
             NeighbourhoodPin neighbourhoodPin = mapPin.GetComponent<NeighbourhoodPin>();
             neighbourhoodPin.neighbourhoodRepresenting = neighbourhood;
             neighbourhoodPin.mapToBeAnimated = GetComponent<MapRenderer>();
+            neighbourhoodPin.datumListToBePopulated = caseDatumListManager;
         }
     }
 }

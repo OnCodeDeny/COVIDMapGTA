@@ -24,99 +24,99 @@ public abstract class Place
     {
         get
         {
-            return caseCountData[(int)CaseAttribute.Cumulative];
+            return caseCountData[(int)CaseDataType.Cumulative];
         }
         set
         {
-            caseCountData[(int)CaseAttribute.Cumulative] = value;
+            caseCountData[(int)CaseDataType.Cumulative] = value;
         }
     }
     public int everHospitalizedCaseCount
     {
         get
         {
-            return caseCountData[(int)CaseAttribute.EverHospitalized];
+            return caseCountData[(int)CaseDataType.EverHospitalized];
         }
         set
         {
-            caseCountData[(int)CaseAttribute.EverHospitalized] = value;
+            caseCountData[(int)CaseDataType.EverHospitalized] = value;
         }
     }
     public int everInICUCaseCount
     {
         get
         {
-            return caseCountData[(int)CaseAttribute.EverInICU];
+            return caseCountData[(int)CaseDataType.EverInICU];
         }
         set
         {
-            caseCountData[(int)CaseAttribute.EverInICU] = value;
+            caseCountData[(int)CaseDataType.EverInICU] = value;
         }
     }
     public int everIntubatedCaseCount
     {
         get
         {
-            return caseCountData[(int)CaseAttribute.EverIntubated];
+            return caseCountData[(int)CaseDataType.EverIntubated];
         }
         set
         {
-            caseCountData[(int)CaseAttribute.EverIntubated] = value;
+            caseCountData[(int)CaseDataType.EverIntubated] = value;
         }
     }
     public int activeCaseCount
     {
         get
         {
-            return caseCountData[(int)CaseAttribute.Active];
+            return caseCountData[(int)CaseDataType.Active];
         }
         set
         {
-            caseCountData[(int)CaseAttribute.Active] = value;
+            caseCountData[(int)CaseDataType.Active] = value;
         }
     }
     public int currentlyHospitalizedCaseCount
     {
         get
         {
-            return caseCountData[(int)CaseAttribute.CurrentlyHospitalized];
+            return caseCountData[(int)CaseDataType.CurrentlyHospitalized];
         }
         set
         {
-            caseCountData[(int)CaseAttribute.CurrentlyHospitalized] = value;
+            caseCountData[(int)CaseDataType.CurrentlyHospitalized] = value;
         }
     }
     public int currentlyInICUCaseCount
     {
         get
         {
-            return caseCountData[(int)CaseAttribute.CurrentlyInICU];
+            return caseCountData[(int)CaseDataType.CurrentlyInICU];
         }
         set
         {
-            caseCountData[(int)CaseAttribute.CurrentlyInICU] = value;
+            caseCountData[(int)CaseDataType.CurrentlyInICU] = value;
         }
     }
     public int currentlyIntubatedCaseCount
     {
         get
         {
-            return caseCountData[(int)CaseAttribute.CurrentlyIntubated];
+            return caseCountData[(int)CaseDataType.CurrentlyIntubated];
         }
         set
         {
-            caseCountData[(int)CaseAttribute.CurrentlyIntubated] = value;
+            caseCountData[(int)CaseDataType.CurrentlyIntubated] = value;
         }
     }
     public int deceasedCaseCount
     {
         get
         {
-            return caseCountData[(int)CaseAttribute.Deceased];
+            return caseCountData[(int)CaseDataType.Deceased];
         }
         set
         {
-            caseCountData[(int)CaseAttribute.Deceased] = value;
+            caseCountData[(int)CaseDataType.Deceased] = value;
         }
     }
 }

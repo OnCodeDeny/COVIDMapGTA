@@ -3799,8 +3799,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _imageryType: 1
-  _areRoadsEnabled: 1
-  _areLabelsEnabled: 1
+  _areRoadsEnabled: 0
+  _areLabelsEnabled: 0
   _isHillShadingEnabled: 1
   _imageryStyle: 0
 --- !u!114 &891002279
@@ -3965,6 +3965,7 @@ MonoBehaviour:
   _mapPinLayer: {fileID: 891002287}
   _mapPinPrefab: {fileID: 114401410002030188, guid: 261b26b55d6094847bd1c13743c5f073,
     type: 3}
+  caseDatumListManager: {fileID: 1803906122}
 --- !u!114 &891002287
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6462,8 +6463,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30c030974464b1545810841cb615627e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dataBars: []
-  caseTypeRepresenting: 0
+  mapPinLayer: {fileID: 891002287}
+  caseDataTypeRepresenting: 0
 --- !u!1 &1414651949
 GameObject:
   m_ObjectHideFlags: 0

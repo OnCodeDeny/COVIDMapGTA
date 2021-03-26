@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 23800032307151600}
   - component: {fileID: 354351673484441338}
   - component: {fileID: 8627329241609093141}
-  - component: {fileID: 3542018341105275240}
   m_Layer: 8
   m_Name: MapPinStem
   m_TagString: Untagged
@@ -29,8 +28,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1129522993810948}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.65, z: 0}
-  m_LocalScale: {x: 0.15, y: 1.3829268, z: 0.15}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.15, y: 0.1, z: 0.15}
   m_Children: []
   m_Father: {fileID: 4538093146654690}
   m_RootOrder: 2
@@ -112,26 +111,57 @@ MonoBehaviour:
       m_Calls: []
   OnEnter:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7520796128532738438}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   OnExit:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7520796128532738438}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnClick:
     m_PersistentCalls:
-      m_Calls: []
---- !u!114 &3542018341105275240
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1129522993810948}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: caa3a2402eb444e47a362501623e087f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  heightMultiplier: 3
+      m_Calls:
+      - m_Target: {fileID: 5278864850003405192}
+        m_MethodName: MoveMapCentreToTarget
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 5278864850003405192}
+        m_MethodName: DisplayCaseData
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1339640369366546
 GameObject:
   m_ObjectHideFlags: 0
@@ -160,7 +190,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1339640369366546}
   m_LocalRotation: {x: 0.44666547, y: 0.50595504, z: 0.08757909, w: 0.7326864}
-  m_LocalPosition: {x: 0, y: 1.449, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children: []
   m_Father: {fileID: 4538093146654690}
@@ -273,6 +303,7 @@ GameObject:
   - component: {fileID: 114401410002030188}
   - component: {fileID: 8485608606784131832}
   - component: {fileID: 5278864850003405192}
+  - component: {fileID: 54926034354258805}
   m_Layer: 8
   m_Name: SmallMapPin
   m_TagString: Untagged
@@ -362,8 +393,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eac5fceb29eb90443b777a4663acfe99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dataBar: {fileID: 3542018341105275240}
+  dataVisualizer: {fileID: 54926034354258805}
+  textMeshPro: {fileID: 8042597523268217699}
   mapToBeAnimated: {fileID: 0}
+  datumListToBePopulated: {fileID: 0}
+--- !u!114 &54926034354258805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1452448874978094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caa3a2402eb444e47a362501623e087f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  visualizationAgent: {fileID: 1129522993810948}
+  heightMultiplier: 3
 --- !u!1 &1748168262977102
 GameObject:
   m_ObjectHideFlags: 0
@@ -415,7 +462,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2099618770465547746
 RectTransform:
   m_ObjectHideFlags: 0
@@ -432,7 +479,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 1.8}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &5834456297681937167
@@ -535,7 +582,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 1024
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -544,14 +591,14 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_enableWordWrapping: 0
   m_wordWrappingRatios: 0.4
-  m_overflowMode: 1
+  m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
   m_enableExtraPadding: 0
-  checkPaddingRequired: 0
+  checkPaddingRequired: 1
   m_isRichText: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 0

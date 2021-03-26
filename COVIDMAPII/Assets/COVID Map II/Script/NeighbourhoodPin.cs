@@ -8,15 +8,18 @@ using UnityEngine.EventSystems;
 
 public class NeighbourhoodPin : MonoBehaviour
 {
-    public DataVisualizer dataBar;
+    public DataVisualizer dataVisualizer;
+    public TextMeshPro textMeshPro;
     public Neighbourhood neighbourhoodRepresenting;
-
     public MapRenderer mapToBeAnimated;
+    public CaseDatumListManager datumListToBePopulated;
     private MapSceneOfLocationAndZoomLevel _targetLocationOnMap;
 
     private void Start()
     {
-        dataBar.neighbourhoodRepresenting = neighbourhoodRepresenting;
+        dataVisualizer.neighbourhoodRepresenting = neighbourhoodRepresenting;
+        textMeshPro.text = neighbourhoodRepresenting.displayName;
+        textMeshPro.transform.localPosition = new Vector3(0, textMeshPro.transform.localScale.y / 2, 0);
         _targetLocationOnMap = new MapSceneOfLocationAndZoomLevel(neighbourhoodRepresenting.locationLatLon, 14f);
         //This should happen after data loading, try coroutine?
         //GetComponentInChildren<TextMeshPro>().text = neighbourhoodRepresenting.activeCaseCount.ToString();
@@ -24,5 +27,9 @@ public class NeighbourhoodPin : MonoBehaviour
     public void MoveMapCentreToTarget()
     {
         mapToBeAnimated.SetMapScene(_targetLocationOnMap);
+    }
+    public void DisplayCaseData()
+    {
+        datumListToBePopulated.DisplayDatumList(neighbourhoodRepresenting);
     }
 }
