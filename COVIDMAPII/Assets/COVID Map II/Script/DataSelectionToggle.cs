@@ -21,8 +21,9 @@ public class DataSelectionToggle : MonoBehaviour
         {
             foreach (MapPin mapPin in mapPinLayer.MapPins)
             {
-                mapPin.gameObject.GetComponent<DataVisualizer>().VisualizeDatumByHeight(caseDataTypeRepresenting);
-                mapPin.gameObject.GetComponent<DataVisualizer>().VisualizeDatumByColour(caseDataTypeRepresenting);
+                DataVisualizer visualizer = mapPin.GetComponent<DataVisualizer>();
+                StartCoroutine(visualizer.VisualizeDatumByHeight(caseDataTypeRepresenting));
+                StartCoroutine(visualizer.VisualizeDatumByColour(caseDataTypeRepresenting));
             }
         }
         else
