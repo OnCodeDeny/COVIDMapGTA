@@ -59,7 +59,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adb84e30e02715445aeb9959894e3b4d, type: 3}
   m_Name: ColorGrading
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   enabled:
     overrideState: 1
     value: 1
@@ -112,16 +112,16 @@ MonoBehaviour:
     value: 0
   saturation:
     overrideState: 1
-    value: 7
+    value: -32
   brightness:
     overrideState: 1
-    value: 13
+    value: 49
   postExposure:
     overrideState: 1
     value: 0
   contrast:
     overrideState: 1
-    value: 50
+    value: -32
   mixerRedOutRedIn:
     overrideState: 0
     value: 100
@@ -1398,7 +1398,7 @@ MonoBehaviour:
     value: 0
   intensity:
     overrideState: 1
-    value: 1.6
+    value: 1
   color:
     overrideState: 1
     value: {r: 0, g: 0, b: 0, a: 1}
@@ -1422,10 +1422,10 @@ MonoBehaviour:
     value: 0
   radius:
     overrideState: 1
-    value: 0.3
+    value: 0.33
   quality:
     overrideState: 1
-    value: 0
+    value: 4
 --- !u!114 &3360181621887370607
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -1448,10 +1448,10 @@ MonoBehaviour:
     defaultState: 1
   intensity:
     overrideState: 1
-    value: 0.059
+    value: 0
   fastMode:
     overrideState: 1
-    value: 1
+    value: 0
 --- !u!114 &6612618869269446806
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -1470,16 +1470,16 @@ MonoBehaviour:
     value: 1
   focusDistance:
     overrideState: 1
-    value: 1.17
+    value: 0.93
   aperture:
     overrideState: 1
-    value: 4.2
+    value: 18.9
   focalLength:
     overrideState: 1
-    value: 43
+    value: 66
   kernelSize:
     overrideState: 1
-    value: 2
+    value: 0
 --- !u!114 &7934001251418704334
 MonoBehaviour:
   m_ObjectHideFlags: 3

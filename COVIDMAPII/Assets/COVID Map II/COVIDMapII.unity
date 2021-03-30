@@ -2572,7 +2572,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 358.26}
+  m_AnchoredPosition: {x: 0, y: 776}
   m_SizeDelta: {x: 0, y: 20}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &642843398
@@ -3874,7 +3874,7 @@ MonoBehaviour:
   m_Script: {fileID: 1124163735, guid: f58183a31672bf641bbeeaef3d4759c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _imageryType: 0
+  _imageryType: 1
   _areRoadsEnabled: 1
   _areLabelsEnabled: 1
   _isHillShadingEnabled: 1
@@ -3897,8 +3897,8 @@ MonoBehaviour:
   _mapEdgeColorFadeDistance: 0.03
   _detailOffset: 0
   _center:
-    _latitude: 43.722535133721
-    _longitude: -79.3839759495802
+    _latitude: 43.7549644862948
+    _longitude: -79.2892127169866
   _zoomLevel: 10.340018
   _minimumZoomLevel: 1
   _maximumZoomLevel: 20
