@@ -53,7 +53,7 @@ public class Neighbourhood : Place
     public static Neighbourhood WillowdaleWest = new Neighbourhood("Willowdale West", 43.772132873535156, -79.42571258544922);
     public static Neighbourhood LansingWestgate = new Neighbourhood("Lansing-Westgate", 43.75436019897461, -79.42453002929688);
     public static Neighbourhood BedfordParkNortown = new Neighbourhood("Bedford Park-Nortown", 43.73137664794922, -79.4211654663086);
-    public static Neighbourhood StAndrewWindfields = new Neighbourhood("St. Andrew-Windfields", 43.7560312016808, -79.3791273502423);
+    public static Neighbourhood StAndrewWindfields = new Neighbourhood("St.Andrew-Windfields", 43.7560312016808, -79.3791273502423);
 
     public static Neighbourhood BridlePathSunnybrookYorkMills = new Neighbourhood("Bridle Path-Sunnybrook-York Mills", 43.7298583984375, -79.3740234375);
     public static Neighbourhood BanburyDonMills = new Neighbourhood("Banbury-Don Mills", 43.7380256652832, -79.3494873046875);
@@ -86,20 +86,20 @@ public class Neighbourhood : Place
     public static Neighbourhood NorthRiverdale = new Neighbourhood("North Riverdale", 43.67112731933594, -79.35106658935547);
     public static Neighbourhood BlakeJones = new Neighbourhood("Blake-Jones", 43.67619323730469, -79.33739471435547);
     public static Neighbourhood SouthRiverdale = new Neighbourhood("South Riverdale", 43.65065002441406, -79.33999633789062);
-    public static Neighbourhood CabbagetownSouthStJamesTown = new Neighbourhood("Cabbagetown-South St. James Town", 43.659584045410156, -79.3675308227539);
+    public static Neighbourhood CabbagetownSouthStJamesTown = new Neighbourhood("Cabbagetown-South St. James Town", 43.667633056640625, -79.3660659790039);
     public static Neighbourhood RegentPark = new Neighbourhood("Regent Park", 43.66065216064453, -79.36048889160156);
     public static Neighbourhood MossPark = new Neighbourhood("Moss Park", 43.65620803833008, -79.3674545288086);
-    public static Neighbourhood NorthStJamesTown = new Neighbourhood("North St. James Town", 43.66923141479492, -79.37281036376953);
+    public static Neighbourhood NorthStJamesTown = new Neighbourhood("North St. James Town", 43.6697883605957, -79.37480926513672);
     public static Neighbourhood ChurchYongeCorridor = new Neighbourhood("Church-Yonge Corridor", 43.65983581542969, -79.37847900390625);
     public static Neighbourhood BayStreetCorridor = new Neighbourhood("Bay Street Corridor", 43.657772064208984, -79.38618469238281);
     public static Neighbourhood WaterfrontCommunitiesTheIsland = new Neighbourhood("Waterfront Communities-The Island", 43.63925552368164, -79.37921905517578);
     public static Neighbourhood KensingtonChinatown = new Neighbourhood("Kensington-Chinatown", 43.65308380126953, -79.39724731445312);
-    public static Neighbourhood University = new Neighbourhood("University", 43.651893615722656, -79.3817138671875);
+    public static Neighbourhood University = new Neighbourhood("University", 43.6627225464794, -79.4015021891874);
     public static Neighbourhood PalmerstonLittleItaly = new Neighbourhood("Palmerston-Little Italy", 43.659427642822266, -79.41729736328125);
 
     public static Neighbourhood TrinityBellwoods = new Neighbourhood("Trinity-Bellwoods", 43.649810791015625, -79.41563415527344);
     public static Neighbourhood Niagara = new Neighbourhood("Niagara", 43.64347839355469, -79.40826416015625);
-    public static Neighbourhood DufferinGrove = new Neighbourhood("Dufferin Grove", 43.65616989135742, -79.42741394042969);
+    public static Neighbourhood DufferinGrove = new Neighbourhood("Dufferin Grove", 43.6548591051871, -79.4371813081079);
     public static Neighbourhood LittlePortugal = new Neighbourhood("Little Portugal", 43.64776611328125, -79.42911529541016);
     public static Neighbourhood SouthParkdale = new Neighbourhood("South Parkdale", 43.63629913330078, -79.43846130371094);
     public static Neighbourhood Roncesvalles = new Neighbourhood("Roncesvalles", 43.64613342285156, -79.44277954101562);
@@ -111,9 +111,9 @@ public class Neighbourhood : Place
     public static Neighbourhood CorsoItaliaDavenport = new Neighbourhood("Corso Italia-Davenport", 43.67790603637695, -79.44523620605469);
     public static Neighbourhood DovercourtWallaceEmersonJunction = new Neighbourhood("Dovercourt-Wallace Emerson-Junction", 43.6654052734375, -79.43853759765625);
     public static Neighbourhood Wychwood = new Neighbourhood("Wychwood", 43.67667770385742, -79.42462158203125);
-    public static Neighbourhood Annex = new Neighbourhood("Annex", 43.651893615722656, -79.3817138671875);
+    public static Neighbourhood Annex = new Neighbourhood("Annex", 43.67242431640625, -79.40483093261719);
     public static Neighbourhood CasaLoma = new Neighbourhood("Casa Loma", 43.679847717285156, -79.41254425048828);
-    public static Neighbourhood YongeStClair = new Neighbourhood("Yonge-St.Clair", 43.68998336791992, -79.39601135253906);
+    public static Neighbourhood YongeStClair = new Neighbourhood("Yonge-St.Clair", 43.689701080322266, -79.39752197265625);
     public static Neighbourhood RosedaleMoorePark = new Neighbourhood("Rosedale-Moore Park", 43.68193435668945, -79.37940979003906);
     public static Neighbourhood MountPleasantEast = new Neighbourhood("Mount Pleasant East", 43.70505905151367, -79.38489532470703);
     public static Neighbourhood YongeEglinton = new Neighbourhood("Yonge-Eglinton", 43.704795837402344, -79.40341186523438);
@@ -125,18 +125,18 @@ public class Neighbourhood : Place
     public static Neighbourhood LawrenceParkNorth = new Neighbourhood("Lawrence Park North", 43.730369567871094, -79.40306854248047);
     public static Neighbourhood HumewoodCedarvale = new Neighbourhood("Humewood-Cedarvale", 43.69010925292969, -79.4276351928711);
     public static Neighbourhood OakwoodVillage = new Neighbourhood("Oakwood Village", 43.6908073425293, -79.43748474121094);
-    public static Neighbourhood BriarHillBelgravia = new Neighbourhood("Briar Hill-Belgravia", 43.69948196411133, -79.45464324951172);
+    public static Neighbourhood BriarHillBelgravia = new Neighbourhood("Briar Hill - Belgravia", 43.69948196411133, -79.45464324951172);
     public static Neighbourhood CaledoniaFairbank = new Neighbourhood("Caledonia-Fairbank", 43.6885986328125, -79.45484924316406);
     public static Neighbourhood KeelesdaleEglintonWest = new Neighbourhood("Keelesdale-Eglinton West", 43.68527603149414, -79.47122192382812);
     public static Neighbourhood RockcliffeSmythe = new Neighbourhood("Rockcliffe-Smythe", 43.67424774169922, -79.49485778808594);
     public static Neighbourhood BeechboroughGreenbrook = new Neighbourhood("Beechborough-Greenbrook", 43.69281768798828, -79.4802017211914);
     public static Neighbourhood Weston = new Neighbourhood("Weston", 43.70175552368164, -79.51432037353516);
-    public static Neighbourhood LambtonBabyPoint = new Neighbourhood("Lambton Baby Point", 43.66023635864258, -79.49285125732422);
+    public static Neighbourhood LambtonBabyPoint = new Neighbourhood("Lambton Baby Point", 43.6563550946296, -79.4952598328673);
     public static Neighbourhood MountDennis = new Neighbourhood("Mount Dennis", 43.688472747802734, -79.5001220703125);
     public static Neighbourhood Steeles = new Neighbourhood("Steeles", 43.81217575073242, -79.32637786865234);
     public static Neighbourhood LAmoreaux = new Neighbourhood("L'Amoreaux", 43.79219436645508, -79.3138656616211);
     public static Neighbourhood TamOShanterSullivan = new Neighbourhood("Tam O'Shanter-Sullivan", 43.77798080444336, -79.31124114990234);
-    public static Neighbourhood WexfordMaryvale = new Neighbourhood("Wexford-Maryvale", 43.748538970947266, -79.29878234863281);
+    public static Neighbourhood WexfordMaryvale = new Neighbourhood("Wexford/Maryvale", 43.748538970947266, -79.29878234863281);
     public static Neighbourhood ClairleaBirchmount = new Neighbourhood("Clairlea-Birchmount", 43.7161979675293, -79.28279113769531);
 
     public static Neighbourhood Oakridge = new Neighbourhood("Oakridge", 43.69758605957031, -79.27957153320312);
