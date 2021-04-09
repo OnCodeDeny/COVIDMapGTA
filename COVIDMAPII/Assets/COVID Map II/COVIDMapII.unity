@@ -1363,7 +1363,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapPinLayer: {fileID: 891002287}
   caseDataTypeRepresenting: 1
-  daysVisualizedPerSecond: 10
+  daysVisualizedPerSecond: 20
 --- !u!1 &328629653
 GameObject:
   m_ObjectHideFlags: 0

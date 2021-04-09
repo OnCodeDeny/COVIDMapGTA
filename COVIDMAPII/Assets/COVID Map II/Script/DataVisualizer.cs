@@ -15,7 +15,7 @@ public class DataVisualizer : MonoBehaviour
     Transform agentLabelTransform;
     public AnimationCurve scaleCurve = AnimationCurve.EaseInOut(0f, 0f, 0.5f, 1f);
 
-    Material agentMaterial;
+    Renderer agentRenderer;
     public AnimationCurve colourCurve = AnimationCurve.EaseInOut(0f, 0f, 0.5f, 1f);
 
     // Start is called before the first frame update
@@ -23,11 +23,13 @@ public class DataVisualizer : MonoBehaviour
     {
         agentTransform = visualizationAgent.transform;
         agentLabelTransform = agentLabel.transform;
-        agentMaterial = visualizationAgent.GetComponent<Renderer>().material;
+
+        agentRenderer = visualizationAgent.GetComponent<Renderer>();
     }
 
     public IEnumerator VisualizeDatumByHeight(CaseDataTypeForDay caseType, Day day, float animationLength)
     {
+        agentRenderer.enabled = true;
         int caseTypeIndex = (int)caseType;
 
         float timeElapsedInAnimation = 0;
@@ -51,11 +53,12 @@ public class DataVisualizer : MonoBehaviour
 
     public IEnumerator VisualizeDatumByColour(CaseDataTypeForDay caseType, Day day, float animationLength)
     {
+        agentRenderer.enabled = true;
         int caseTypeIndex = (int)caseType;
 
         float timeElapsedInAnimation = 0;
         float progressPercentage;
-        Color initialAgentColour = agentMaterial.color;
+        Color initialAgentColour = agentRenderer.material.color;
         float targetAgentColourGB = 1 - ((float)day.caseCountData[caseTypeIndex] / (float)Neighbourhood.maxNeighbourhoodDailyCaseCountData[caseTypeIndex]);
         Color targetAgentColour = new Color(1, targetAgentColourGB, targetAgentColourGB);
 
@@ -63,7 +66,7 @@ public class DataVisualizer : MonoBehaviour
         {
             timeElapsedInAnimation += Time.deltaTime;
             progressPercentage = timeElapsedInAnimation / animationLength;
-            agentMaterial.color = Color.Lerp(initialAgentColour, targetAgentColour, progressPercentage);
+            agentRenderer.material.color = Color.Lerp(initialAgentColour, targetAgentColour, progressPercentage);
 
             yield return null;
         } while (progressPercentage < 1);
@@ -71,6 +74,7 @@ public class DataVisualizer : MonoBehaviour
 
     public IEnumerator VisualizeDatumByHeight(CaseDataTypeForNeighbourhood caseType)
     {
+        agentRenderer.enabled = true;
         int caseTypeIndex = (int)caseType;
 
         float timeElapsedInAnimation = 0;
@@ -94,10 +98,11 @@ public class DataVisualizer : MonoBehaviour
 
     public IEnumerator VisualizeDatumByColour(CaseDataTypeForNeighbourhood caseType)
     {
+        agentRenderer.enabled = true;
         int caseTypeIndex = (int)caseType;
 
         float timeElapsedInAnimation = 0;
-        Color initialAgentColour = agentMaterial.color;
+        Color initialAgentColour = agentRenderer.material.color;
         float targetAgentColourGB = 1 - ((float)neighbourhoodRepresenting.caseCountData[caseTypeIndex] / (float)Neighbourhood.NeighbourhoodWithMaxCaseCount(caseType, false).caseCountData[caseTypeIndex]);
         Color targetAgentColour = new Color(1, targetAgentColourGB, targetAgentColourGB);
 
@@ -106,17 +111,21 @@ public class DataVisualizer : MonoBehaviour
             if (gameObject.activeSelf)
             {
                 timeElapsedInAnimation += Time.deltaTime;
-                agentMaterial.color = Color.Lerp(initialAgentColour, targetAgentColour, colourCurve.Evaluate(timeElapsedInAnimation));
+                agentRenderer.material.color = Color.Lerp(initialAgentColour, targetAgentColour, colourCurve.Evaluate(timeElapsedInAnimation));
             }
             yield return null;
         } while (timeElapsedInAnimation < colourCurve[colourCurve.length - 1].time);
     }
 
-    public void DevisualizeDatum()
+    public void DevisualizeDatum(bool disableRenderer)
     {
-        agentTransform.localScale = new Vector3(agentTransform.localScale.x, 0, agentTransform.localScale.z);
+        agentTransform.localScale = new Vector3(agentTransform.localScale.x, 0.1f, agentTransform.localScale.z);
         agentTransform.localPosition = new Vector3(agentTransform.localPosition.x, agentTransform.localScale.y / 2, agentTransform.localPosition.z);
         agentLabelTransform.localPosition = new Vector3(0, agentLabelTransform.localScale.y / 2, 0);
-        visualizationAgent.GetComponent<Renderer>().material.color = new Color(1, 1, 1);
+        visualizationAgent.GetComponent<Renderer>().material.color = Color.cyan;
+        if (disableRenderer)
+        {
+            agentRenderer.enabled = false;
+        }
     }
 }

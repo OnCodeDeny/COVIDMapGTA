@@ -11,29 +11,43 @@ public class TimelinePlayButton : MonoBehaviour
     public CaseDataTypeForDay caseDataTypeRepresenting;
     //How many days are visualized per second, this is the timeline playback speed.
     public float daysVisualizedPerSecond;
+
+    DataVisualizer[] dataVisualizers;
+
+    private void Start()
+    {
+        dataVisualizers = new DataVisualizer[mapPinLayer.MapPins.Count];
+        for (int i = 0; i < mapPinLayer.MapPins.Count; i++)
+        {
+            dataVisualizers[i]= mapPinLayer.MapPins[i].GetComponent<DataVisualizer>();
+        }
+    }
+
     public void PlayTimeline()
     {
+        foreach (DataVisualizer dataVisualizer in dataVisualizers)
+        {
+            dataVisualizer.DevisualizeDatum(true);
+        }
         StartCoroutine(StartDaySequence());
     }
 
     public IEnumerator StartDaySequence()
     {
         //How long will it take to visualize a day's data.
-        float animationLengthForADay = 1 / daysVisualizedPerSecond;
+        float animationLengthForADay = 1f / daysVisualizedPerSecond;
 
         for (DateTime i = Neighbourhood.firstEpisodeDate; i <= Neighbourhood.lastEpisodeDate; i = i.AddDays(1))
         {
-            foreach (MapPin mapPin in mapPinLayer.MapPins)
+            foreach (DataVisualizer dataVisualizer in dataVisualizers)
             {
-                DataVisualizer visualizer = mapPin.GetComponent<DataVisualizer>();
-                if (visualizer.neighbourhoodRepresenting.episodeDays.ContainsKey(i))
+                if (dataVisualizer.neighbourhoodRepresenting.episodeDays.ContainsKey(i))
                 {
-                    StartCoroutine(visualizer.VisualizeDatumByHeight(caseDataTypeRepresenting, visualizer.neighbourhoodRepresenting.episodeDays[i], animationLengthForADay));
-                    StartCoroutine(visualizer.VisualizeDatumByColour(caseDataTypeRepresenting, visualizer.neighbourhoodRepresenting.episodeDays[i], animationLengthForADay));
+                    StartCoroutine(dataVisualizer.VisualizeDatumByHeight(caseDataTypeRepresenting, dataVisualizer.neighbourhoodRepresenting.episodeDays[i], animationLengthForADay));
+                    StartCoroutine(dataVisualizer.VisualizeDatumByColour(caseDataTypeRepresenting, dataVisualizer.neighbourhoodRepresenting.episodeDays[i], animationLengthForADay));
                 }
             }
             yield return new WaitForSeconds(animationLengthForADay);
         }
-        Debug.Log("end!");
     }
 }

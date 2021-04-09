@@ -30,7 +30,7 @@ public class DataSelectionToggle : MonoBehaviour
         {
             foreach (MapPin mapPin in mapPinLayer.MapPins)
             {
-                mapPin.gameObject.GetComponent<DataVisualizer>().DevisualizeDatum();
+                mapPin.gameObject.GetComponent<DataVisualizer>().DevisualizeDatum(false);
             }
         }
     }

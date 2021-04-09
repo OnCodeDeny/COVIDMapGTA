@@ -138,7 +138,8 @@ public class DataLoader : MonoBehaviour
             }
         }
 
-        //Universal but inefficient way to calculate and assign values for max neighbourhood daily case count data
+        //Universal but inefficient way to calculate and assign values for max neighbourhood daily case count data.
+        //To implement efficient calculations, calculation method will vary depending on data type.
         int[] maxNeighbourhoodDailyCaseCountData = new int[3];
         foreach (Neighbourhood neighbourhood in Neighbourhood.allNeighbourhoods)
         {
