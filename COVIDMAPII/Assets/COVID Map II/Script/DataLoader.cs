@@ -46,12 +46,30 @@ public class DataLoader : MonoBehaviour
             if (singleCaseData.Length == 18)
             {
                 Neighbourhood caseNeighbourhood = CheckCaseNeighbourhood(singleCaseData);
+                DateTime episodeDate = CheckCaseEpisodeDate(singleCaseData);
+
+                if (episodeDate > Neighbourhood.lastEpisodeDate)
+                {
+                    Neighbourhood.lastEpisodeDate = episodeDate;
+                }
+                else if (episodeDate < Neighbourhood.firstEpisodeDate)
+                {
+                    Neighbourhood.firstEpisodeDate = episodeDate;
+                }
+
                 if (caseNeighbourhood != null)
                 {
                     if (IsConfirmed(singleCaseData))
                     {
-                        caseNeighbourhood.cumulativeCaseCount++;
+                        //Check if episode day is already recorded
+                        if (!caseNeighbourhood.episodeDays.ContainsKey(episodeDate))
+                        {
+                            caseNeighbourhood.episodeDays[episodeDate] = new Day();
+                        }
+                        //Add to episode day
+                        caseNeighbourhood.episodeDays[episodeDate].newCase++;
 
+                        caseNeighbourhood.cumulativeCaseCount++;
                         if (IsActive(singleCaseData))
                         {
                             caseNeighbourhood.activeCaseCount++;
@@ -94,6 +112,28 @@ public class DataLoader : MonoBehaviour
                 }
             }
         }
+        foreach (Neighbourhood neighbourhood in Neighbourhood.allNeighbourhoods)
+        {
+            DateTime previousEpisodeDate = new DateTime();
+            int dayOrder = 0;
+            for (DateTime i = Neighbourhood.firstEpisodeDate; i <= Neighbourhood.lastEpisodeDate; i = i.AddDays(1))
+            {
+                dayOrder++;
+                if (neighbourhood.episodeDays.ContainsKey(i))
+                {
+                    if (neighbourhood.episodeDays.ContainsKey(previousEpisodeDate))
+                    {
+                        neighbourhood.episodeDays[i].cumulativeCase = neighbourhood.episodeDays[i].newCase + neighbourhood.episodeDays[previousEpisodeDate].cumulativeCase;
+                    }
+                    else
+                    {
+                        neighbourhood.episodeDays[i].cumulativeCase = neighbourhood.episodeDays[i].newCase;
+                    }
+                    neighbourhood.episodeDays[i].orderOnTimeline = dayOrder;
+                    previousEpisodeDate = i;
+                }
+            }
+        }
     }
 
     private Neighbourhood CheckCaseNeighbourhood(string[] caseData)
@@ -106,6 +146,16 @@ public class DataLoader : MonoBehaviour
             }
         }
         return null;
+    }
+
+    private DateTime CheckCaseEpisodeDate(string[] caseData)
+    {
+        DateTime episodeDate;
+        if (DateTime.TryParse(caseData[8], out episodeDate))
+        {
+            return episodeDate;
+        }
+        return new DateTime();
     }
 
     private bool IsConfirmed(string[] caseData)

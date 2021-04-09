@@ -310,7 +310,7 @@ public class Neighbourhood : Place
     };
 
     private static Neighbourhood[] neighbourhoodsWithMaxCaseCount = new Neighbourhood[9];
-    public static Neighbourhood NeighbourhoodWithMaxCaseCount(CaseDataType caseType, bool recalculate)
+    public static Neighbourhood NeighbourhoodWithMaxCaseCount(CaseDataTypeForNeighbourhood caseType, bool recalculate)
     {
         int caseTypeIndex = (int)caseType;
         if (recalculate || neighbourhoodsWithMaxCaseCount[caseTypeIndex] == null)
@@ -326,4 +326,12 @@ public class Neighbourhood : Place
         }
         return neighbourhoodsWithMaxCaseCount[caseTypeIndex];
     }
+
+    //Make the latest the default value for first episode date for the sake of finding the actual first episode date on record.
+    public static DateTime firstEpisodeDate = DateTime.Today;
+    //Make the oldest day the default value for last episode date for the sake of finding the actual last episode date on record.
+    public static DateTime lastEpisodeDate;
+    //Store all types of max case count values ever reported in history, these values are tied to spicific places that reported highest values in the history.
+    //These values are for the relative data visualization purpose.
+    public static int[] maxPlaceDayCaseCount = new int[3];
 }

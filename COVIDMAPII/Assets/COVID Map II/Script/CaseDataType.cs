@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public enum CaseDataType
+public enum CaseDataTypeForNeighbourhood
 {
     Cumulative,
     EverHospitalized,
@@ -12,4 +12,10 @@ public enum CaseDataType
     CurrentlyInICU,
     CurrentlyIntubated,
     Deceased
+}
+public enum CaseDataTypeForDay
+{
+    New,
+    Cumulative,
+    Active
 }
