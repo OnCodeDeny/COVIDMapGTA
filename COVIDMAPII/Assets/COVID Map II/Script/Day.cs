@@ -10,7 +10,6 @@ public class Day
 
     //COVID case data
     public int[] caseCountData = new int[3];
-
     //Case for the day (increasement).
     public int newCase
     {

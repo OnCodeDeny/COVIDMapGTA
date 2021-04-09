@@ -112,10 +112,13 @@ public class DataLoader : MonoBehaviour
                 }
             }
         }
+
+        //Calculate and assign attributes value for each episode day in each neighbourhood
         foreach (Neighbourhood neighbourhood in Neighbourhood.allNeighbourhoods)
         {
             DateTime previousEpisodeDate = new DateTime();
             int dayOrder = 0;
+            
             for (DateTime i = Neighbourhood.firstEpisodeDate; i <= Neighbourhood.lastEpisodeDate; i = i.AddDays(1))
             {
                 dayOrder++;
@@ -134,6 +137,25 @@ public class DataLoader : MonoBehaviour
                 }
             }
         }
+
+        //Universal but inefficient way to calculate and assign values for max neighbourhood daily case count data
+        int[] maxNeighbourhoodDailyCaseCountData = new int[3];
+        foreach (Neighbourhood neighbourhood in Neighbourhood.allNeighbourhoods)
+        {
+            foreach (KeyValuePair<DateTime, Day> dayEntry in neighbourhood.episodeDays)
+            {
+                int[] caseCountDataOfTheDay = dayEntry.Value.caseCountData;
+
+                for (int i = 0; i < caseCountDataOfTheDay.Length; i++)
+                {
+                    if (caseCountDataOfTheDay[i] > maxNeighbourhoodDailyCaseCountData[i])
+                    {
+                        maxNeighbourhoodDailyCaseCountData[i] = caseCountDataOfTheDay[i];
+                    }
+                }
+            }
+        }
+        Neighbourhood.maxNeighbourhoodDailyCaseCountData = maxNeighbourhoodDailyCaseCountData;
     }
 
     private Neighbourhood CheckCaseNeighbourhood(string[] caseData)

@@ -18,8 +18,6 @@ public class DataVisualizer : MonoBehaviour
     Material agentMaterial;
     public AnimationCurve colourCurve = AnimationCurve.EaseInOut(0f, 0f, 0.5f, 1f);
 
-    public float timeToVisualizeADay;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -28,34 +26,47 @@ public class DataVisualizer : MonoBehaviour
         agentMaterial = visualizationAgent.GetComponent<Renderer>().material;
     }
 
-    public IEnumerator VisualizeDatumByHeight(CaseDataTypeForDay caseType, Day day)
+    public IEnumerator VisualizeDatumByHeight(CaseDataTypeForDay caseType, Day day, float animationLength)
     {
         int caseTypeIndex = (int)caseType;
 
-        for (DateTime i = Neighbourhood.firstEpisodeDate; i <= Neighbourhood.lastEpisodeDate; i = i.AddDays(1))
+        float timeElapsedInAnimation = 0;
+        float progressPercentage;
+        Vector3 initialAgentLocalScale = agentTransform.localScale;
+        float targetAgentHeight = agentHeightMultiplier * day.caseCountData[caseTypeIndex] / Neighbourhood.maxNeighbourhoodDailyCaseCountData[caseTypeIndex];
+        Vector3 targetAgentLocalScale = new Vector3(agentTransform.localScale.x, targetAgentHeight, agentTransform.localScale.z);
+
+        do
         {
-            if (neighbourhoodRepresenting.episodeDays.ContainsKey(i))
-            {
-                float timeElapsedInAnimation = 0;
-                float percentage;
-                Vector3 initialAgentLocalScale = agentTransform.localScale;
-                float targetAgentHeight = agentHeightMultiplier * neighbourhoodRepresenting.episodeDays[i].caseCountData[caseTypeIndex] / Neighbourhood.maxPlaceDayCaseCount[caseTypeIndex];
+            timeElapsedInAnimation += Time.deltaTime;
+            progressPercentage = timeElapsedInAnimation / animationLength;
+            agentTransform.localScale = Vector3.Lerp(initialAgentLocalScale, targetAgentLocalScale, progressPercentage);
+            //Position offset due to scale change
+            agentTransform.localPosition = new Vector3(agentTransform.localPosition.x, agentTransform.localScale.y / 2, agentTransform.localPosition.z);
+            agentLabelTransform.localPosition = new Vector3(agentTransform.localPosition.x, agentTransform.localScale.y + agentLabelTransform.localScale.y / 2, agentTransform.localPosition.z);
 
-                Vector3 targetAgentLocalScale = new Vector3(agentTransform.localScale.x, targetAgentHeight, agentTransform.localScale.z);
+            yield return null;
+        } while (progressPercentage < 1);
+    }
 
-                do
-                {
-                    timeElapsedInAnimation += Time.deltaTime;
-                    percentage = timeElapsedInAnimation / timeToVisualizeADay;
-                    agentTransform.localScale = Vector3.Lerp(initialAgentLocalScale, targetAgentLocalScale, percentage);
-                    //Position offset due to scale change
-                    agentTransform.localPosition = new Vector3(agentTransform.localPosition.x, agentTransform.localScale.y / 2, agentTransform.localPosition.z);
-                    agentLabelTransform.localPosition = new Vector3(agentTransform.localPosition.x, agentTransform.localScale.y + agentLabelTransform.localScale.y / 2, agentTransform.localPosition.z);
+    public IEnumerator VisualizeDatumByColour(CaseDataTypeForDay caseType, Day day, float animationLength)
+    {
+        int caseTypeIndex = (int)caseType;
 
-                    yield return null;
-                } while (percentage < 1);
-            }
-        }
+        float timeElapsedInAnimation = 0;
+        float progressPercentage;
+        Color initialAgentColour = agentMaterial.color;
+        float targetAgentColourGB = 1 - ((float)day.caseCountData[caseTypeIndex] / (float)Neighbourhood.maxNeighbourhoodDailyCaseCountData[caseTypeIndex]);
+        Color targetAgentColour = new Color(1, targetAgentColourGB, targetAgentColourGB);
+
+        do
+        {
+            timeElapsedInAnimation += Time.deltaTime;
+            progressPercentage = timeElapsedInAnimation / animationLength;
+            agentMaterial.color = Color.Lerp(initialAgentColour, targetAgentColour, progressPercentage);
+
+            yield return null;
+        } while (progressPercentage < 1);
     }
 
     public IEnumerator VisualizeDatumByHeight(CaseDataTypeForNeighbourhood caseType)
@@ -103,7 +114,7 @@ public class DataVisualizer : MonoBehaviour
 
     public void DevisualizeDatum()
     {
-        agentTransform.localScale = new Vector3(agentTransform.localScale.x, 0.1f, agentTransform.localScale.z);
+        agentTransform.localScale = new Vector3(agentTransform.localScale.x, 0, agentTransform.localScale.z);
         agentTransform.localPosition = new Vector3(agentTransform.localPosition.x, agentTransform.localScale.y / 2, agentTransform.localPosition.z);
         agentLabelTransform.localPosition = new Vector3(0, agentLabelTransform.localScale.y / 2, 0);
         visualizationAgent.GetComponent<Renderer>().material.color = new Color(1, 1, 1);
