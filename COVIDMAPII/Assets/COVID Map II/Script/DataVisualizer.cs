@@ -29,47 +29,81 @@ public class DataVisualizer : MonoBehaviour
 
     public IEnumerator VisualizeDatumByHeight(CaseDataTypeForDay caseType, Day day, float animationLength)
     {
-        agentRenderer.enabled = true;
         int caseTypeIndex = (int)caseType;
 
         float timeElapsedInAnimation = 0;
-        float progressPercentage;
+        float progressPercentage = 0;
         Vector3 initialAgentLocalScale = agentTransform.localScale;
         float targetAgentHeight = agentHeightMultiplier * day.caseCountData[caseTypeIndex] / Neighbourhood.maxNeighbourhoodDailyCaseCountData[caseTypeIndex];
         Vector3 targetAgentLocalScale = new Vector3(agentTransform.localScale.x, targetAgentHeight, agentTransform.localScale.z);
 
-        do
+        //Detect if animation is needed
+        if (initialAgentLocalScale != targetAgentLocalScale)
         {
-            timeElapsedInAnimation += Time.deltaTime;
-            progressPercentage = timeElapsedInAnimation / animationLength;
-            agentTransform.localScale = Vector3.Lerp(initialAgentLocalScale, targetAgentLocalScale, progressPercentage);
-            //Position offset due to scale change
-            agentTransform.localPosition = new Vector3(agentTransform.localPosition.x, agentTransform.localScale.y / 2, agentTransform.localPosition.z);
-            agentLabelTransform.localPosition = new Vector3(agentTransform.localPosition.x, agentTransform.localScale.y + agentLabelTransform.localScale.y / 2, agentTransform.localPosition.z);
+            //Enable renderer and animate to target
+            agentRenderer.enabled = true;
 
-            yield return null;
-        } while (progressPercentage < 1);
+            while (progressPercentage < 1)
+            {
+                timeElapsedInAnimation += Time.deltaTime;
+                progressPercentage = timeElapsedInAnimation / animationLength;
+                agentTransform.localScale = Vector3.Lerp(initialAgentLocalScale, targetAgentLocalScale, progressPercentage);
+                //Position offset due to scale change
+                agentTransform.localPosition = new Vector3(agentTransform.localPosition.x, agentTransform.localScale.y / 2, agentTransform.localPosition.z);
+                agentLabelTransform.localPosition = new Vector3(agentTransform.localPosition.x, agentTransform.localScale.y + agentLabelTransform.localScale.y / 2, agentTransform.localPosition.z);
+
+                yield return null;
+            }
+        }
+        //If animation is not needed, enable renderer if there are cases to show
+        else if (day.caseCountData[caseTypeIndex] > 0)
+        {
+            agentRenderer.enabled = true;
+        }
+
+        //If renderer is enabled when agent scale y is <= 0, ugly black area will appear.
+        if (agentTransform.localScale.y <= 0)
+        {
+            agentRenderer.enabled = false;
+        }
     }
 
     public IEnumerator VisualizeDatumByColour(CaseDataTypeForDay caseType, Day day, float animationLength)
     {
-        agentRenderer.enabled = true;
         int caseTypeIndex = (int)caseType;
 
         float timeElapsedInAnimation = 0;
-        float progressPercentage;
+        float progressPercentage = 0;
         Color initialAgentColour = agentRenderer.material.color;
         float targetAgentColourGB = 1 - ((float)day.caseCountData[caseTypeIndex] / (float)Neighbourhood.maxNeighbourhoodDailyCaseCountData[caseTypeIndex]);
         Color targetAgentColour = new Color(1, targetAgentColourGB, targetAgentColourGB);
 
-        do
+        //Detect if animation is needed
+        if (initialAgentColour != targetAgentColour)
         {
-            timeElapsedInAnimation += Time.deltaTime;
-            progressPercentage = timeElapsedInAnimation / animationLength;
-            agentRenderer.material.color = Color.Lerp(initialAgentColour, targetAgentColour, progressPercentage);
+            //Enable renderer and animate to target
+            agentRenderer.enabled = true;
 
-            yield return null;
-        } while (progressPercentage < 1);
+            while (progressPercentage < 1)
+            {
+                timeElapsedInAnimation += Time.deltaTime;
+                progressPercentage = timeElapsedInAnimation / animationLength;
+                agentRenderer.material.color = Color.Lerp(initialAgentColour, targetAgentColour, progressPercentage);
+
+                yield return null;
+            }
+        }
+        //If animation is not needed, enable renderer if there are cases to show
+        else if (day.caseCountData[caseTypeIndex] > 0)
+        {
+            agentRenderer.enabled = true;
+        }
+
+        //Disable renderer when there's no case to show to avoid confusion.
+        if (day.caseCountData[caseTypeIndex] <= 0)
+        {
+            agentRenderer.enabled = false;
+        }
     }
 
     public IEnumerator VisualizeDatumByHeight(CaseDataTypeForNeighbourhood caseType)

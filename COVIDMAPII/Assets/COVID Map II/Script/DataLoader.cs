@@ -8,6 +8,9 @@ using SimpleJSON;
 
 public class DataLoader : MonoBehaviour
 {
+    //For calculating active case count
+    //Unit: Day
+    int averageVirusRetentionTime = 14;
     string caseDataFilePath;
 
     void Awake()
@@ -116,25 +119,40 @@ public class DataLoader : MonoBehaviour
         //Calculate and assign attributes value for each episode day in each neighbourhood
         foreach (Neighbourhood neighbourhood in Neighbourhood.allNeighbourhoods)
         {
-            DateTime previousEpisodeDate = new DateTime();
+            //For calculating day order on timeline
             int dayOrder = 0;
-            
+            //For calculating active case count
+            int dailyActiveCaseCount = 0;
+
             for (DateTime i = Neighbourhood.firstEpisodeDate; i <= Neighbourhood.lastEpisodeDate; i = i.AddDays(1))
             {
-                dayOrder++;
-                if (neighbourhood.episodeDays.ContainsKey(i))
+                if (!neighbourhood.episodeDays.ContainsKey(i))
                 {
-                    if (neighbourhood.episodeDays.ContainsKey(previousEpisodeDate))
-                    {
-                        neighbourhood.episodeDays[i].cumulativeCase = neighbourhood.episodeDays[i].newCase + neighbourhood.episodeDays[previousEpisodeDate].cumulativeCase;
-                    }
-                    else
-                    {
-                        neighbourhood.episodeDays[i].cumulativeCase = neighbourhood.episodeDays[i].newCase;
-                    }
-                    neighbourhood.episodeDays[i].orderOnTimeline = dayOrder;
-                    previousEpisodeDate = i;
+                    neighbourhood.episodeDays[i] = new Day();
                 }
+
+                dayOrder++;
+                neighbourhood.episodeDays[i].orderOnTimeline = dayOrder;
+
+                //For calculating cumulative case count
+                DateTime lastEpisodeDate = i.AddDays(-1);
+                if (neighbourhood.episodeDays.ContainsKey(lastEpisodeDate))
+                {
+                    neighbourhood.episodeDays[i].cumulativeCase = neighbourhood.episodeDays[i].newCase + neighbourhood.episodeDays[lastEpisodeDate].cumulativeCase;
+                }
+                //In case this is the first episode date on record
+                else
+                {
+                    neighbourhood.episodeDays[i].cumulativeCase = neighbourhood.episodeDays[i].newCase;
+                }
+
+                dailyActiveCaseCount += neighbourhood.episodeDays[i].newCase;
+                DateTime lastDayOfVirusRetention = i.AddDays(-averageVirusRetentionTime);
+                if (neighbourhood.episodeDays.ContainsKey(lastDayOfVirusRetention))
+                {
+                    dailyActiveCaseCount -= neighbourhood.episodeDays[lastDayOfVirusRetention].newCase;
+                }
+                neighbourhood.episodeDays[i].activeCase = dailyActiveCaseCount;
             }
         }
 

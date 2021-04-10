@@ -41,13 +41,11 @@ public class TimelinePlayButton : MonoBehaviour
         {
             foreach (DataVisualizer dataVisualizer in dataVisualizers)
             {
-                if (dataVisualizer.neighbourhoodRepresenting.episodeDays.ContainsKey(i))
-                {
-                    StartCoroutine(dataVisualizer.VisualizeDatumByHeight(caseDataTypeRepresenting, dataVisualizer.neighbourhoodRepresenting.episodeDays[i], animationLengthForADay));
-                    StartCoroutine(dataVisualizer.VisualizeDatumByColour(caseDataTypeRepresenting, dataVisualizer.neighbourhoodRepresenting.episodeDays[i], animationLengthForADay));
-                }
+                StartCoroutine(dataVisualizer.VisualizeDatumByHeight(caseDataTypeRepresenting, dataVisualizer.neighbourhoodRepresenting.episodeDays[i], animationLengthForADay));
+                StartCoroutine(dataVisualizer.VisualizeDatumByColour(caseDataTypeRepresenting, dataVisualizer.neighbourhoodRepresenting.episodeDays[i], animationLengthForADay));
             }
             yield return new WaitForSeconds(animationLengthForADay);
         }
+        Debug.Log("done");
     }
 }
