@@ -9,28 +9,35 @@ public class DataSelectionToggle : MonoBehaviour
     public MapPinLayer mapPinLayer;
     Toggle toggle;
     public CaseDataTypeForNeighbourhood caseDataTypeRepresenting;
+    DataVisualizer[] dataVisualizers;
+
     // Start is called before the first frame update
     void Start()
     {
         toggle = GetComponent<Toggle>();
+
+        dataVisualizers = new DataVisualizer[mapPinLayer.MapPins.Count];
+        for (int i = 0; i < mapPinLayer.MapPins.Count; i++)
+        {
+            dataVisualizers[i] = mapPinLayer.MapPins[i].GetComponent<DataVisualizer>();
+        }
     }
 
     public void VisualizeData()
     {
         if (toggle.isOn)
         {
-            foreach (MapPin mapPin in mapPinLayer.MapPins)
+            foreach (DataVisualizer dataVisualizer in dataVisualizers)
             {
-                DataVisualizer visualizer = mapPin.GetComponent<DataVisualizer>();
-                StartCoroutine(visualizer.VisualizeDatumByHeight(caseDataTypeRepresenting));
-                StartCoroutine(visualizer.VisualizeDatumByColour(caseDataTypeRepresenting));
+                StartCoroutine(dataVisualizer.VisualizeDatumByHeight(caseDataTypeRepresenting));
+                StartCoroutine(dataVisualizer.VisualizeDatumByColour(caseDataTypeRepresenting));
             }
         }
         else
         {
-            foreach (MapPin mapPin in mapPinLayer.MapPins)
+            foreach (DataVisualizer dataVisualizer in dataVisualizers)
             {
-                mapPin.gameObject.GetComponent<DataVisualizer>().DevisualizeDatum(false);
+                dataVisualizer.DevisualizeDatum();
             }
         }
     }

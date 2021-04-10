@@ -27,14 +27,14 @@ public class TimelinePlayButton : MonoBehaviour
     {
         foreach (DataVisualizer dataVisualizer in dataVisualizers)
         {
-            dataVisualizer.DevisualizeDatum(true);
+            dataVisualizer.DevisualizeDatum();
         }
         StartCoroutine(StartDaySequence());
     }
 
     public IEnumerator StartDaySequence()
     {
-        //How long will it take to visualize a day's data.
+        //Calculate how long it will take to visualize a day's data
         float animationLengthForADay = 1f / daysVisualizedPerSecond;
 
         for (DateTime i = Neighbourhood.firstEpisodeDate; i <= Neighbourhood.lastEpisodeDate; i = i.AddDays(1))
@@ -46,6 +46,5 @@ public class TimelinePlayButton : MonoBehaviour
             }
             yield return new WaitForSeconds(animationLengthForADay);
         }
-        Debug.Log("done");
     }
 }

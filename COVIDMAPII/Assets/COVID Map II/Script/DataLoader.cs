@@ -119,20 +119,16 @@ public class DataLoader : MonoBehaviour
         //Calculate and assign attributes value for each episode day in each neighbourhood
         foreach (Neighbourhood neighbourhood in Neighbourhood.allNeighbourhoods)
         {
-            //For calculating day order on timeline
-            int dayOrder = 0;
             //For calculating active case count
             int dailyActiveCaseCount = 0;
 
             for (DateTime i = Neighbourhood.firstEpisodeDate; i <= Neighbourhood.lastEpisodeDate; i = i.AddDays(1))
             {
+                //Fill empty episode days with generated days
                 if (!neighbourhood.episodeDays.ContainsKey(i))
                 {
                     neighbourhood.episodeDays[i] = new Day();
                 }
-
-                dayOrder++;
-                neighbourhood.episodeDays[i].orderOnTimeline = dayOrder;
 
                 //For calculating cumulative case count
                 DateTime lastEpisodeDate = i.AddDays(-1);
@@ -146,6 +142,7 @@ public class DataLoader : MonoBehaviour
                     neighbourhood.episodeDays[i].cumulativeCase = neighbourhood.episodeDays[i].newCase;
                 }
 
+                //Calculate active case count
                 dailyActiveCaseCount += neighbourhood.episodeDays[i].newCase;
                 DateTime lastDayOfVirusRetention = i.AddDays(-averageVirusRetentionTime);
                 if (neighbourhood.episodeDays.ContainsKey(lastDayOfVirusRetention))

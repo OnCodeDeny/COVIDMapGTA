@@ -409,6 +409,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caa3a2402eb444e47a362501623e087f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  visualized: 1
   visualizationAgent: {fileID: 1129522993810948}
   agentLabel: {fileID: 7520796128532738438}
   agentHeightMultiplier: 3
