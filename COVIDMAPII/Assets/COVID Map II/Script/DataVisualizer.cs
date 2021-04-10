@@ -58,7 +58,7 @@ public class DataVisualizer : MonoBehaviour
                 yield return null;
             }
         }
-        //If animation is not needed, enable renderer if there are cases to show
+        //In case animation is not needed, enable renderer if there are cases to show
         else if (day.caseCountData[caseTypeIndex] > 0)
         {
             agentRenderer.enabled = true;
@@ -97,7 +97,7 @@ public class DataVisualizer : MonoBehaviour
                 yield return null;
             }
         }
-        //If animation is not needed, enable renderer if there are cases to show
+        //In case animation is not needed, enable renderer if there are cases to show
         else if (day.caseCountData[caseTypeIndex] > 0)
         {
             agentRenderer.enabled = true;
