@@ -1745,7 +1745,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99d2c96249cf5cf4eb6469709c77aacd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapPinLayer: {fileID: 891002287}
 --- !u!1 &417928074
 GameObject:
   m_ObjectHideFlags: 0
@@ -3837,7 +3836,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 880718911}
-        m_MethodName: CheckValue
+        m_MethodName: OnClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3896,8 +3895,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ebe5ee4ec8714842ae348734a7ff081, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dropdown: {fileID: 1547440455}
-  mapPinLayer: {fileID: 891002287}
 --- !u!1 &891002273
 GameObject:
   m_ObjectHideFlags: 0
@@ -7696,6 +7693,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentTimelineState: 1
+  dropdown: {fileID: 1547440455}
+  mapPinLayer: {fileID: 891002287}
+  pPButtonText: {fileID: 467131981}
   daysVisualizedPerSecond: 20
 --- !u!1 &1488936995
 GameObject:
