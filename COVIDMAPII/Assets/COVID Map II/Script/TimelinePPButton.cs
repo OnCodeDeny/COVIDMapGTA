@@ -4,14 +4,16 @@ using UnityEngine;
 using UnityEngine.UI;
 using Microsoft.Maps.Unity;
 using System;
+using TMPro;
 
-public class TimelinePlayButton : MonoBehaviour
+public class TimelinePPButton : MonoBehaviour
 {
-    public MapPinLayer mapPinLayer;
-    public CaseDataTypeForDay caseDataTypeRepresenting;
-    //How many days are visualized per second, this is the timeline playback speed.
+    //How many days are visualized per second, this is the timeline play speed.
     public float daysVisualizedPerSecond;
 
+    public TMP_Dropdown dropdown;
+    public MapPinLayer mapPinLayer;
+    CaseDataTypeForDay _caseDataTypeRepresenting;
     DataVisualizer[] _dataVisualizers;
 
     private void Start()
@@ -25,6 +27,8 @@ public class TimelinePlayButton : MonoBehaviour
 
     public void PlayTimeline()
     {
+        _caseDataTypeRepresenting = (CaseDataTypeForDay)dropdown.value;
+
         foreach (DataVisualizer dataVisualizer in _dataVisualizers)
         {
             dataVisualizer.DevisualizeDatum();
@@ -41,8 +45,8 @@ public class TimelinePlayButton : MonoBehaviour
         {
             foreach (DataVisualizer dataVisualizer in _dataVisualizers)
             {
-                StartCoroutine(dataVisualizer.VisualizeDatumByHeight(caseDataTypeRepresenting, dataVisualizer.neighbourhoodRepresenting.episodeDays[i], animationLengthForADay));
-                StartCoroutine(dataVisualizer.VisualizeDatumByColour(caseDataTypeRepresenting, dataVisualizer.neighbourhoodRepresenting.episodeDays[i], animationLengthForADay));
+                StartCoroutine(dataVisualizer.VisualizeDatumByHeight(_caseDataTypeRepresenting, dataVisualizer.neighbourhoodRepresenting.episodeDays[i], animationLengthForADay));
+                StartCoroutine(dataVisualizer.VisualizeDatumByColour(_caseDataTypeRepresenting, dataVisualizer.neighbourhoodRepresenting.episodeDays[i], animationLengthForADay));
             }
             yield return new WaitForSeconds(animationLengthForADay);
         }
