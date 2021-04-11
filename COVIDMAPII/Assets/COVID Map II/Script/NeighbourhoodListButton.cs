@@ -20,7 +20,7 @@ public class NeighbourhoodListButton : MonoBehaviour
 
     public void MoveMapCentreToTarget()
     {
-        mapToBeAnimated.SetMapScene(_targetLocationOnMap);
+        mapToBeAnimated.SetMapScene(_targetLocationOnMap, MapSceneAnimationKind.Bow, 5f);
     }
 
     public void DisplayCaseData()

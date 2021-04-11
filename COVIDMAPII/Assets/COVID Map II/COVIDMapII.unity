@@ -3887,8 +3887,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.3, z: 1}
-  m_Center: {x: 0, y: 0.15, z: 0}
+  m_Size: {x: 2, y: 0.2, z: 2}
+  m_Center: {x: 0, y: 0.1, z: 0}
 --- !u!114 &891002275
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3963,22 +3963,22 @@ MonoBehaviour:
   _version: 3
   _mapSession: {fileID: 891002280}
   _mapEdgeColor: {r: 0.105882354, g: 0.3373846, b: 0.34117648, a: 1}
-  _mapEdgeColorFadeDistance: 0.03
+  _mapEdgeColorFadeDistance: 0.06
   _detailOffset: 0
   _center:
-    _latitude: 43.72
-    _longitude: -79.35
+    _latitude: 43.75
+    _longitude: -79.38
   _zoomLevel: 10.340018
   _minimumZoomLevel: 1
   _maximumZoomLevel: 20
   _mapTerrainType: 1
-  _mapShape: 0
+  _mapShape: 1
   _localMapDimension: {x: 1, y: 1}
-  _localMapRadius: 0.84
-  _localMapBaseHeight: 0.3
+  _localMapRadius: 1
+  _localMapBaseHeight: 0.2
   _elevationScale: 1
-  _castShadows: 1
-  _receiveShadows: 1
+  _castShadows: 0
+  _receiveShadows: 0
   _enableMrtkMaterialIntegration: 0
   _terrainMaterial: {fileID: 0}
   _isClippingVolumeWallEnabled: 1
@@ -4040,7 +4040,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _camera: {fileID: 1107240295}
-  _zoomSpeed: 5
+  _zoomSpeed: 8
 --- !u!114 &891002283
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5589,7 +5589,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1107240293}
   m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
-  m_LocalPosition: {x: 0, y: 1, z: -0.8}
+  m_LocalPosition: {x: 0, y: 0.9, z: -0.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

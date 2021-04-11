@@ -13,7 +13,7 @@ public class NeighbourhoodPin : MonoBehaviour
     public Neighbourhood neighbourhoodRepresenting;
     public MapRenderer mapToBeAnimated;
     public CaseDatumListManager datumListToBePopulated;
-    private MapSceneOfLocationAndZoomLevel _targetLocationOnMap;
+    MapSceneOfLocationAndZoomLevel _targetLocationOnMap;
 
     private void Start()
     {
@@ -21,12 +21,13 @@ public class NeighbourhoodPin : MonoBehaviour
         textMeshPro.text = neighbourhoodRepresenting.displayName;
         textMeshPro.transform.localPosition = new Vector3(0, textMeshPro.transform.localScale.y / 2, 0);
         _targetLocationOnMap = new MapSceneOfLocationAndZoomLevel(neighbourhoodRepresenting.locationLatLon, 14f);
+
         //This should happen after data loading, try coroutine?
         //GetComponentInChildren<TextMeshPro>().text = neighbourhoodRepresenting.activeCaseCount.ToString();
     }
     public void MoveMapCentreToTarget()
     {
-        mapToBeAnimated.SetMapScene(_targetLocationOnMap);
+        mapToBeAnimated.SetMapScene(_targetLocationOnMap, MapSceneAnimationKind.Linear, 30f);
     }
     public void DisplayCaseData()
     {

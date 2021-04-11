@@ -10,13 +10,14 @@ public class DataLoader : MonoBehaviour
 {
     //For calculating active case count
     //Unit: Day
-    int averageVirusRetentionTime = 14;
-    string caseDataFilePath;
+    int _averageVirusRetentionTime = 14;
+
+    string _caseDataFilePath;
 
     void Awake()
     {
-        caseDataFilePath = Path.Combine(Application.persistentDataPath, "TorontoCOVID19Cases.tsv");
-        if (File.Exists(caseDataFilePath))
+        _caseDataFilePath = Path.Combine(Application.persistentDataPath, "TorontoCOVID19Cases.tsv");
+        if (File.Exists(_caseDataFilePath))
         {
             ReadCaseDataFile();
         }
@@ -27,20 +28,20 @@ public class DataLoader : MonoBehaviour
     IEnumerator DownloadCaseDataToFile()
     {
         var unityWebRequest = new UnityWebRequest("https://ckan0.cf.opendata.inter.prod-toronto.ca/datastore/dump/e5bf35bc-e681-43da-b2ce-0242d00922ad?format=tsv", UnityWebRequest.kHttpVerbGET);
-        unityWebRequest.downloadHandler = new DownloadHandlerFile(caseDataFilePath);
+        unityWebRequest.downloadHandler = new DownloadHandlerFile(_caseDataFilePath);
         yield return unityWebRequest.SendWebRequest();
         if (unityWebRequest.isNetworkError || unityWebRequest.isHttpError)
             Debug.LogError(unityWebRequest.error);
         else
         {
-            Debug.Log("File successfully downloaded and saved to " + caseDataFilePath);
+            Debug.Log("File successfully downloaded and saved to " + _caseDataFilePath);
             ReadCaseDataFile();
         }
     }
 
     private void ReadCaseDataFile()
     {
-        string caseDataFileContents = File.ReadAllText(caseDataFilePath);
+        string caseDataFileContents = File.ReadAllText(_caseDataFilePath);
         string[] lines = caseDataFileContents.Split('\n');
         for (int i = 1; i < lines.Length; i++)
         {
@@ -144,7 +145,7 @@ public class DataLoader : MonoBehaviour
 
                 //Calculate active case count
                 dailyActiveCaseCount += neighbourhood.episodeDays[i].newCase;
-                DateTime lastDayOfVirusRetention = i.AddDays(-averageVirusRetentionTime);
+                DateTime lastDayOfVirusRetention = i.AddDays(-_averageVirusRetentionTime);
                 if (neighbourhood.episodeDays.ContainsKey(lastDayOfVirusRetention))
                 {
                     dailyActiveCaseCount -= neighbourhood.episodeDays[lastDayOfVirusRetention].newCase;

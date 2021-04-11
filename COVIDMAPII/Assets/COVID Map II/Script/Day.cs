@@ -5,9 +5,6 @@ using UnityEngine;
 
 public class Day
 {
-    //Where the day is located on the timeline, number of days elapsed since the first day on record until the day (inclusive).
-    //public int orderOnTimeline;
-
     //COVID case data
     public int[] caseCountData = new int[3];
     //Case for the day (increasement).

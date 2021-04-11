@@ -7,27 +7,27 @@ using Microsoft.Maps.Unity;
 public class DataSelectionToggle : MonoBehaviour
 {
     public MapPinLayer mapPinLayer;
-    Toggle toggle;
+    Toggle _toggle;
     public CaseDataTypeForNeighbourhood caseDataTypeRepresenting;
-    DataVisualizer[] dataVisualizers;
+    DataVisualizer[] _dataVisualizers;
 
     // Start is called before the first frame update
     void Start()
     {
-        toggle = GetComponent<Toggle>();
+        _toggle = GetComponent<Toggle>();
 
-        dataVisualizers = new DataVisualizer[mapPinLayer.MapPins.Count];
+        _dataVisualizers = new DataVisualizer[mapPinLayer.MapPins.Count];
         for (int i = 0; i < mapPinLayer.MapPins.Count; i++)
         {
-            dataVisualizers[i] = mapPinLayer.MapPins[i].GetComponent<DataVisualizer>();
+            _dataVisualizers[i] = mapPinLayer.MapPins[i].GetComponent<DataVisualizer>();
         }
     }
 
     public void VisualizeData()
     {
-        if (toggle.isOn)
+        if (_toggle.isOn)
         {
-            foreach (DataVisualizer dataVisualizer in dataVisualizers)
+            foreach (DataVisualizer dataVisualizer in _dataVisualizers)
             {
                 StartCoroutine(dataVisualizer.VisualizeDatumByHeight(caseDataTypeRepresenting));
                 StartCoroutine(dataVisualizer.VisualizeDatumByColour(caseDataTypeRepresenting));
@@ -35,7 +35,7 @@ public class DataSelectionToggle : MonoBehaviour
         }
         else
         {
-            foreach (DataVisualizer dataVisualizer in dataVisualizers)
+            foreach (DataVisualizer dataVisualizer in _dataVisualizers)
             {
                 dataVisualizer.DevisualizeDatum();
             }
