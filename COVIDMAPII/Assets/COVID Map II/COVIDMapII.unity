@@ -1614,6 +1614,7 @@ GameObject:
   - component: {fileID: 387322884}
   - component: {fileID: 387322883}
   - component: {fileID: 387322882}
+  - component: {fileID: 387322885}
   m_Layer: 5
   m_Name: StopButton
   m_TagString: Untagged
@@ -1683,7 +1684,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 387322883}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 387322885}
+        m_MethodName: StopTimeline
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &387322883
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1721,6 +1733,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 387322880}
   m_CullTransparentMesh: 0
+--- !u!114 &387322885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 387322880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99d2c96249cf5cf4eb6469709c77aacd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mapPinLayer: {fileID: 891002287}
 --- !u!1 &417928074
 GameObject:
   m_ObjectHideFlags: 0
@@ -3740,6 +3765,7 @@ GameObject:
   - component: {fileID: 880718910}
   - component: {fileID: 880718909}
   - component: {fileID: 880718908}
+  - component: {fileID: 880718911}
   m_Layer: 5
   m_Name: PPButton
   m_TagString: Untagged
@@ -3809,7 +3835,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 880718909}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 880718911}
+        m_MethodName: CheckValue
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &880718909
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3847,6 +3884,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 880718906}
   m_CullTransparentMesh: 0
+--- !u!114 &880718911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 880718906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ebe5ee4ec8714842ae348734a7ff081, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dropdown: {fileID: 1547440455}
+  mapPinLayer: {fileID: 891002287}
 --- !u!1 &891002273
 GameObject:
   m_ObjectHideFlags: 0
@@ -7599,6 +7650,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1485622894}
+  - component: {fileID: 1485622895}
   m_Layer: 5
   m_Name: Timeline Player
   m_TagString: Untagged
@@ -7631,6 +7683,20 @@ RectTransform:
   m_AnchoredPosition: {x: -420, y: -665}
   m_SizeDelta: {x: 262.77222, y: 138.48651}
   m_Pivot: {x: 1, y: 1}
+--- !u!114 &1485622895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1485622893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99ba35dd46814d24d819d30acae2188a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentTimelineState: 1
+  daysVisualizedPerSecond: 20
 --- !u!1 &1488936995
 GameObject:
   m_ObjectHideFlags: 0
@@ -7854,8 +7920,9 @@ GameObject:
   - component: {fileID: 1547440457}
   - component: {fileID: 1547440456}
   - component: {fileID: 1547440455}
+  - component: {fileID: 1547440458}
   m_Layer: 5
-  m_Name: CaseTypeSelectionDropdown
+  m_Name: TimelineCaseTypeSelection
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7931,16 +7998,21 @@ MonoBehaviour:
   m_ItemImage: {fileID: 0}
   m_Value: 0
   m_Options:
-    m_Options:
-    - m_Text: Cumulative Case
-      m_Image: {fileID: 0}
-    - m_Text: Active Case
-      m_Image: {fileID: 0}
-    - m_Text: New Case
-      m_Image: {fileID: 0}
+    m_Options: []
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1547440458}
+        m_MethodName: ChangeChosenCaseDataTypeForDay
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_AlphaFadeSpeed: 0.15
 --- !u!114 &1547440456
 MonoBehaviour:
@@ -7979,6 +8051,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1547440453}
   m_CullTransparentMesh: 0
+--- !u!114 &1547440458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1547440453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47890bb8f896f404ea7413d18e909c29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chosenCaseDataTypeForDay: 0
 --- !u!1 &1577785752
 GameObject:
   m_ObjectHideFlags: 0
@@ -8109,7 +8194,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Cumulative Case
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

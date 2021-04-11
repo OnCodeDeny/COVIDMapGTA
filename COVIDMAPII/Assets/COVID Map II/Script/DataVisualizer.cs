@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class DataVisualizer : MonoBehaviour
 {
-    public bool visualized;
+    [SerializeField]
+    bool visualized;
 
     public Neighbourhood neighbourhoodRepresenting;
 
@@ -163,6 +164,7 @@ public class DataVisualizer : MonoBehaviour
         _agentTransform.localPosition = new Vector3(_agentTransform.localPosition.x, _agentTransform.localScale.y / 2, _agentTransform.localPosition.z);
         _agentLabelTransform.localPosition = new Vector3(0, _agentLabelTransform.localScale.y / 2, 0);
         visualizationAgent.GetComponent<Renderer>().material.color = Color.cyan;
+        _agentRenderer.enabled = true;
         visualized = false;
     }
 }
