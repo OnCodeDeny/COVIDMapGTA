@@ -41,6 +41,14 @@ public class DataLoader : MonoBehaviour
 
     private void ReadCaseDataFile()
     {
+        CalculateNeighbourhoodsCaseData();
+        CalculatePlaceDaysCaseData();
+        CalculateNeighbourhoodsWithMaxCaseCount();
+        CalculatePlaceDaysWithMaxCaseCount();
+    }
+
+    private void CalculateNeighbourhoodsCaseData()
+    {
         string caseDataFileContents = File.ReadAllText(_caseDataFilePath);
         string[] lines = caseDataFileContents.Split('\n');
         for (int i = 1; i < lines.Length; i++)
@@ -68,7 +76,7 @@ public class DataLoader : MonoBehaviour
                         //Check if episode day is already recorded
                         if (!caseNeighbourhood.episodeDays.ContainsKey(episodeDate))
                         {
-                            caseNeighbourhood.episodeDays[episodeDate] = new Day();
+                            caseNeighbourhood.episodeDays[episodeDate] = new PlaceDay(caseNeighbourhood);
                         }
                         //Add to episode day
                         caseNeighbourhood.episodeDays[episodeDate].newCase++;
@@ -116,8 +124,11 @@ public class DataLoader : MonoBehaviour
                 }
             }
         }
+    }
 
-        //Calculate and assign attributes value for each episode day in each neighbourhood
+    //Calculate and assign case data value for each episode day in each neighbourhood
+    private void CalculatePlaceDaysCaseData()
+    {
         foreach (Neighbourhood neighbourhood in Neighbourhood.allNeighbourhoods)
         {
             //For calculating active case count
@@ -128,7 +139,7 @@ public class DataLoader : MonoBehaviour
                 //Fill empty episode days with generated days
                 if (!neighbourhood.episodeDays.ContainsKey(i))
                 {
-                    neighbourhood.episodeDays[i] = new Day();
+                    neighbourhood.episodeDays[i] = new PlaceDay(neighbourhood);
                 }
 
                 //For calculating cumulative case count
@@ -153,26 +164,65 @@ public class DataLoader : MonoBehaviour
                 neighbourhood.episodeDays[i].activeCase = dailyActiveCaseCount;
             }
         }
+    }
 
-        //Universal but inefficient way to calculate and assign values for max neighbourhood daily case count data.
-        //To implement efficient calculations, calculation method will vary depending on data type.
-        int[] maxNeighbourhoodDailyCaseCountData = new int[3];
-        foreach (Neighbourhood neighbourhood in Neighbourhood.allNeighbourhoods)
+    private void CalculateNeighbourhoodsWithMaxCaseCount()
+    {
+        List<Neighbourhood>[] neighbourhoodsWithMaxCaseCount = new List<Neighbourhood>[9];
+
+        foreach (NeighbourhoodCaseDataType caseType in Enum.GetValues(typeof(NeighbourhoodCaseDataType)))
         {
-            foreach (KeyValuePair<DateTime, Day> dayEntry in neighbourhood.episodeDays)
-            {
-                int[] caseCountDataOfTheDay = dayEntry.Value.caseCountData;
+            int caseTypeIndex = (int)caseType;
 
-                for (int i = 0; i < caseCountDataOfTheDay.Length; i++)
+            neighbourhoodsWithMaxCaseCount[caseTypeIndex] = new List<Neighbourhood>();
+            neighbourhoodsWithMaxCaseCount[caseTypeIndex].Add(Neighbourhood.allNeighbourhoods[0]);
+            for (int i = 1; i < Neighbourhood.allNeighbourhoods.Length; i++)
+            {
+                if (neighbourhoodsWithMaxCaseCount[caseTypeIndex][0].caseCountData[caseTypeIndex] < Neighbourhood.allNeighbourhoods[i].caseCountData[caseTypeIndex])
                 {
-                    if (caseCountDataOfTheDay[i] > maxNeighbourhoodDailyCaseCountData[i])
+                    neighbourhoodsWithMaxCaseCount[caseTypeIndex].Clear();
+                    neighbourhoodsWithMaxCaseCount[caseTypeIndex].Add(Neighbourhood.allNeighbourhoods[i]);
+                }
+                else if (neighbourhoodsWithMaxCaseCount[caseTypeIndex][0].caseCountData[caseTypeIndex] == Neighbourhood.allNeighbourhoods[i].caseCountData[caseTypeIndex])
+                {
+                    neighbourhoodsWithMaxCaseCount[caseTypeIndex].Add(Neighbourhood.allNeighbourhoods[i]);
+                }
+            }
+        }
+
+        Neighbourhood.neighbourhoodsWithMaxCaseCount = neighbourhoodsWithMaxCaseCount;
+    }
+
+    private void CalculatePlaceDaysWithMaxCaseCount()
+    {
+        //Universal but inefficient way to calculate and assign values for placedays with max case count
+        //To implement efficient calculations, calculation method will vary depending on data type
+        List<PlaceDay>[] placeDaysWithMaxCaseCount = new List<PlaceDay>[3];
+
+        foreach (NeighbourhoodDailyCaseDataType caseType in Enum.GetValues(typeof(NeighbourhoodDailyCaseDataType)))
+        {
+            int caseTypeIndex = (int)caseType;
+
+            placeDaysWithMaxCaseCount[caseTypeIndex] = new List<PlaceDay>();
+            placeDaysWithMaxCaseCount[caseTypeIndex].Add(Neighbourhood.allNeighbourhoods[0].episodeDays[Neighbourhood.firstEpisodeDate]);
+            for (int i = 0; i < Neighbourhood.allNeighbourhoods.Length; i++)
+            {
+                foreach (KeyValuePair<DateTime, PlaceDay> dayEntry in Neighbourhood.allNeighbourhoods[i].episodeDays)
+                {
+                    if (placeDaysWithMaxCaseCount[caseTypeIndex][0].caseCountData[caseTypeIndex] < dayEntry.Value.caseCountData[caseTypeIndex])
                     {
-                        maxNeighbourhoodDailyCaseCountData[i] = caseCountDataOfTheDay[i];
+                        placeDaysWithMaxCaseCount[caseTypeIndex].Clear();
+                        placeDaysWithMaxCaseCount[caseTypeIndex].Add(dayEntry.Value);
+                    }
+                    else if (placeDaysWithMaxCaseCount[caseTypeIndex][0].caseCountData[caseTypeIndex] == dayEntry.Value.caseCountData[caseTypeIndex])
+                    {
+                        placeDaysWithMaxCaseCount[caseTypeIndex].Add(dayEntry.Value);
                     }
                 }
             }
         }
-        Neighbourhood.maxNeighbourhoodDailyCaseCountData = maxNeighbourhoodDailyCaseCountData;
+
+        Neighbourhood.placeDaysWithMaxCaseCount = placeDaysWithMaxCaseCount;
     }
 
     private Neighbourhood CheckCaseNeighbourhood(string[] caseData)

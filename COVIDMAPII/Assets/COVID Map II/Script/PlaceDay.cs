@@ -3,8 +3,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Day
+//A day that belongs to a place
+//Example: Guildwood/4/12/2021
+public class PlaceDay
 {
+    public PlaceDay(Place place)
+    {
+        placeRepresenting = place;
+    }
+
+    public Place placeRepresenting
+    {
+        get 
+        {
+            return placeRepresenting;
+        }
+        private set { }
+    }
+
     //COVID case data
     public int[] caseCountData = new int[3];
     //Case for the day (increasement).

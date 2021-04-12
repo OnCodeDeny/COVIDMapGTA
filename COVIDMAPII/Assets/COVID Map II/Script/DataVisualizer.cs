@@ -30,7 +30,7 @@ public class DataVisualizer : MonoBehaviour
         _agentRenderer = visualizationAgent.GetComponent<Renderer>();
     }
 
-    public IEnumerator VisualizeDatumByHeight(NeighbourhoodDailyCaseDataType caseType, Day day, float animationLength)
+    public IEnumerator VisualizeDatumByHeight(NeighbourhoodDailyCaseDataType caseType, PlaceDay day, float animationLength)
     {
         visualized = true;
         int caseTypeIndex = (int)caseType;
@@ -38,7 +38,7 @@ public class DataVisualizer : MonoBehaviour
         float timeElapsedInAnimation = 0;
         float progressPercentage = 0;
         Vector3 initialAgentLocalScale = _agentTransform.localScale;
-        float targetAgentHeight = agentHeightMultiplier * day.caseCountData[caseTypeIndex] / Neighbourhood.maxNeighbourhoodDailyCaseCountData[caseTypeIndex];
+        float targetAgentHeight = agentHeightMultiplier * day.caseCountData[caseTypeIndex] / Neighbourhood.PlaceDaysWithMaxCaseCount(caseType)[0].caseCountData[caseTypeIndex];
         Vector3 targetAgentLocalScale = new Vector3(_agentTransform.localScale.x, targetAgentHeight, _agentTransform.localScale.z);
 
         //Detect if animation is needed
@@ -72,7 +72,7 @@ public class DataVisualizer : MonoBehaviour
         }
     }
 
-    public IEnumerator VisualizeDatumByColour(NeighbourhoodDailyCaseDataType caseType, Day day, float animationLength)
+    public IEnumerator VisualizeDatumByColour(NeighbourhoodDailyCaseDataType caseType, PlaceDay day, float animationLength)
     {
         visualized = true;
         int caseTypeIndex = (int)caseType;
@@ -80,7 +80,7 @@ public class DataVisualizer : MonoBehaviour
         float timeElapsedInAnimation = 0;
         float progressPercentage = 0;
         Color initialAgentColour = _agentRenderer.material.color;
-        float targetAgentColourGB = 1 - ((float)day.caseCountData[caseTypeIndex] / (float)Neighbourhood.maxNeighbourhoodDailyCaseCountData[caseTypeIndex]);
+        float targetAgentColourGB = 1 - ((float)day.caseCountData[caseTypeIndex] / (float)Neighbourhood.PlaceDaysWithMaxCaseCount(caseType)[0].caseCountData[caseTypeIndex]);
         Color targetAgentColour = new Color(1, targetAgentColourGB, targetAgentColourGB);
 
         //Detect if animation is needed
@@ -119,7 +119,7 @@ public class DataVisualizer : MonoBehaviour
 
         float timeElapsedInAnimation = 0;
         Vector3 initialAgentLocalScale = _agentTransform.localScale;
-        float targetAgentHeight = agentHeightMultiplier * neighbourhoodRepresenting.caseCountData[caseTypeIndex] / Neighbourhood.NeighbourhoodWithMaxCaseCount(caseType, false).caseCountData[caseTypeIndex];
+        float targetAgentHeight = agentHeightMultiplier * neighbourhoodRepresenting.caseCountData[caseTypeIndex] / Neighbourhood.NeighbourhoodsWithMaxCaseCount(caseType)[0].caseCountData[caseTypeIndex];
         Vector3 targetAgentLocalScale = new Vector3(_agentTransform.localScale.x, targetAgentHeight, _agentTransform.localScale.z);
 
         while (timeElapsedInAnimation < scaleCurve[scaleCurve.length - 1].time && visualized)
@@ -144,7 +144,7 @@ public class DataVisualizer : MonoBehaviour
 
         float timeElapsedInAnimation = 0;
         Color initialAgentColour = _agentRenderer.material.color;
-        float targetAgentColourGB = 1 - ((float)neighbourhoodRepresenting.caseCountData[caseTypeIndex] / (float)Neighbourhood.NeighbourhoodWithMaxCaseCount(caseType, false).caseCountData[caseTypeIndex]);
+        float targetAgentColourGB = 1 - ((float)neighbourhoodRepresenting.caseCountData[caseTypeIndex] / (float)Neighbourhood.NeighbourhoodsWithMaxCaseCount(caseType)[0].caseCountData[caseTypeIndex]);
         Color targetAgentColour = new Color(1, targetAgentColourGB, targetAgentColourGB);
 
         while (timeElapsedInAnimation < colourCurve[colourCurve.length - 1].time && visualized)

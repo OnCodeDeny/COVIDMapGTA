@@ -309,29 +309,24 @@ public class Neighbourhood : Place
     Guildwood
     };
 
-    private static Neighbourhood[] neighbourhoodsWithMaxCaseCount = new Neighbourhood[9];
-    public static Neighbourhood NeighbourhoodWithMaxCaseCount(NeighbourhoodCaseDataType caseType, bool recalculate)
+    //Store neighbourhoods with highest CURRENT case count values
+    public static List<Neighbourhood>[] neighbourhoodsWithMaxCaseCount = new List<Neighbourhood>[9];
+
+    public static List<Neighbourhood> NeighbourhoodsWithMaxCaseCount(NeighbourhoodCaseDataType caseDataType)
     {
-        int caseTypeIndex = (int)caseType;
-        if (recalculate || neighbourhoodsWithMaxCaseCount[caseTypeIndex] == null)
-        {
-            neighbourhoodsWithMaxCaseCount[caseTypeIndex] = allNeighbourhoods[0];
-            for (int i = 1; i < allNeighbourhoods.Length; i++)
-            {
-                if (allNeighbourhoods[i].caseCountData[caseTypeIndex] > neighbourhoodsWithMaxCaseCount[caseTypeIndex].caseCountData[caseTypeIndex])
-                {
-                    neighbourhoodsWithMaxCaseCount[caseTypeIndex] = allNeighbourhoods[i];
-                }
-            }
-        }
-        return neighbourhoodsWithMaxCaseCount[caseTypeIndex];
+        return neighbourhoodsWithMaxCaseCount[(int)caseDataType];
+    }
+
+    //Store placedays with highest case count values EVER reported in history
+    public static List<PlaceDay>[] placeDaysWithMaxCaseCount = new List<PlaceDay>[3];
+
+    public static List<PlaceDay> PlaceDaysWithMaxCaseCount(NeighbourhoodDailyCaseDataType caseDataType)
+    {
+        return placeDaysWithMaxCaseCount[(int)caseDataType];
     }
 
     //Make the latest the default value for first episode date for the sake of finding the actual first episode date on record.
     public static DateTime firstEpisodeDate = DateTime.Today;
     //Make the oldest day the default value for last episode date for the sake of finding the actual last episode date on record.
     public static DateTime lastEpisodeDate;
-    //Store all types of max daily case count values ever reported in history, these values are from spicific neighbourhoods that reported highest values in the history.
-    //These values are for the relative data visualization purpose.
-    public static int[] maxNeighbourhoodDailyCaseCountData = new int[3];
 }

@@ -19,7 +19,7 @@ public abstract class Place
         get => new LatLon(latitude, longitude);
     }
     //To store each episode days.
-    public Dictionary<DateTime, Day> episodeDays = new Dictionary<DateTime, Day>();
+    public Dictionary<DateTime, PlaceDay> episodeDays = new Dictionary<DateTime, PlaceDay>();
 
     //COVID case data
     public int[] caseCountData = new int[9];
