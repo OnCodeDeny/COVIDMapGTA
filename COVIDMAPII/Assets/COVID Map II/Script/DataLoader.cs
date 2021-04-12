@@ -129,7 +129,7 @@ public class DataLoader : MonoBehaviour
     //Calculate and assign case data value for each episode day in each neighbourhood
     private void CalculatePlaceDaysCaseData()
     {
-        foreach (Neighbourhood neighbourhood in Neighbourhood.allNeighbourhoods)
+        foreach (Neighbourhood neighbourhood in Neighbourhood.allNeighbourhoodsInNumericalOrder)
         {
             //For calculating active case count
             int dailyActiveCaseCount = 0;
@@ -175,17 +175,17 @@ public class DataLoader : MonoBehaviour
             int caseTypeIndex = (int)caseType;
 
             neighbourhoodsWithMaxCaseCount[caseTypeIndex] = new List<Neighbourhood>();
-            neighbourhoodsWithMaxCaseCount[caseTypeIndex].Add(Neighbourhood.allNeighbourhoods[0]);
-            for (int i = 1; i < Neighbourhood.allNeighbourhoods.Length; i++)
+            neighbourhoodsWithMaxCaseCount[caseTypeIndex].Add(Neighbourhood.allNeighbourhoodsInNumericalOrder[0]);
+            for (int i = 1; i < Neighbourhood.allNeighbourhoodsInNumericalOrder.Length; i++)
             {
-                if (neighbourhoodsWithMaxCaseCount[caseTypeIndex][0].caseCountData[caseTypeIndex] < Neighbourhood.allNeighbourhoods[i].caseCountData[caseTypeIndex])
+                if (neighbourhoodsWithMaxCaseCount[caseTypeIndex][0].caseCountData[caseTypeIndex] < Neighbourhood.allNeighbourhoodsInNumericalOrder[i].caseCountData[caseTypeIndex])
                 {
                     neighbourhoodsWithMaxCaseCount[caseTypeIndex].Clear();
-                    neighbourhoodsWithMaxCaseCount[caseTypeIndex].Add(Neighbourhood.allNeighbourhoods[i]);
+                    neighbourhoodsWithMaxCaseCount[caseTypeIndex].Add(Neighbourhood.allNeighbourhoodsInNumericalOrder[i]);
                 }
-                else if (neighbourhoodsWithMaxCaseCount[caseTypeIndex][0].caseCountData[caseTypeIndex] == Neighbourhood.allNeighbourhoods[i].caseCountData[caseTypeIndex])
+                else if (neighbourhoodsWithMaxCaseCount[caseTypeIndex][0].caseCountData[caseTypeIndex] == Neighbourhood.allNeighbourhoodsInNumericalOrder[i].caseCountData[caseTypeIndex])
                 {
-                    neighbourhoodsWithMaxCaseCount[caseTypeIndex].Add(Neighbourhood.allNeighbourhoods[i]);
+                    neighbourhoodsWithMaxCaseCount[caseTypeIndex].Add(Neighbourhood.allNeighbourhoodsInNumericalOrder[i]);
                 }
             }
         }
@@ -204,10 +204,10 @@ public class DataLoader : MonoBehaviour
             int caseTypeIndex = (int)caseType;
 
             placeDaysWithMaxCaseCount[caseTypeIndex] = new List<PlaceDay>();
-            placeDaysWithMaxCaseCount[caseTypeIndex].Add(Neighbourhood.allNeighbourhoods[0].episodeDays[Neighbourhood.firstEpisodeDate]);
-            for (int i = 0; i < Neighbourhood.allNeighbourhoods.Length; i++)
+            placeDaysWithMaxCaseCount[caseTypeIndex].Add(Neighbourhood.allNeighbourhoodsInNumericalOrder[0].episodeDays[Neighbourhood.firstEpisodeDate]);
+            for (int i = 0; i < Neighbourhood.allNeighbourhoodsInNumericalOrder.Length; i++)
             {
-                foreach (KeyValuePair<DateTime, PlaceDay> dayEntry in Neighbourhood.allNeighbourhoods[i].episodeDays)
+                foreach (KeyValuePair<DateTime, PlaceDay> dayEntry in Neighbourhood.allNeighbourhoodsInNumericalOrder[i].episodeDays)
                 {
                     if (placeDaysWithMaxCaseCount[caseTypeIndex][0].caseCountData[caseTypeIndex] < dayEntry.Value.caseCountData[caseTypeIndex])
                     {
@@ -227,7 +227,7 @@ public class DataLoader : MonoBehaviour
 
     private Neighbourhood CheckCaseNeighbourhood(string[] caseData)
     {
-        foreach (Neighbourhood neighbourhood in Neighbourhood.allNeighbourhoods)
+        foreach (Neighbourhood neighbourhood in Neighbourhood.allNeighbourhoodsInNumericalOrder)
         {
             if (caseData[4]==neighbourhood.displayName)
             {

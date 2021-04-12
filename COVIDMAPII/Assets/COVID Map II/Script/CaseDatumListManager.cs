@@ -8,9 +8,12 @@ public class CaseDatumListManager : MonoBehaviour
 {
     public GameObject CaseDatumListTextPrefab;
     public Transform populatingSpace;
+    public TMP_Text neighbourhoodName;
 
     public void DisplayDatumList(Neighbourhood neighbourhood)
     {
+        neighbourhoodName.text = neighbourhood.displayName;
+
         foreach (Transform child in populatingSpace.transform)
         {
             Destroy(child.gameObject);

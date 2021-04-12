@@ -30,7 +30,7 @@ public class MapPinFeeder : MonoBehaviour
         _mapPinPrefab.gameObject.SetActive(false);
         
         // Generate a MapPin for each of the locations and add it to the layer.
-        foreach (var neighbourhood in Neighbourhood.allNeighbourhoods)
+        foreach (var neighbourhood in Neighbourhood.allNeighbourhoodsInNumericalOrder)
         {
             MapPin mapPin = Instantiate(_mapPinPrefab);
             mapPin.Location = new LatLon(neighbourhood.latitude, neighbourhood.longitude);
