@@ -6,25 +6,28 @@ using TMPro;
 
 public class TimelineCaseTypeSelection : MonoBehaviour
 {
-    public CaseDataTypeForDay chosenCaseDataTypeForDay;
+    TimelinePlayer _timelinePlayer;
     TMP_Dropdown _dropdown;
 
     // Start is called before the first frame update
     void Start()
     {
+        _timelinePlayer = transform.parent.GetComponent<TimelinePlayer>();
+
         _dropdown = transform.GetComponent<TMP_Dropdown>();
 
         List<string> options = new List<string>();
         options.AddRange(new string[3]);
 
-        options[(int)CaseDataTypeForDay.Cumulative] = "Cumulative Case";
-        options[(int)CaseDataTypeForDay.Active] = "Active Case";
-        options[(int)CaseDataTypeForDay.New] = "New Case";
+        options[(int)NeighbourhoodDailyCaseDataType.Cumulative] = "Cumulative Case";
+        options[(int)NeighbourhoodDailyCaseDataType.Active] = "Active Case";
+        options[(int)NeighbourhoodDailyCaseDataType.New] = "New Case";
 
         _dropdown.AddOptions(options);
     }
-    public void ChangeChosenCaseDataTypeForDay()
+    public void ChangeChosenVisualizedDataType()
     {
-        chosenCaseDataTypeForDay = (CaseDataTypeForDay)_dropdown.value;
+        _timelinePlayer.caseDataTypePresenting = (NeighbourhoodDailyCaseDataType)_dropdown.value;
+        _timelinePlayer.OnChangeChosenVisualizedDataType();
     }
 }

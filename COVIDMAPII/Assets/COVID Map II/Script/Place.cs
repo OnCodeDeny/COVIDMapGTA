@@ -28,99 +28,99 @@ public abstract class Place
     {
         get
         {
-            return caseCountData[(int)CaseDataTypeForNeighbourhood.Cumulative];
+            return caseCountData[(int)NeighbourhoodCaseDataType.Cumulative];
         }
         set
         {
-            caseCountData[(int)CaseDataTypeForNeighbourhood.Cumulative] = value;
+            caseCountData[(int)NeighbourhoodCaseDataType.Cumulative] = value;
         }
     }
     public int everHospitalizedCaseCount
     {
         get
         {
-            return caseCountData[(int)CaseDataTypeForNeighbourhood.EverHospitalized];
+            return caseCountData[(int)NeighbourhoodCaseDataType.EverHospitalized];
         }
         set
         {
-            caseCountData[(int)CaseDataTypeForNeighbourhood.EverHospitalized] = value;
+            caseCountData[(int)NeighbourhoodCaseDataType.EverHospitalized] = value;
         }
     }
     public int everInICUCaseCount
     {
         get
         {
-            return caseCountData[(int)CaseDataTypeForNeighbourhood.EverInICU];
+            return caseCountData[(int)NeighbourhoodCaseDataType.EverInICU];
         }
         set
         {
-            caseCountData[(int)CaseDataTypeForNeighbourhood.EverInICU] = value;
+            caseCountData[(int)NeighbourhoodCaseDataType.EverInICU] = value;
         }
     }
     public int everIntubatedCaseCount
     {
         get
         {
-            return caseCountData[(int)CaseDataTypeForNeighbourhood.EverIntubated];
+            return caseCountData[(int)NeighbourhoodCaseDataType.EverIntubated];
         }
         set
         {
-            caseCountData[(int)CaseDataTypeForNeighbourhood.EverIntubated] = value;
+            caseCountData[(int)NeighbourhoodCaseDataType.EverIntubated] = value;
         }
     }
     public int activeCaseCount
     {
         get
         {
-            return caseCountData[(int)CaseDataTypeForNeighbourhood.Active];
+            return caseCountData[(int)NeighbourhoodCaseDataType.Active];
         }
         set
         {
-            caseCountData[(int)CaseDataTypeForNeighbourhood.Active] = value;
+            caseCountData[(int)NeighbourhoodCaseDataType.Active] = value;
         }
     }
     public int currentlyHospitalizedCaseCount
     {
         get
         {
-            return caseCountData[(int)CaseDataTypeForNeighbourhood.CurrentlyHospitalized];
+            return caseCountData[(int)NeighbourhoodCaseDataType.CurrentlyHospitalized];
         }
         set
         {
-            caseCountData[(int)CaseDataTypeForNeighbourhood.CurrentlyHospitalized] = value;
+            caseCountData[(int)NeighbourhoodCaseDataType.CurrentlyHospitalized] = value;
         }
     }
     public int currentlyInICUCaseCount
     {
         get
         {
-            return caseCountData[(int)CaseDataTypeForNeighbourhood.CurrentlyInICU];
+            return caseCountData[(int)NeighbourhoodCaseDataType.CurrentlyInICU];
         }
         set
         {
-            caseCountData[(int)CaseDataTypeForNeighbourhood.CurrentlyInICU] = value;
+            caseCountData[(int)NeighbourhoodCaseDataType.CurrentlyInICU] = value;
         }
     }
     public int currentlyIntubatedCaseCount
     {
         get
         {
-            return caseCountData[(int)CaseDataTypeForNeighbourhood.CurrentlyIntubated];
+            return caseCountData[(int)NeighbourhoodCaseDataType.CurrentlyIntubated];
         }
         set
         {
-            caseCountData[(int)CaseDataTypeForNeighbourhood.CurrentlyIntubated] = value;
+            caseCountData[(int)NeighbourhoodCaseDataType.CurrentlyIntubated] = value;
         }
     }
     public int deceasedCaseCount
     {
         get
         {
-            return caseCountData[(int)CaseDataTypeForNeighbourhood.Deceased];
+            return caseCountData[(int)NeighbourhoodCaseDataType.Deceased];
         }
         set
         {
-            caseCountData[(int)CaseDataTypeForNeighbourhood.Deceased] = value;
+            caseCountData[(int)NeighbourhoodCaseDataType.Deceased] = value;
         }
     }
 }

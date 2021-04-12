@@ -8,7 +8,7 @@ public class DataSelectionToggle : MonoBehaviour
 {
     public MapPinLayer mapPinLayer;
     Toggle _toggle;
-    public CaseDataTypeForNeighbourhood caseDataTypeRepresenting;
+    public NeighbourhoodCaseDataType caseDataTypeRepresenting;
     DataVisualizer[] _dataVisualizers;
 
     // Start is called before the first frame update

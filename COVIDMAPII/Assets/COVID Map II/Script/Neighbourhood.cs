@@ -310,7 +310,7 @@ public class Neighbourhood : Place
     };
 
     private static Neighbourhood[] neighbourhoodsWithMaxCaseCount = new Neighbourhood[9];
-    public static Neighbourhood NeighbourhoodWithMaxCaseCount(CaseDataTypeForNeighbourhood caseType, bool recalculate)
+    public static Neighbourhood NeighbourhoodWithMaxCaseCount(NeighbourhoodCaseDataType caseType, bool recalculate)
     {
         int caseTypeIndex = (int)caseType;
         if (recalculate || neighbourhoodsWithMaxCaseCount[caseTypeIndex] == null)

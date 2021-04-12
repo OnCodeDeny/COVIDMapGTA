@@ -7677,7 +7677,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -420, y: -665}
+  m_AnchoredPosition: {x: -683.3, y: -805}
   m_SizeDelta: {x: 262.77222, y: 138.48651}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &1485622895
@@ -7693,9 +7693,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentTimelineState: 1
+  caseDataTypePresenting: 0
   dropdown: {fileID: 1547440455}
-  mapPinLayer: {fileID: 891002287}
   pPButtonText: {fileID: 467131981}
+  dateText: {fileID: 1722798138}
+  mapPinLayer: {fileID: 891002287}
   daysVisualizedPerSecond: 20
 --- !u!1 &1488936995
 GameObject:
@@ -8003,7 +8005,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1547440458}
-        m_MethodName: ChangeChosenCaseDataTypeForDay
+        m_MethodName: ChangeChosenVisualizedDataType
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8063,7 +8065,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47890bb8f896f404ea7413d18e909c29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chosenCaseDataTypeForDay: 0
 --- !u!1 &1577785752
 GameObject:
   m_ObjectHideFlags: 0
@@ -8913,7 +8914,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Presenting Date
+  m_text: MM/DD/YYYY
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

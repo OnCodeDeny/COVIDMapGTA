@@ -30,7 +30,7 @@ public class DataVisualizer : MonoBehaviour
         _agentRenderer = visualizationAgent.GetComponent<Renderer>();
     }
 
-    public IEnumerator VisualizeDatumByHeight(CaseDataTypeForDay caseType, Day day, float animationLength)
+    public IEnumerator VisualizeDatumByHeight(NeighbourhoodDailyCaseDataType caseType, Day day, float animationLength)
     {
         visualized = true;
         int caseTypeIndex = (int)caseType;
@@ -72,7 +72,7 @@ public class DataVisualizer : MonoBehaviour
         }
     }
 
-    public IEnumerator VisualizeDatumByColour(CaseDataTypeForDay caseType, Day day, float animationLength)
+    public IEnumerator VisualizeDatumByColour(NeighbourhoodDailyCaseDataType caseType, Day day, float animationLength)
     {
         visualized = true;
         int caseTypeIndex = (int)caseType;
@@ -111,7 +111,7 @@ public class DataVisualizer : MonoBehaviour
         }
     }
 
-    public IEnumerator VisualizeDatumByHeight(CaseDataTypeForNeighbourhood caseType)
+    public IEnumerator VisualizeDatumByHeight(NeighbourhoodCaseDataType caseType)
     {
         visualized = true;
         _agentRenderer.enabled = true;
@@ -136,7 +136,7 @@ public class DataVisualizer : MonoBehaviour
         }
     }
 
-    public IEnumerator VisualizeDatumByColour(CaseDataTypeForNeighbourhood caseType)
+    public IEnumerator VisualizeDatumByColour(NeighbourhoodCaseDataType caseType)
     {
         visualized = true;
         _agentRenderer.enabled = true;
@@ -161,7 +161,7 @@ public class DataVisualizer : MonoBehaviour
     public void DevisualizeDatum()
     {
         _agentTransform.localScale = new Vector3(_agentTransform.localScale.x, 0.1f, _agentTransform.localScale.z);
-        _agentTransform.localPosition = new Vector3(_agentTransform.localPosition.x, _agentTransform.localScale.y / 2, _agentTransform.localPosition.z);
+        _agentTransform.localPosition = new Vector3(_agentTransform.localPosition.x, 0, _agentTransform.localPosition.z);
         _agentLabelTransform.localPosition = new Vector3(0, _agentLabelTransform.localScale.y / 2, 0);
         visualizationAgent.GetComponent<Renderer>().material.color = Color.cyan;
         _agentRenderer.enabled = true;
