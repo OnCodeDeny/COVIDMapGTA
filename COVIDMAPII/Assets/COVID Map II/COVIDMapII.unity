@@ -1327,7 +1327,7 @@ RectTransform:
   m_Children:
   - {fileID: 1547103501}
   m_Father: {fileID: 1485622894}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1372,11 +1372,22 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 187085710}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1485622895}
+        m_MethodName: JumpToNextDay
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &187085710
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1509,6 +1520,7 @@ GameObject:
   m_Component:
   - component: {fileID: 225997734}
   - component: {fileID: 225997735}
+  - component: {fileID: 225997736}
   m_Layer: 5
   m_Name: PlaybackSpeedSlider
   m_TagString: Untagged
@@ -1581,13 +1593,36 @@ MonoBehaviour:
   m_FillRect: {fileID: 1320907873}
   m_HandleRect: {fileID: 1115884623}
   m_Direction: 0
-  m_MinValue: 0
-  m_MaxValue: 1
-  m_WholeNumbers: 0
-  m_Value: 0
+  m_MinValue: 1
+  m_MaxValue: 30
+  m_WholeNumbers: 1
+  m_Value: 15
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 225997736}
+        m_MethodName: ChangePlaybackSpeed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &225997736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 225997733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79d8061d81129a64abc84a288fef75bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &236895392
 GameObject:
   m_ObjectHideFlags: 0
@@ -2514,7 +2549,7 @@ RectTransform:
   m_Children:
   - {fileID: 1183869339}
   m_Father: {fileID: 1485622894}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2559,11 +2594,22 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 374572328}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1485622895}
+        m_MethodName: JumpToLastYear
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &374572328
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2634,7 +2680,7 @@ RectTransform:
   m_Children:
   - {fileID: 1488936996}
   m_Father: {fileID: 1485622894}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -6118,7 +6164,7 @@ RectTransform:
   m_Children:
   - {fileID: 467131980}
   m_Father: {fileID: 1485622894}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -7251,7 +7297,7 @@ RectTransform:
   m_Children:
   - {fileID: 900741527}
   m_Father: {fileID: 1485622894}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -7296,11 +7342,22 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 968979151}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1485622895}
+        m_MethodName: JumpToLastDay
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &968979151
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7556,7 +7613,7 @@ RectTransform:
   m_Children:
   - {fileID: 35613762}
   m_Father: {fileID: 1485622894}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -7601,11 +7658,22 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 994686306}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1485622895}
+        m_MethodName: JumpToLastMonth
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &994686306
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7808,7 +7876,7 @@ RectTransform:
   m_Children:
   - {fileID: 1620698694}
   m_Father: {fileID: 1485622894}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -7853,11 +7921,22 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1005074171}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1485622895}
+        m_MethodName: JumpToNextYear
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1005074171
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10267,7 +10346,7 @@ RectTransform:
   - {fileID: 936881867}
   - {fileID: 1872981003}
   m_Father: {fileID: 1485622894}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -10880,7 +10959,7 @@ RectTransform:
   m_Children:
   - {fileID: 1211059763}
   m_Father: {fileID: 1485622894}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -10925,11 +11004,22 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1358281921}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1485622895}
+        m_MethodName: JumpToNextMonth
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1358281921
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12128,7 +12218,6 @@ RectTransform:
   m_Children:
   - {fileID: 1830401428}
   - {fileID: 1001685251}
-  - {fileID: 1576375350}
   - {fileID: 1722798137}
   - {fileID: 1547440454}
   - {fileID: 880718907}
@@ -12140,6 +12229,7 @@ RectTransform:
   - {fileID: 994686304}
   - {fileID: 374572326}
   - {fileID: 1260630815}
+  - {fileID: 1576375350}
   - {fileID: 225997734}
   - {fileID: 1925421331}
   m_Father: {fileID: 66973464}
@@ -12168,7 +12258,27 @@ MonoBehaviour:
   pPButtonText: {fileID: 467131981}
   dateText: {fileID: 1722798138}
   mapPinLayer: {fileID: 891002287}
-  daysVisualizedPerSecond: 20
+  playbackSpeedText: {fileID: 1576375351}
+  jumpToNextDayButton: {fileID: 187085709}
+  jumpToNextMonthButton: {fileID: 1358281920}
+  jumpToNextYearButton: {fileID: 1005074170}
+  jumpToLastDayButton: {fileID: 968979150}
+  jumpToLastMonthButton: {fileID: 994686305}
+  jumpToLastYearButton: {fileID: 374572327}
+  OnDayChange:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1485622895}
+        m_MethodName: DetermineJumpToDateButtonsState
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1488936995
 GameObject:
   m_ObjectHideFlags: 0
@@ -12784,7 +12894,7 @@ RectTransform:
   - {fileID: 1011073243}
   - {fileID: 1838499750}
   m_Father: {fileID: 1485622894}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -12934,7 +13044,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1485622894}
-  m_RootOrder: 2
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -14029,7 +14139,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1485622894}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
