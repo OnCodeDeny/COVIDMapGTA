@@ -34,6 +34,7 @@ public class TimelinePlayer : MonoBehaviour
     //Calculate how long it will take to visualize a day's data
     float _animationLengthForADay;
 
+    public Slider playbackSpeedSlider;
     public TMP_Text playbackSpeedText;
 
     //For manipulating date jump buttons
@@ -44,11 +45,15 @@ public class TimelinePlayer : MonoBehaviour
     public Button jumpToLastMonthButton;
     public Button jumpToLastYearButton;
 
+    public Slider playbackProgressSlider;
+
     //Event is invoked on visualized day/presentingDate change
     public UnityEvent OnDayChange;
 
     private void Start()
     {
+        SetPlaybackSpeed();
+
         caseDataTypePresenting = (NeighbourhoodDailyCaseDataType)dropdown.value;
 
         _animationLengthForADay = 1f / _daysVisualizedPerSecond;
@@ -179,11 +184,19 @@ public class TimelinePlayer : MonoBehaviour
         }
     }
 
-    public void SetPlaybackSpeed(float speed)
+    public void SetPlaybackProgressSliderValue()
     {
+        float elapsedEpisodeDays = presentingDate.Subtract(Neighbourhood.firstEpisodeDate).Days;
+        float totalEpisodeDays = Neighbourhood.lastEpisodeDate.Subtract(Neighbourhood.firstEpisodeDate).Days;
+        playbackProgressSlider.value = elapsedEpisodeDays / totalEpisodeDays * playbackProgressSlider.maxValue;
+    }
+
+    public void SetPlaybackSpeed()
+    {
+        float speed = playbackSpeedSlider.value;
         _daysVisualizedPerSecond = speed;
         _animationLengthForADay = 1f / _daysVisualizedPerSecond;
-        if(speed>1)
+        if(speed > 1)
         playbackSpeedText.text = speed.ToString() + " Days Per Second";
         else
             playbackSpeedText.text = speed.ToString() + " Day Per Second";
@@ -193,7 +206,7 @@ public class TimelinePlayer : MonoBehaviour
     {
         currentTimelineState = TimelineState.Paused;
         StopCoroutine(_runDaySequence);
-        pPButtonText.text = "PLAY";
+        pPButtonText.text = "RESUME";
     }
 
     public void TransferFromPausedToStarted()
