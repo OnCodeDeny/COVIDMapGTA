@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class TimelinePlayer : MonoBehaviour
@@ -26,7 +27,7 @@ public class TimelinePlayer : MonoBehaviour
 
     public MapPinLayer mapPinLayer;
     DataVisualizer[] _dataVisualizers;
-    IEnumerator _runDaySequence;
+    IEnumerator _visualizeHistoryDaysData;
 
     //How many days are visualized per second, this is the timeline play speed
     //It will take speed control slider's value if provided, if the speed control slider is missing, it will use its default value set here
@@ -50,6 +51,9 @@ public class TimelinePlayer : MonoBehaviour
     //Event is invoked on visualized day/presentingDate change
     public UnityEvent OnDayChange;
 
+    [SerializeField]
+    bool userIsControllingProgress;
+
     private void Start()
     {
         SetPlaybackSpeed();
@@ -58,13 +62,44 @@ public class TimelinePlayer : MonoBehaviour
 
         _animationLengthForADay = 1f / _daysVisualizedPerSecond;
 
-        _runDaySequence = VisualizeHistoryDaysData(Neighbourhood.firstEpisodeDate, Neighbourhood.lastEpisodeDate);
+        _visualizeHistoryDaysData = VisualizeHistoryDaysData(Neighbourhood.firstEpisodeDate, Neighbourhood.lastEpisodeDate);
 
         _dataVisualizers = new DataVisualizer[mapPinLayer.MapPins.Count];
         for (int i = 0; i < mapPinLayer.MapPins.Count; i++)
         {
             _dataVisualizers[i] = mapPinLayer.MapPins[i].GetComponent<DataVisualizer>();
         }
+    }
+
+    public void SetPlaybackProgressSliderValue()
+    {
+        if (!userIsControllingProgress)
+        {
+            float elapsedEpisodeDays = presentingDate.Subtract(Neighbourhood.firstEpisodeDate).Days;
+            float totalEpisodeDays = Neighbourhood.lastEpisodeDate.Subtract(Neighbourhood.firstEpisodeDate).Days;
+            playbackProgressSlider.value = elapsedEpisodeDays / totalEpisodeDays * playbackProgressSlider.maxValue;
+        }
+    }
+
+    public void OnUserAttemptChangePlaybackProgress()
+    {
+        userIsControllingProgress = true;
+    }
+
+    public void OnUserFinishChangePlaybackProgress()
+    {
+        userIsControllingProgress = false;
+        if (currentTimelineState == TimelineState.Started)
+        {
+            StartTimelineFromPresentingDate();
+        }
+    }
+
+    public void JumpToDayOnPlaybackProgressSlider()
+    {
+        int targetDayOrder = Mathf.RoundToInt(playbackProgressSlider.value / 100 * Neighbourhood.totalPlaceDays);
+        DateTime targetDate = Neighbourhood.firstEpisodeDate.AddDays(targetDayOrder);
+        JumpToDate(targetDate);
     }
 
     public void JumpToNextDay()
@@ -102,13 +137,13 @@ public class TimelinePlayer : MonoBehaviour
     {
         if (targetDate >= Neighbourhood.firstEpisodeDate && targetDate <= Neighbourhood.lastEpisodeDate)
         {
-            StopCoroutine(_runDaySequence);
+            StopCoroutine(_visualizeHistoryDaysData);
             presentingDate = targetDate;
             VisualizeSingleDayData(targetDate);
             dateText.text = targetDate.ToString("d");
             OnDayChange.Invoke();
         }
-        if (currentTimelineState==TimelineState.Started)
+        if (currentTimelineState == TimelineState.Started && !userIsControllingProgress)
         {
             StartTimelineFromPresentingDate();
         }
@@ -184,11 +219,12 @@ public class TimelinePlayer : MonoBehaviour
         }
     }
 
-    public void SetPlaybackProgressSliderValue()
+    public void OnChangeChosenVisualizedDataType()
     {
-        float elapsedEpisodeDays = presentingDate.Subtract(Neighbourhood.firstEpisodeDate).Days;
-        float totalEpisodeDays = Neighbourhood.lastEpisodeDate.Subtract(Neighbourhood.firstEpisodeDate).Days;
-        playbackProgressSlider.value = elapsedEpisodeDays / totalEpisodeDays * playbackProgressSlider.maxValue;
+        if (currentTimelineState != TimelineState.Started && presentingDate != default)
+        {
+            VisualizeSingleDayData(presentingDate);
+        }
     }
 
     public void SetPlaybackSpeed()
@@ -205,7 +241,7 @@ public class TimelinePlayer : MonoBehaviour
     public void TransferFromStartedToPaused()
     {
         currentTimelineState = TimelineState.Paused;
-        StopCoroutine(_runDaySequence);
+        StopCoroutine(_visualizeHistoryDaysData);
         pPButtonText.text = "RESUME";
     }
 
@@ -233,38 +269,34 @@ public class TimelinePlayer : MonoBehaviour
     public void TransferToStopped(bool manuallyStopped)
     {
         currentTimelineState = TimelineState.Stopped;
-        StopCoroutine(_runDaySequence);
+        StopCoroutine(_visualizeHistoryDaysData);
         if (manuallyStopped)
         {
             presentingDate = default;
             DevisualizeData();
             OnDayChange.Invoke();
             dateText.text = "MM/DD/YYYY";
-            pPButtonText.text = "PLAY";
         }
-        else
-        {
-            pPButtonText.text = "REPLAY";
-        }
+        pPButtonText.text = "PLAY";
     }
 
     public void StartTimelineFromBeginning()
     {
         DevisualizeData();
-        _runDaySequence = VisualizeHistoryDaysData(Neighbourhood.firstEpisodeDate, Neighbourhood.lastEpisodeDate);
-        StartCoroutine(_runDaySequence);
+        _visualizeHistoryDaysData = VisualizeHistoryDaysData(Neighbourhood.firstEpisodeDate, Neighbourhood.lastEpisodeDate);
+        StartCoroutine(_visualizeHistoryDaysData);
     }
 
     public void StartTimelineFromPresentingDate()
     {
         if (currentTimelineState == TimelineState.Paused)
         {
-            StartCoroutine(_runDaySequence);
+            StartCoroutine(_visualizeHistoryDaysData);
         }
         else
         {
-            _runDaySequence = VisualizeHistoryDaysData(presentingDate, Neighbourhood.lastEpisodeDate);
-            StartCoroutine(_runDaySequence);
+            _visualizeHistoryDaysData = VisualizeHistoryDaysData(presentingDate, Neighbourhood.lastEpisodeDate);
+            StartCoroutine(_visualizeHistoryDaysData);
         }
     }
 
@@ -273,14 +305,6 @@ public class TimelinePlayer : MonoBehaviour
         foreach (DataVisualizer dataVisualizer in _dataVisualizers)
         {
             dataVisualizer.DevisualizeDatum();
-        }
-    }
-
-    public void OnChangeChosenVisualizedDataType()
-    {
-        if (currentTimelineState != TimelineState.Started && presentingDate != default)
-        {
-            VisualizeSingleDayData(presentingDate);
         }
     }
 

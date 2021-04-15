@@ -494,4 +494,7 @@ public class Neighbourhood : Place
     public static DateTime firstEpisodeDate = DateTime.Today;
     //Make the oldest day the default value for last episode date for the sake of finding the actual last episode date on record.
     public static DateTime lastEpisodeDate;
+    //Total place days is technically not total episode days, since the code auto generate & insert place days when no episode days are found on record.
+    //The total episode days found on record should never be more than total place days.
+    public static int totalPlaceDays;
 }

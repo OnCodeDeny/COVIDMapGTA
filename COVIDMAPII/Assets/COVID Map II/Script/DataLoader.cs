@@ -41,15 +41,19 @@ public class DataLoader : MonoBehaviour
 
     private void ReadCaseDataFile()
     {
-        CalculateNeighbourhoodsCaseData();
-        CalculatePlaceDaysCaseData();
+        LoadRawDataset();
+        CalculatePlaceDaysData();
         CalculateNeighbourhoodsWithMaxCaseCount();
         CalculatePlaceDaysWithMaxCaseCount();
     }
 
-    private void CalculateNeighbourhoodsCaseData()
+    private void LoadRawDataset()
     {
+        DateTime lastEpisodeDate = Neighbourhood.lastEpisodeDate;
+        DateTime firstEpisodeDate = Neighbourhood.firstEpisodeDate;
+
         string caseDataFileContents = File.ReadAllText(_caseDataFilePath);
+
         string[] lines = caseDataFileContents.Split('\n');
         for (int i = 1; i < lines.Length; i++)
         {
@@ -60,13 +64,13 @@ public class DataLoader : MonoBehaviour
                 Neighbourhood caseNeighbourhood = CheckCaseNeighbourhood(singleCaseData);
                 DateTime episodeDate = CheckCaseEpisodeDate(singleCaseData);
 
-                if (episodeDate > Neighbourhood.lastEpisodeDate)
+                if (episodeDate > lastEpisodeDate)
                 {
-                    Neighbourhood.lastEpisodeDate = episodeDate;
+                    lastEpisodeDate = episodeDate;
                 }
-                else if (episodeDate < Neighbourhood.firstEpisodeDate)
+                else if (episodeDate < firstEpisodeDate)
                 {
-                    Neighbourhood.firstEpisodeDate = episodeDate;
+                    firstEpisodeDate = episodeDate;
                 }
 
                 if (caseNeighbourhood != null)
@@ -124,10 +128,13 @@ public class DataLoader : MonoBehaviour
                 }
             }
         }
+        Neighbourhood.lastEpisodeDate = lastEpisodeDate;
+        Neighbourhood.firstEpisodeDate = firstEpisodeDate;
+        Neighbourhood.totalPlaceDays = lastEpisodeDate.Subtract(firstEpisodeDate).Days;
     }
 
     //Calculate and assign case data value for each episode day in each neighbourhood
-    private void CalculatePlaceDaysCaseData()
+    private void CalculatePlaceDaysData()
     {
         foreach (Neighbourhood neighbourhood in Neighbourhood.allNeighbourhoodsInNumericalOrder)
         {
