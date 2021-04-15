@@ -20,9 +20,9 @@ public class NeighbourhoodListManager : MonoBehaviour
 
     public void PopulateAlphabetically()
     {
-        foreach (var item in GetComponentsInChildren<NeighbourhoodListButton>())
+        foreach (NeighbourhoodListButton button in GetComponentsInChildren<NeighbourhoodListButton>())
         {
-            Destroy(item.gameObject);
+            Destroy(button.gameObject);
         }
 
         foreach (Neighbourhood neighbourhood in Neighbourhood.allNeighbourhoodsInAlphabeticalOrder)
@@ -36,9 +36,9 @@ public class NeighbourhoodListManager : MonoBehaviour
     }
     public void PopulateNumerically()
     {
-        foreach (var item in GetComponentsInChildren<NeighbourhoodListButton>())
+        foreach (NeighbourhoodListButton button in GetComponentsInChildren<NeighbourhoodListButton>())
         {
-            Destroy(item.gameObject);
+            Destroy(button.gameObject);
         }
 
         foreach (Neighbourhood neighbourhood in Neighbourhood.allNeighbourhoodsInNumericalOrder)

@@ -11,6 +11,140 @@ public class Neighbourhood : Place
         latitude = lat;
         longitude = lon;
     }
+    public enum LatestCaseDataType
+    {
+        Cumulative,
+        EverHospitalized,
+        EverInICU,
+        EverIntubated,
+        Active,
+        CurrentlyHospitalized,
+        CurrentlyInICU,
+        CurrentlyIntubated,
+        Deceased
+    }
+    public static string[] LatestCaseDataTypeStrings = {
+        "Cumulative",
+        "Ever Hospitalized",
+        "Ever In ICU",
+        "Ever Intubated",
+        "Active",
+        "Currently Hospitalized",
+        "Currently In ICU",
+        "Currently Intubated",
+        "Deceased"};
+    public enum DailyCaseDataType
+    {
+        Cumulative,
+        Active,
+        New
+    }
+    public static string[] DailyCaseDataTypeStrings = {
+        "Cumulative",
+        "Active",
+        "New"};
+
+    //COVID case data
+    public int[] caseCountData = new int[9];
+    public int cumulativeCaseCount
+    {
+        get
+        {
+            return caseCountData[(int)LatestCaseDataType.Cumulative];
+        }
+        set
+        {
+            caseCountData[(int)LatestCaseDataType.Cumulative] = value;
+        }
+    }
+    public int everHospitalizedCaseCount
+    {
+        get
+        {
+            return caseCountData[(int)LatestCaseDataType.EverHospitalized];
+        }
+        set
+        {
+            caseCountData[(int)LatestCaseDataType.EverHospitalized] = value;
+        }
+    }
+    public int everInICUCaseCount
+    {
+        get
+        {
+            return caseCountData[(int)LatestCaseDataType.EverInICU];
+        }
+        set
+        {
+            caseCountData[(int)LatestCaseDataType.EverInICU] = value;
+        }
+    }
+    public int everIntubatedCaseCount
+    {
+        get
+        {
+            return caseCountData[(int)LatestCaseDataType.EverIntubated];
+        }
+        set
+        {
+            caseCountData[(int)LatestCaseDataType.EverIntubated] = value;
+        }
+    }
+    public int activeCaseCount
+    {
+        get
+        {
+            return caseCountData[(int)LatestCaseDataType.Active];
+        }
+        set
+        {
+            caseCountData[(int)LatestCaseDataType.Active] = value;
+        }
+    }
+    public int currentlyHospitalizedCaseCount
+    {
+        get
+        {
+            return caseCountData[(int)LatestCaseDataType.CurrentlyHospitalized];
+        }
+        set
+        {
+            caseCountData[(int)LatestCaseDataType.CurrentlyHospitalized] = value;
+        }
+    }
+    public int currentlyInICUCaseCount
+    {
+        get
+        {
+            return caseCountData[(int)LatestCaseDataType.CurrentlyInICU];
+        }
+        set
+        {
+            caseCountData[(int)LatestCaseDataType.CurrentlyInICU] = value;
+        }
+    }
+    public int currentlyIntubatedCaseCount
+    {
+        get
+        {
+            return caseCountData[(int)LatestCaseDataType.CurrentlyIntubated];
+        }
+        set
+        {
+            caseCountData[(int)LatestCaseDataType.CurrentlyIntubated] = value;
+        }
+    }
+    public int deceasedCaseCount
+    {
+        get
+        {
+            return caseCountData[(int)LatestCaseDataType.Deceased];
+        }
+        set
+        {
+            caseCountData[(int)LatestCaseDataType.Deceased] = value;
+        }
+    }
 
     //Store neighbourhood-specific info
     public static Neighbourhood WestHumberClairville = new Neighbourhood("West Humber-Clairville", 43.713165283203125, -79.59501647949219);
@@ -477,7 +611,7 @@ public class Neighbourhood : Place
     //Store neighbourhoods with highest CURRENT case count values
     public static List<Neighbourhood>[] neighbourhoodsWithMaxCaseCount = new List<Neighbourhood>[9];
 
-    public static List<Neighbourhood> NeighbourhoodsWithMaxCaseCount(NeighbourhoodCaseDataType caseDataType)
+    public static List<Neighbourhood> NeighbourhoodsWithMaxCaseCount(LatestCaseDataType caseDataType)
     {
         return neighbourhoodsWithMaxCaseCount[(int)caseDataType];
     }
@@ -485,7 +619,7 @@ public class Neighbourhood : Place
     //Store placedays with highest case count values EVER reported in history
     public static List<PlaceDay>[] placeDaysWithMaxCaseCount = new List<PlaceDay>[3];
 
-    public static List<PlaceDay> PlaceDaysWithMaxCaseCount(NeighbourhoodDailyCaseDataType caseDataType)
+    public static List<PlaceDay> PlaceDaysWithMaxCaseCount(DailyCaseDataType caseDataType)
     {
         return placeDaysWithMaxCaseCount[(int)caseDataType];
     }

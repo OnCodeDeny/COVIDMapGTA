@@ -19,15 +19,15 @@ public class TimelineCaseTypeSelection : MonoBehaviour
         List<string> options = new List<string>();
         options.AddRange(new string[3]);
 
-        options[(int)NeighbourhoodDailyCaseDataType.Cumulative] = "Cumulative Case";
-        options[(int)NeighbourhoodDailyCaseDataType.Active] = "Active Case";
-        options[(int)NeighbourhoodDailyCaseDataType.New] = "New Case";
+        options[(int)Neighbourhood.DailyCaseDataType.Cumulative] = "Cumulative Case";
+        options[(int)Neighbourhood.DailyCaseDataType.Active] = "Active Case";
+        options[(int)Neighbourhood.DailyCaseDataType.New] = "New Case";
 
         _dropdown.AddOptions(options);
     }
     public void ChangeChosenVisualizedDataType()
     {
-        _timelinePlayer.caseDataTypePresenting = (NeighbourhoodDailyCaseDataType)_dropdown.value;
+        _timelinePlayer.caseDataTypePresenting = (Neighbourhood.DailyCaseDataType)_dropdown.value;
         _timelinePlayer.OnChangeChosenVisualizedDataType();
     }
 }

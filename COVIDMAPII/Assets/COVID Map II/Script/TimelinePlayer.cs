@@ -18,7 +18,7 @@ public class TimelinePlayer : MonoBehaviour
     }
 
     public TimelineState currentTimelineState = TimelineState.Stopped;
-    public NeighbourhoodDailyCaseDataType caseDataTypePresenting;
+    public Neighbourhood.DailyCaseDataType caseDataTypePresenting;
     public DateTime presentingDate;
 
     public TMP_Dropdown dropdown;
@@ -58,7 +58,7 @@ public class TimelinePlayer : MonoBehaviour
     {
         SetPlaybackSpeed();
 
-        caseDataTypePresenting = (NeighbourhoodDailyCaseDataType)dropdown.value;
+        caseDataTypePresenting = (Neighbourhood.DailyCaseDataType)dropdown.value;
 
         _animationLengthForADay = 1f / _daysVisualizedPerSecond;
 
@@ -84,6 +84,7 @@ public class TimelinePlayer : MonoBehaviour
     public void OnUserAttemptChangePlaybackProgress()
     {
         userIsControllingProgress = true;
+        JumpToDayOnPlaybackProgressSlider();
     }
 
     public void OnUserFinishChangePlaybackProgress()

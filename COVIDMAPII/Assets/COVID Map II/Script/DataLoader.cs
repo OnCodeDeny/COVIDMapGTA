@@ -177,7 +177,7 @@ public class DataLoader : MonoBehaviour
     {
         List<Neighbourhood>[] neighbourhoodsWithMaxCaseCount = new List<Neighbourhood>[9];
 
-        foreach (NeighbourhoodCaseDataType caseType in Enum.GetValues(typeof(NeighbourhoodCaseDataType)))
+        foreach (Neighbourhood.LatestCaseDataType caseType in Enum.GetValues(typeof(Neighbourhood.LatestCaseDataType)))
         {
             int caseTypeIndex = (int)caseType;
 
@@ -206,7 +206,7 @@ public class DataLoader : MonoBehaviour
         //To implement efficient calculations, calculation method will vary depending on data type
         List<PlaceDay>[] placeDaysWithMaxCaseCount = new List<PlaceDay>[3];
 
-        foreach (NeighbourhoodDailyCaseDataType caseType in Enum.GetValues(typeof(NeighbourhoodDailyCaseDataType)))
+        foreach (Neighbourhood.DailyCaseDataType caseType in Enum.GetValues(typeof(Neighbourhood.DailyCaseDataType)))
         {
             int caseTypeIndex = (int)caseType;
 

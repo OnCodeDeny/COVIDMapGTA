@@ -28,11 +28,11 @@ public class PlaceDay
     {
         get
         {
-            return caseCountData[(int)NeighbourhoodDailyCaseDataType.New];
+            return caseCountData[(int)Neighbourhood.DailyCaseDataType.New];
         }
         set
         {
-            caseCountData[(int)NeighbourhoodDailyCaseDataType.New] = value;
+            caseCountData[(int)Neighbourhood.DailyCaseDataType.New] = value;
         }
     }
     //Cumulative case till the day (old amount + increasement) (Inclusive).
@@ -40,11 +40,11 @@ public class PlaceDay
     {
         get
         {
-            return caseCountData[(int)NeighbourhoodDailyCaseDataType.Cumulative];
+            return caseCountData[(int)Neighbourhood.DailyCaseDataType.Cumulative];
         }
         set
         {
-            caseCountData[(int)NeighbourhoodDailyCaseDataType.Cumulative] = value;
+            caseCountData[(int)Neighbourhood.DailyCaseDataType.Cumulative] = value;
         }
     }
 
@@ -53,11 +53,11 @@ public class PlaceDay
     {
         get
         {
-            return caseCountData[(int)NeighbourhoodDailyCaseDataType.Active];
+            return caseCountData[(int)Neighbourhood.DailyCaseDataType.Active];
         }
         set
         {
-            caseCountData[(int)NeighbourhoodDailyCaseDataType.Active] = value;
+            caseCountData[(int)Neighbourhood.DailyCaseDataType.Active] = value;
         }
     }
 }

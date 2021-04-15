@@ -3,18 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Microsoft.Maps.Unity;
+using System;
 
-public class DataSelectionToggle : MonoBehaviour
+public class LatestDataSelectionToggle : MonoBehaviour
 {
     public MapPinLayer mapPinLayer;
+    public Neighbourhood.LatestCaseDataType caseDataTypeRepresenting;
     Toggle _toggle;
-    public NeighbourhoodCaseDataType caseDataTypeRepresenting;
     DataVisualizer[] _dataVisualizers;
 
     // Start is called before the first frame update
     void Start()
     {
         _toggle = GetComponent<Toggle>();
+
+        GetComponentInChildren<Text>().text = Neighbourhood.LatestCaseDataTypeStrings[(int)caseDataTypeRepresenting] + " Case";
 
         _dataVisualizers = new DataVisualizer[mapPinLayer.MapPins.Count];
         for (int i = 0; i < mapPinLayer.MapPins.Count; i++)
@@ -23,7 +26,7 @@ public class DataSelectionToggle : MonoBehaviour
         }
     }
 
-    public void VisualizeData()
+    public void SwitchDataVisualizationState()
     {
         if (_toggle.isOn)
         {

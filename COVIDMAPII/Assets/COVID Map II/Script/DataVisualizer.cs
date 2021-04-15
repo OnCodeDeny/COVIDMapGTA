@@ -30,7 +30,7 @@ public class DataVisualizer : MonoBehaviour
         _agentRenderer = visualizationAgent.GetComponent<Renderer>();
     }
 
-    public IEnumerator VisualizeDatumByHeight(NeighbourhoodDailyCaseDataType caseType, PlaceDay day, float animationLength)
+    public IEnumerator VisualizeDatumByHeight(Neighbourhood.DailyCaseDataType caseType, PlaceDay day, float animationLength)
     {
         _visualized = true;
         int caseTypeIndex = (int)caseType;
@@ -65,14 +65,14 @@ public class DataVisualizer : MonoBehaviour
             _agentRenderer.enabled = true;
         }
 
-        //If renderer is enabled when agent scale y is <= 0, ugly black area will appear
+        //Disable renderer when there's no case to show to avoid ugly black area
         if (_agentTransform.localScale.y <= 0)
         {
             _agentRenderer.enabled = false;
         }
     }
 
-    public IEnumerator VisualizeDatumByColour(NeighbourhoodDailyCaseDataType caseType, PlaceDay day, float animationLength)
+    public IEnumerator VisualizeDatumByColour(Neighbourhood.DailyCaseDataType caseType, PlaceDay day, float animationLength)
     {
         _visualized = true;
         int caseTypeIndex = (int)caseType;
@@ -104,14 +104,14 @@ public class DataVisualizer : MonoBehaviour
             _agentRenderer.enabled = true;
         }
 
-        //Disable renderer when there's no case to show to avoid confusion
+        //Disable renderer when there's no case to show to avoid ugly black area
         if (day.caseCountData[caseTypeIndex] <= 0)
         {
             _agentRenderer.enabled = false;
         }
     }
 
-    public IEnumerator VisualizeDatumByHeight(NeighbourhoodCaseDataType caseType)
+    public IEnumerator VisualizeDatumByHeight(Neighbourhood.LatestCaseDataType caseType)
     {
         _visualized = true;
         _agentRenderer.enabled = true;
@@ -122,21 +122,36 @@ public class DataVisualizer : MonoBehaviour
         float targetAgentHeight = agentHeightMultiplier * neighbourhoodRepresenting.caseCountData[caseTypeIndex] / Neighbourhood.NeighbourhoodsWithMaxCaseCount(caseType)[0].caseCountData[caseTypeIndex];
         Vector3 targetAgentLocalScale = new Vector3(_agentTransform.localScale.x, targetAgentHeight, _agentTransform.localScale.z);
 
-        while (timeElapsedInAnimation < scaleCurve[scaleCurve.length - 1].time && _visualized)
+        //Detect if animation is needed
+        if (initialAgentLocalScale != targetAgentLocalScale)
         {
-            if (gameObject.activeSelf)
+            while (timeElapsedInAnimation < scaleCurve[scaleCurve.length - 1].time && _visualized)
             {
-                timeElapsedInAnimation += Time.deltaTime;
-                _agentTransform.localScale = Vector3.LerpUnclamped(initialAgentLocalScale, targetAgentLocalScale, scaleCurve.Evaluate(timeElapsedInAnimation));
-                //Position offset due to scale change
-                _agentTransform.localPosition = new Vector3(_agentTransform.localPosition.x, _agentTransform.localScale.y / 2, _agentTransform.localPosition.z);
-                _agentLabelTransform.localPosition = new Vector3(_agentTransform.localPosition.x, _agentTransform.localScale.y + _agentLabelTransform.localScale.y / 2, _agentTransform.localPosition.z);
+                if (gameObject.activeSelf)
+                {
+                    timeElapsedInAnimation += Time.deltaTime;
+                    _agentTransform.localScale = Vector3.LerpUnclamped(initialAgentLocalScale, targetAgentLocalScale, scaleCurve.Evaluate(timeElapsedInAnimation));
+                    //Position offset due to scale change
+                    _agentTransform.localPosition = new Vector3(_agentTransform.localPosition.x, _agentTransform.localScale.y / 2, _agentTransform.localPosition.z);
+                    _agentLabelTransform.localPosition = new Vector3(_agentTransform.localPosition.x, _agentTransform.localScale.y + _agentLabelTransform.localScale.y / 2, _agentTransform.localPosition.z);
+                }
+                yield return null;
             }
-            yield return null;
+        }
+        //In case animation is not needed, enable renderer if there are cases to show
+        else if (neighbourhoodRepresenting.caseCountData[caseTypeIndex] > 0)
+        {
+            _agentRenderer.enabled = true;
+        }
+
+        //Disable renderer when there's no case to show to avoid ugly black area
+        if (_agentTransform.localScale.y <= 0)
+        {
+            _agentRenderer.enabled = false;
         }
     }
 
-    public IEnumerator VisualizeDatumByColour(NeighbourhoodCaseDataType caseType)
+    public IEnumerator VisualizeDatumByColour(Neighbourhood.LatestCaseDataType caseType)
     {
         _visualized = true;
         _agentRenderer.enabled = true;
@@ -147,14 +162,29 @@ public class DataVisualizer : MonoBehaviour
         float targetAgentColourGB = 1 - ((float)neighbourhoodRepresenting.caseCountData[caseTypeIndex] / (float)Neighbourhood.NeighbourhoodsWithMaxCaseCount(caseType)[0].caseCountData[caseTypeIndex]);
         Color targetAgentColour = new Color(1, targetAgentColourGB, targetAgentColourGB);
 
-        while (timeElapsedInAnimation < colourCurve[colourCurve.length - 1].time && _visualized)
+        //Detect if animation is needed
+        if (initialAgentColour != targetAgentColour)
         {
-            if (gameObject.activeSelf)
+            while (timeElapsedInAnimation < colourCurve[colourCurve.length - 1].time && _visualized)
             {
-                timeElapsedInAnimation += Time.deltaTime;
-                _agentRenderer.material.color = Color.Lerp(initialAgentColour, targetAgentColour, colourCurve.Evaluate(timeElapsedInAnimation));
+                if (gameObject.activeSelf)
+                {
+                    timeElapsedInAnimation += Time.deltaTime;
+                    _agentRenderer.material.color = Color.Lerp(initialAgentColour, targetAgentColour, colourCurve.Evaluate(timeElapsedInAnimation));
+                }
+                yield return null;
             }
-            yield return null;
+        }
+        //In case animation is not needed, enable renderer if there are cases to show
+        else if (neighbourhoodRepresenting.caseCountData[caseTypeIndex] > 0)
+        {
+            _agentRenderer.enabled = true;
+        }
+
+        //Disable renderer when there's no case to show to avoid ugly black area
+        if (neighbourhoodRepresenting.caseCountData[caseTypeIndex] <= 0)
+        {
+            _agentRenderer.enabled = false;
         }
     }
 
