@@ -13,6 +13,7 @@ public class NeighbourhoodPin : MonoBehaviour
     public Neighbourhood neighbourhoodRepresenting;
     public MapRenderer mapToBeAnimated;
     public LatestCaseDatumList datumListToBePopulated;
+    public TimelinePlayer timelinePlayer;
     MapSceneOfLocationAndZoomLevel _targetLocationOnMap;
 
     private void Start()
@@ -32,5 +33,10 @@ public class NeighbourhoodPin : MonoBehaviour
     public void DisplayCaseData()
     {
         datumListToBePopulated.DisplayDatumList(neighbourhoodRepresenting);
+    }
+    public void ChangeTimelinePlayerPresentingNeighbourhood()
+    {
+        timelinePlayer.presentingNeighbourhood = neighbourhoodRepresenting;
+        timelinePlayer.UpdateDailyCaseDatumList();
     }
 }

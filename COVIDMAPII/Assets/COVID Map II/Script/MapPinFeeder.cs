@@ -20,13 +20,13 @@ public class MapPinFeeder : MonoBehaviour
     private MapPin _mapPinPrefab = null;
 
     [SerializeField]
-    private LatestCaseDatumList caseDatumListManager = null;
+    private LatestCaseDatumList _latestCaseDatumList = null;
+
+    [SerializeField]
+    private TimelinePlayer _timelinePlayer = null;
 
     private void Awake()
     {
-        Debug.Assert(_mapPinLayer != null);
-        Debug.Assert(_mapPinPrefab != null);
-
         _mapPinPrefab.gameObject.SetActive(false);
         
         // Generate a MapPin for each of the locations and add it to the layer.
@@ -39,7 +39,8 @@ public class MapPinFeeder : MonoBehaviour
             NeighbourhoodPin neighbourhoodPin = mapPin.GetComponent<NeighbourhoodPin>();
             neighbourhoodPin.neighbourhoodRepresenting = neighbourhood;
             neighbourhoodPin.mapToBeAnimated = GetComponent<MapRenderer>();
-            neighbourhoodPin.datumListToBePopulated = caseDatumListManager;
+            neighbourhoodPin.datumListToBePopulated = _latestCaseDatumList;
+            neighbourhoodPin.timelinePlayer = _timelinePlayer;
         }
     }
 }
