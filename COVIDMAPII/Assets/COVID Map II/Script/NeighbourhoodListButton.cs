@@ -10,7 +10,8 @@ public class NeighbourhoodListButton : MonoBehaviour
 
     public MapRenderer mapToBeAnimated;
     private MapSceneOfLocationAndZoomLevel _targetLocationOnMap;
-    public CaseDatumListManager datumListToBePopulated;
+    public LatestCaseDatumList datumListToBePopulated;
+    public TimelinePlayer timelinePlayer;
 
     private void Start()
     {
@@ -26,5 +27,11 @@ public class NeighbourhoodListButton : MonoBehaviour
     public void DisplayCaseData()
     {
         datumListToBePopulated.DisplayDatumList(neighbourhoodRepresenting);
+    }
+
+    public void ChangeTimelinePlayerPresentingNeighbourhood()
+    {
+        timelinePlayer.presentingNeighbourhood = neighbourhoodRepresenting;
+        timelinePlayer.UpdateDailyCaseDatumList();
     }
 }

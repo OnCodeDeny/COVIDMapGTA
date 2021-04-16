@@ -12,7 +12,7 @@ public class NeighbourhoodPin : MonoBehaviour
     public TextMeshPro textMeshPro;
     public Neighbourhood neighbourhoodRepresenting;
     public MapRenderer mapToBeAnimated;
-    public CaseDatumListManager datumListToBePopulated;
+    public LatestCaseDatumList datumListToBePopulated;
     MapSceneOfLocationAndZoomLevel _targetLocationOnMap;
 
     private void Start()

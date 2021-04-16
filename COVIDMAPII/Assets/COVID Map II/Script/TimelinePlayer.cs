@@ -20,6 +20,7 @@ public class TimelinePlayer : MonoBehaviour
     public TimelineState currentTimelineState = TimelineState.Stopped;
     public Neighbourhood.DailyCaseDataType caseDataTypePresenting;
     public DateTime presentingDate;
+    public Neighbourhood presentingNeighbourhood;
 
     public TMP_Dropdown dropdown;
     public TMP_Text pPButtonText;
@@ -48,6 +49,8 @@ public class TimelinePlayer : MonoBehaviour
 
     public Slider playbackProgressSlider;
 
+    public DailyCaseDatumList dailyCaseDatumList;
+
     //Event is invoked on visualized day/presentingDate change
     public UnityEvent OnDayChange;
 
@@ -56,6 +59,8 @@ public class TimelinePlayer : MonoBehaviour
 
     private void Start()
     {
+        OnDayChange.AddListener(UpdateDailyCaseDatumList);
+
         SetPlaybackSpeed();
 
         caseDataTypePresenting = (Neighbourhood.DailyCaseDataType)dropdown.value;
@@ -68,6 +73,18 @@ public class TimelinePlayer : MonoBehaviour
         for (int i = 0; i < mapPinLayer.MapPins.Count; i++)
         {
             _dataVisualizers[i] = mapPinLayer.MapPins[i].GetComponent<DataVisualizer>();
+        }
+    }
+
+    public void UpdateDailyCaseDatumList()
+    {
+        if (presentingNeighbourhood != null && presentingDate != default)
+        {
+            dailyCaseDatumList.DisplayDatumList(presentingNeighbourhood, presentingDate);
+        }
+        else
+        {
+            dailyCaseDatumList.ClearDatumList();
         }
     }
 
@@ -319,8 +336,8 @@ public class TimelinePlayer : MonoBehaviour
 
             foreach (DataVisualizer dataVisualizer in _dataVisualizers)
             {
-                StartCoroutine(dataVisualizer.VisualizeDatumByHeight(caseDataTypePresenting, dataVisualizer.neighbourhoodRepresenting.episodeDays[i], _animationLengthForADay));
-                StartCoroutine(dataVisualizer.VisualizeDatumByColour(caseDataTypePresenting, dataVisualizer.neighbourhoodRepresenting.episodeDays[i], _animationLengthForADay));
+                StartCoroutine(dataVisualizer.VisualizeDatumByHeight(caseDataTypePresenting, dataVisualizer.neighbourhoodRepresenting.placeDays[i], _animationLengthForADay));
+                StartCoroutine(dataVisualizer.VisualizeDatumByColour(caseDataTypePresenting, dataVisualizer.neighbourhoodRepresenting.placeDays[i], _animationLengthForADay));
             }
 
             yield return new WaitForSeconds(_animationLengthForADay);
@@ -332,8 +349,8 @@ public class TimelinePlayer : MonoBehaviour
     {
         foreach (DataVisualizer dataVisualizer in _dataVisualizers)
         {
-            StartCoroutine(dataVisualizer.VisualizeDatumByHeight(caseDataTypePresenting, dataVisualizer.neighbourhoodRepresenting.episodeDays[targetDate], _animationLengthForADay));
-            StartCoroutine(dataVisualizer.VisualizeDatumByColour(caseDataTypePresenting, dataVisualizer.neighbourhoodRepresenting.episodeDays[targetDate], _animationLengthForADay));
+            StartCoroutine(dataVisualizer.VisualizeDatumByHeight(caseDataTypePresenting, dataVisualizer.neighbourhoodRepresenting.placeDays[targetDate], _animationLengthForADay));
+            StartCoroutine(dataVisualizer.VisualizeDatumByColour(caseDataTypePresenting, dataVisualizer.neighbourhoodRepresenting.placeDays[targetDate], _animationLengthForADay));
         }
     }
 }

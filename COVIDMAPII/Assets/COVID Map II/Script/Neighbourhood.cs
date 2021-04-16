@@ -23,7 +23,7 @@ public class Neighbourhood : Place
         CurrentlyIntubated,
         Deceased
     }
-    public static string[] LatestCaseDataTypeStrings = {
+    public static string[] LatestCaseDataTypeDisplayNames = {
         "Cumulative",
         "Ever Hospitalized",
         "Ever In ICU",
@@ -39,12 +39,12 @@ public class Neighbourhood : Place
         Active,
         New
     }
-    public static string[] DailyCaseDataTypeStrings = {
+    public static string[] DailyCaseDataTypeDisplayNames = {
         "Cumulative",
         "Active",
         "New"};
 
-    //COVID case data
+    //COVID latest case data
     public int[] caseCountData = new int[9];
     public int cumulativeCaseCount
     {

@@ -5,12 +5,13 @@ using UnityEngine.UI;
 using TMPro;
 using Microsoft.Maps.Unity;
 
-public class NeighbourhoodListManager : MonoBehaviour
+public class NeighbourhoodList : MonoBehaviour
 {
     public GameObject neighbourhoodListButtonPrefab;
     public Transform populatingSpace;
     public MapRenderer controllingMap;
-    public CaseDatumListManager caseDatumList;
+    public LatestCaseDatumList controllingLatestCaseDatumList;
+    public TimelinePlayer controllingTimelinePlayer;
 
     // Start is called before the first frame update
     void Start()
@@ -31,7 +32,8 @@ public class NeighbourhoodListManager : MonoBehaviour
             NeighbourhoodListButton neighbourhoodListButton = button.transform.GetComponent<NeighbourhoodListButton>();
             neighbourhoodListButton.neighbourhoodRepresenting = neighbourhood;
             neighbourhoodListButton.mapToBeAnimated = controllingMap;
-            neighbourhoodListButton.datumListToBePopulated = caseDatumList;
+            neighbourhoodListButton.datumListToBePopulated = controllingLatestCaseDatumList;
+            neighbourhoodListButton.timelinePlayer = controllingTimelinePlayer;
         }
     }
     public void PopulateNumerically()
@@ -47,7 +49,7 @@ public class NeighbourhoodListManager : MonoBehaviour
             NeighbourhoodListButton neighbourhoodListButton = button.transform.GetComponent<NeighbourhoodListButton>();
             neighbourhoodListButton.neighbourhoodRepresenting = neighbourhood;
             neighbourhoodListButton.mapToBeAnimated = controllingMap;
-            neighbourhoodListButton.datumListToBePopulated = caseDatumList;
+            neighbourhoodListButton.datumListToBePopulated = controllingLatestCaseDatumList;
         }
     }
 }

@@ -78,12 +78,12 @@ public class DataLoader : MonoBehaviour
                     if (IsConfirmed(singleCaseData))
                     {
                         //Check if episode day is already recorded
-                        if (!caseNeighbourhood.episodeDays.ContainsKey(episodeDate))
+                        if (!caseNeighbourhood.placeDays.ContainsKey(episodeDate))
                         {
-                            caseNeighbourhood.episodeDays[episodeDate] = new PlaceDay(caseNeighbourhood);
+                            caseNeighbourhood.placeDays[episodeDate] = new PlaceDay(caseNeighbourhood);
                         }
                         //Add to episode day
-                        caseNeighbourhood.episodeDays[episodeDate].newCase++;
+                        caseNeighbourhood.placeDays[episodeDate].newCase++;
 
                         caseNeighbourhood.cumulativeCaseCount++;
                         if (IsActive(singleCaseData))
@@ -144,31 +144,31 @@ public class DataLoader : MonoBehaviour
             for (DateTime i = Neighbourhood.firstEpisodeDate; i <= Neighbourhood.lastEpisodeDate; i = i.AddDays(1))
             {
                 //Fill empty episode days with generated days
-                if (!neighbourhood.episodeDays.ContainsKey(i))
+                if (!neighbourhood.placeDays.ContainsKey(i))
                 {
-                    neighbourhood.episodeDays[i] = new PlaceDay(neighbourhood);
+                    neighbourhood.placeDays[i] = new PlaceDay(neighbourhood);
                 }
 
                 //For calculating cumulative case count
                 DateTime lastEpisodeDate = i.AddDays(-1);
-                if (neighbourhood.episodeDays.ContainsKey(lastEpisodeDate))
+                if (neighbourhood.placeDays.ContainsKey(lastEpisodeDate))
                 {
-                    neighbourhood.episodeDays[i].cumulativeCase = neighbourhood.episodeDays[i].newCase + neighbourhood.episodeDays[lastEpisodeDate].cumulativeCase;
+                    neighbourhood.placeDays[i].cumulativeCase = neighbourhood.placeDays[i].newCase + neighbourhood.placeDays[lastEpisodeDate].cumulativeCase;
                 }
                 //In case this is the first episode date on record
                 else
                 {
-                    neighbourhood.episodeDays[i].cumulativeCase = neighbourhood.episodeDays[i].newCase;
+                    neighbourhood.placeDays[i].cumulativeCase = neighbourhood.placeDays[i].newCase;
                 }
 
                 //Calculate active case count
-                dailyActiveCaseCount += neighbourhood.episodeDays[i].newCase;
+                dailyActiveCaseCount += neighbourhood.placeDays[i].newCase;
                 DateTime lastDayOfVirusRetention = i.AddDays(-_averageVirusRetentionTime);
-                if (neighbourhood.episodeDays.ContainsKey(lastDayOfVirusRetention))
+                if (neighbourhood.placeDays.ContainsKey(lastDayOfVirusRetention))
                 {
-                    dailyActiveCaseCount -= neighbourhood.episodeDays[lastDayOfVirusRetention].newCase;
+                    dailyActiveCaseCount -= neighbourhood.placeDays[lastDayOfVirusRetention].newCase;
                 }
-                neighbourhood.episodeDays[i].activeCase = dailyActiveCaseCount;
+                neighbourhood.placeDays[i].activeCase = dailyActiveCaseCount;
             }
         }
     }
@@ -211,10 +211,10 @@ public class DataLoader : MonoBehaviour
             int caseTypeIndex = (int)caseType;
 
             placeDaysWithMaxCaseCount[caseTypeIndex] = new List<PlaceDay>();
-            placeDaysWithMaxCaseCount[caseTypeIndex].Add(Neighbourhood.allNeighbourhoodsInNumericalOrder[0].episodeDays[Neighbourhood.firstEpisodeDate]);
+            placeDaysWithMaxCaseCount[caseTypeIndex].Add(Neighbourhood.allNeighbourhoodsInNumericalOrder[0].placeDays[Neighbourhood.firstEpisodeDate]);
             for (int i = 0; i < Neighbourhood.allNeighbourhoodsInNumericalOrder.Length; i++)
             {
-                foreach (KeyValuePair<DateTime, PlaceDay> dayEntry in Neighbourhood.allNeighbourhoodsInNumericalOrder[i].episodeDays)
+                foreach (KeyValuePair<DateTime, PlaceDay> dayEntry in Neighbourhood.allNeighbourhoodsInNumericalOrder[i].placeDays)
                 {
                     if (placeDaysWithMaxCaseCount[caseTypeIndex][0].caseCountData[caseTypeIndex] < dayEntry.Value.caseCountData[caseTypeIndex])
                     {

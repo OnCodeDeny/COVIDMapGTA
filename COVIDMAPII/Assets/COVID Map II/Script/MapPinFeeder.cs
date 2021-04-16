@@ -20,7 +20,7 @@ public class MapPinFeeder : MonoBehaviour
     private MapPin _mapPinPrefab = null;
 
     [SerializeField]
-    private CaseDatumListManager caseDatumListManager = null;
+    private LatestCaseDatumList caseDatumListManager = null;
 
     private void Awake()
     {

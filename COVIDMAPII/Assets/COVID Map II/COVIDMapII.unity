@@ -1092,7 +1092,8 @@ MonoBehaviour:
     type: 3}
   populatingSpace: {fileID: 358217336}
   controllingMap: {fileID: 891002279}
-  caseDatumList: {fileID: 1803906122}
+  controllingLatestCaseDatumList: {fileID: 1803906122}
+  controllingTimelinePlayer: {fileID: 1485622895}
 --- !u!1 &175715486
 GameObject:
   m_ObjectHideFlags: 0
@@ -1880,7 +1881,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Neighbourhood Name
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1907,7 +1908,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 27.3
+  m_fontSize: 36
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -3137,7 +3138,7 @@ GameObject:
   - component: {fileID: 576814948}
   - component: {fileID: 576814949}
   m_Layer: 5
-  m_Name: Visualize Latest Data Selection
+  m_Name: Latest Data Selection
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10512,6 +10513,7 @@ MonoBehaviour:
   jumpToLastMonthButton: {fileID: 994686305}
   jumpToLastYearButton: {fileID: 374572327}
   playbackProgressSlider: {fileID: 1260630816}
+  dailyCaseDatumList: {fileID: 1925421332}
   OnDayChange:
     m_PersistentCalls:
       m_Calls:
@@ -12058,7 +12060,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: -1183493901
+  m_TextStyleHashCode: 2192
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -12349,10 +12351,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a02c938cc728bbd42b710e663b404e90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CaseDatumListTextPrefab: {fileID: 8608547014911759067, guid: ebef1ff184dccd546bd5fec82ae21466,
+  CaseDatumTextPrefab: {fileID: 8608547014911759067, guid: ebef1ff184dccd546bd5fec82ae21466,
     type: 3}
   populatingSpace: {fileID: 1853558616}
-  neighbourhoodName: {fileID: 2061331416}
+  neighbourhoodNameText: {fileID: 2061331416}
 --- !u!1 &1810236982
 GameObject:
   m_ObjectHideFlags: 0
@@ -13109,13 +13111,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1925421330}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a02c938cc728bbd42b710e663b404e90, type: 3}
+  m_Script: {fileID: 11500000, guid: 3ec0caa1504fa584396439f0285fe860, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CaseDatumListTextPrefab: {fileID: 8608547014911759067, guid: ebef1ff184dccd546bd5fec82ae21466,
+  CaseDatumTextPrefab: {fileID: 8608547014911759067, guid: ebef1ff184dccd546bd5fec82ae21466,
     type: 3}
   populatingSpace: {fileID: 1519103217}
-  neighbourhoodName: {fileID: 290828197}
+  neighbourhoodNameText: {fileID: 290828197}
 --- !u!1 &1938233466
 GameObject:
   m_ObjectHideFlags: 0
@@ -13992,7 +13994,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Neighbourhood Name
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -14019,7 +14021,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 35.4
+  m_fontSize: 36
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1

@@ -18,6 +18,6 @@ public abstract class Place
     {
         get => new LatLon(latitude, longitude);
     }
-    //To store each episode days.
-    public Dictionary<DateTime, PlaceDay> episodeDays = new Dictionary<DateTime, PlaceDay>();
+    //To store each place days.
+    public Dictionary<DateTime, PlaceDay> placeDays = new Dictionary<DateTime, PlaceDay>();
 }
