@@ -3344,6 +3344,7 @@ GameObject:
   m_Component:
   - component: {fileID: 576814948}
   - component: {fileID: 576814949}
+  - component: {fileID: 576814950}
   m_Layer: 5
   m_Name: Latest Data Selection
   m_TagString: Untagged
@@ -3389,6 +3390,33 @@ MonoBehaviour:
     type: 3}
   populatingSpace: {fileID: 1333967277}
   mapPinLayer: {fileID: 891002287}
+  OnLatestDataVisualize:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1485622895}
+        m_MethodName: TransferToStopped
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+--- !u!114 &576814950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 576814947}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fafe2cfe61f6974895a912c3755e8f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AllowSwitchOff: 1
 --- !u!1 &582142275
 GameObject:
   m_ObjectHideFlags: 0
@@ -11135,6 +11163,17 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1485622895}
         m_MethodName: SetPlaybackProgressSliderValue
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1485622895}
+        m_MethodName: UpdateDailyCaseDatumList
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

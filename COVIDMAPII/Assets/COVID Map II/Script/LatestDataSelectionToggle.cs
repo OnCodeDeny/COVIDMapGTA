@@ -10,14 +10,14 @@ public class LatestDataSelectionToggle : MonoBehaviour
     public MapPinLayer mapPinLayer;
     public Neighbourhood.LatestCaseDataType caseDataTypeRepresenting;
     Toggle _toggle;
-    LatestDataSelection _latestDataSelectionManager;
+    LatestDataSelection _latestDataSelection;
     DataVisualizer[] _dataVisualizers;
 
     // Start is called before the first frame update
     void Start()
     {
         _toggle = GetComponent<Toggle>();
-        _latestDataSelectionManager = GetComponentInParent<LatestDataSelection>();
+        _latestDataSelection = GetComponentInParent<LatestDataSelection>();
 
         GetComponentInChildren<Text>().text = Neighbourhood.LatestCaseDataTypeDisplayNames[(int)caseDataTypeRepresenting] + " Case";
 
@@ -32,7 +32,8 @@ public class LatestDataSelectionToggle : MonoBehaviour
     {
         if (_toggle.isOn)
         {
-            _latestDataSelectionManager.DeselectOtherToggles(_toggle);
+            _latestDataSelection.OnLatestDataVisualize.Invoke();
+
             foreach (DataVisualizer dataVisualizer in _dataVisualizers)
             {
                 StartCoroutine(dataVisualizer.VisualizeDatumByHeight(caseDataTypeRepresenting));
@@ -41,7 +42,7 @@ public class LatestDataSelectionToggle : MonoBehaviour
         }
         else
         {
-            if (!_latestDataSelectionManager.VisualizingData())
+            if (!_latestDataSelection.VisualizingData())
             {
                 foreach (DataVisualizer dataVisualizer in _dataVisualizers)
                 {

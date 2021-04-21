@@ -59,8 +59,6 @@ public class TimelinePlayer : MonoBehaviour
 
     private void Start()
     {
-        OnDayChange.AddListener(UpdateDailyCaseDatumList);
-
         SetPlaybackSpeed();
 
         caseDataTypePresenting = (Neighbourhood.DailyCaseDataType)dropdown.value;
@@ -286,16 +284,19 @@ public class TimelinePlayer : MonoBehaviour
 
     public void TransferToStopped(bool manuallyStopped)
     {
-        currentTimelineState = TimelineState.Stopped;
-        StopCoroutine(_visualizeHistoryDaysData);
-        if (manuallyStopped)
+        if (currentTimelineState != TimelineState.Stopped)
         {
-            presentingDate = default;
-            DevisualizeData();
-            OnDayChange.Invoke();
-            dateText.text = "MM/DD/YYYY";
+            currentTimelineState = TimelineState.Stopped;
+            StopCoroutine(_visualizeHistoryDaysData);
+            if (manuallyStopped)
+            {
+                presentingDate = default;
+                DevisualizeData();
+                OnDayChange.Invoke();
+                dateText.text = "MM/DD/YYYY";
+            }
+            pPButtonText.text = "PLAY";
         }
-        pPButtonText.text = "PLAY";
     }
 
     public void StartTimelineFromBeginning()

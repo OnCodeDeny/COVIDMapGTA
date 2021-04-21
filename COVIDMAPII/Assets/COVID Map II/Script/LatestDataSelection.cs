@@ -5,17 +5,21 @@ using UnityEngine.UI;
 using TMPro;
 using Microsoft.Maps.Unity;
 using System;
+using UnityEngine.Events;
 
 public class LatestDataSelection : MonoBehaviour
 {
     public GameObject latestDataListTogglePrefab;
     public Transform populatingSpace;
     public MapPinLayer mapPinLayer;
+    public UnityEvent OnLatestDataVisualize;
     List<Toggle> _latestDataSelectionToggles = new List<Toggle>();
+    ToggleGroup _latestDataSelectionToggleGroup;
 
     // Start is called before the first frame update
     void Start()
     {
+        _latestDataSelectionToggleGroup = GetComponent<ToggleGroup>();
         Populate();
     }
 
@@ -24,21 +28,12 @@ public class LatestDataSelection : MonoBehaviour
         foreach (Neighbourhood.LatestCaseDataType dataType in Enum.GetValues(typeof(Neighbourhood.LatestCaseDataType)))
         {
             GameObject toggleGameObject = Instantiate(latestDataListTogglePrefab, populatingSpace);
-            _latestDataSelectionToggles.Add(toggleGameObject.GetComponent<Toggle>());
+            Toggle toggle = toggleGameObject.GetComponent<Toggle>();
+            toggle.group = _latestDataSelectionToggleGroup;
+            _latestDataSelectionToggles.Add(toggle);
             LatestDataSelectionToggle latestDataSelectionToggle = toggleGameObject.transform.GetComponent<LatestDataSelectionToggle>();
             latestDataSelectionToggle.caseDataTypeRepresenting = dataType;
             latestDataSelectionToggle.mapPinLayer = mapPinLayer;
-        }
-    }
-
-    public void DeselectOtherToggles(Toggle toggleKeptOn)
-    {
-        foreach (Toggle toggle in _latestDataSelectionToggles)
-        {
-            if (toggle != toggleKeptOn)
-            {
-                toggle.isOn = false;
-            }
         }
     }
 
