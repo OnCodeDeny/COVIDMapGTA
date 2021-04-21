@@ -1,8 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
 using Microsoft.Maps.Unity;
 
 public class NeighbourhoodList : MonoBehaviour
@@ -50,6 +48,7 @@ public class NeighbourhoodList : MonoBehaviour
             neighbourhoodListButton.neighbourhoodRepresenting = neighbourhood;
             neighbourhoodListButton.mapToBeAnimated = controllingMap;
             neighbourhoodListButton.datumListToBePopulated = controllingLatestCaseDatumList;
+            neighbourhoodListButton.timelinePlayer = controllingTimelinePlayer;
         }
     }
 }

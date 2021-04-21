@@ -1,11 +1,10 @@
-﻿using Microsoft.Maps.Unity;
-using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
+using Microsoft.Maps.Unity;
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class TimelinePlayer : MonoBehaviour

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 using Microsoft.Maps.Unity;
 using System;
 using UnityEngine.Events;

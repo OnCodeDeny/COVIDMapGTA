@@ -5,13 +5,13 @@ using TMPro;
 
 public class SortOptionDropdown : MonoBehaviour
 {
-    NeighbourhoodList _neighbourhoodListManager;
+    NeighbourhoodList _neighbourhoodList;
     TMP_Dropdown _dropdown;
 
     // Start is called before the first frame update
     void Start()
     {
-        _neighbourhoodListManager = transform.parent.GetComponent<NeighbourhoodList>();
+        _neighbourhoodList = transform.parent.GetComponent<NeighbourhoodList>();
         _dropdown = GetComponent<TMP_Dropdown>();
     }
 
@@ -19,11 +19,11 @@ public class SortOptionDropdown : MonoBehaviour
     {
         if (_dropdown.value == 0)
         {
-            _neighbourhoodListManager.PopulateAlphabetically();
+            _neighbourhoodList.PopulateAlphabetically();
         }
         else if (_dropdown.value == 1)
         {
-            _neighbourhoodListManager.PopulateNumerically();
+            _neighbourhoodList.PopulateNumerically();
         }
     }
 }

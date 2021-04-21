@@ -13,21 +13,17 @@ public class PinStem : MonoBehaviour
     private void OnMouseOver()
     {
         OnHover.Invoke();
-        Debug.Log("hoverStem!");
     }
     private void OnMouseEnter()
     {
         OnEnter.Invoke();
-        Debug.Log("enterStem!");
     }
     private void OnMouseExit()
     {
         OnExit.Invoke();
-        Debug.Log("exitStem!");
     }
     private void OnMouseUpAsButton()
     {
         OnClick.Invoke();
-        Debug.Log("clickStem!");
     }
 }

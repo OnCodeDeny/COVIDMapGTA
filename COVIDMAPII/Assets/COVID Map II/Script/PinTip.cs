@@ -13,21 +13,17 @@ public class PinTip : MonoBehaviour
     private void OnMouseOver()
     {
         OnHover.Invoke();
-        Debug.Log("hoverTip!");
     }
     private void OnMouseEnter()
     {
         OnEnter.Invoke();
-        Debug.Log("enterTip!");
     }
     private void OnMouseExit()
     {
         OnExit.Invoke();
-        Debug.Log("exitTip!");
     }
     private void OnMouseUpAsButton()
     {
         OnClick.Invoke();
-        Debug.Log("clickTip!");
     }
 }
