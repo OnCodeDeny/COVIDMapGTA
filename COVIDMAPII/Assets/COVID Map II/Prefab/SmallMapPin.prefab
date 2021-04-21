@@ -394,7 +394,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dataVisualizer: {fileID: 54926034354258805}
-  textMeshPro: {fileID: 8042597523268217699}
+  infoText: {fileID: 8042597523268217699}
   mapToBeAnimated: {fileID: 0}
   datumListToBePopulated: {fileID: 0}
   timelinePlayer: {fileID: 0}

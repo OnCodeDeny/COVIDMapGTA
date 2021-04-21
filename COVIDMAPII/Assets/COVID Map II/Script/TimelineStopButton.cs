@@ -1,8 +1,6 @@
-﻿using Microsoft.Maps.Unity;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class TimelineStopButton : MonoBehaviour
 {
@@ -16,9 +14,6 @@ public class TimelineStopButton : MonoBehaviour
 
     public void StopTimeline()
     {
-        if (_timelinePlayer.currentTimelineState != TimelinePlayer.TimelineState.Stopped)
-        {
-            _timelinePlayer.TransferToStopped(true);
-        }
+        _timelinePlayer.TransferToStoppedWithReset();
     }
 }

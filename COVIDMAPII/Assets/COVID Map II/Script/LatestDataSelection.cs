@@ -8,6 +8,10 @@ using UnityEngine.Events;
 
 public class LatestDataSelection : MonoBehaviour
 {
+    DataVisualizer[] _dataVisualizers;
+    Coroutine[] _visualizeDatumByHeightRoutines;
+    Coroutine[] _visualizeDatumByColourRoutines;
+
     public GameObject latestDataListTogglePrefab;
     public Transform populatingSpace;
     public MapPinLayer mapPinLayer;
@@ -18,6 +22,14 @@ public class LatestDataSelection : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _dataVisualizers = new DataVisualizer[mapPinLayer.MapPins.Count];
+        for (int i = 0; i < mapPinLayer.MapPins.Count; i++)
+        {
+            _dataVisualizers[i] = mapPinLayer.MapPins[i].GetComponent<DataVisualizer>();
+        }
+        _visualizeDatumByHeightRoutines = new Coroutine[_dataVisualizers.Length];
+        _visualizeDatumByColourRoutines = new Coroutine[_dataVisualizers.Length];
+
         _latestDataSelectionToggleGroup = GetComponent<ToggleGroup>();
         Populate();
     }
@@ -32,7 +44,6 @@ public class LatestDataSelection : MonoBehaviour
             _latestDataSelectionToggles.Add(toggle);
             LatestDataSelectionToggle latestDataSelectionToggle = toggleGameObject.transform.GetComponent<LatestDataSelectionToggle>();
             latestDataSelectionToggle.caseDataTypeRepresenting = dataType;
-            latestDataSelectionToggle.mapPinLayer = mapPinLayer;
         }
     }
 
@@ -46,5 +57,27 @@ public class LatestDataSelection : MonoBehaviour
             }
         }
         return false;
+    }
+
+    public void VisualizeData(Neighbourhood.LatestCaseDataType caseDataTypeToBeVisualized)
+    {
+        StopAllCoroutines();
+        foreach (DataVisualizer dataVisualizer in _dataVisualizers)
+        {
+            StartCoroutine(dataVisualizer.VisualizeDatumByHeight(caseDataTypeToBeVisualized));
+            StartCoroutine(dataVisualizer.VisualizeDatumByColour(caseDataTypeToBeVisualized));
+        }
+    }
+
+    public void DevisualizeData(bool resetVisualization = true)
+    {
+        StopAllCoroutines();
+        if (resetVisualization)
+        {
+            foreach (DataVisualizer dataVisualizer in _dataVisualizers)
+            {
+                dataVisualizer.DevisualizeDatum();
+            }
+        }
     }
 }

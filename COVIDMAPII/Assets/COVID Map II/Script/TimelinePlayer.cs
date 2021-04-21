@@ -53,6 +53,9 @@ public class TimelinePlayer : MonoBehaviour
     //Event is invoked on visualized day/presentingDate change
     public UnityEvent OnDayChange;
 
+    //Event is invoked on placeday data visualization start
+    public UnityEvent OnVisualizationStart;
+
     [SerializeField]
     bool userIsControllingProgress;
 
@@ -281,21 +284,26 @@ public class TimelinePlayer : MonoBehaviour
         pPButtonText.text = "PAUSE";
     }
 
-    public void TransferToStopped(bool manuallyStopped)
+    public void TransferToStoppedWithReset(bool resetVisualization = true)
     {
-        if (currentTimelineState != TimelineState.Stopped)
+        currentTimelineState = TimelineState.Stopped;
+        StopCoroutine(_visualizeHistoryDaysData);
+        pPButtonText.text = "PLAY";
+
+        presentingDate = default;
+        OnDayChange.Invoke();
+        dateText.text = "MM/DD/YYYY";
+        if (resetVisualization)
         {
-            currentTimelineState = TimelineState.Stopped;
-            StopCoroutine(_visualizeHistoryDaysData);
-            if (manuallyStopped)
-            {
-                presentingDate = default;
-                DevisualizeData();
-                OnDayChange.Invoke();
-                dateText.text = "MM/DD/YYYY";
-            }
-            pPButtonText.text = "PLAY";
+            DevisualizeData();
         }
+    }
+
+    public void TransferToStoppedWithoutReset()
+    {
+        currentTimelineState = TimelineState.Stopped;
+        StopCoroutine(_visualizeHistoryDaysData);
+        pPButtonText.text = "PLAY";
     }
 
     public void StartTimelineFromBeginning()
@@ -328,6 +336,7 @@ public class TimelinePlayer : MonoBehaviour
 
     IEnumerator VisualizeHistoryDaysData(DateTime startDate, DateTime endDate)
     {
+        OnVisualizationStart.Invoke();
         for (DateTime i = startDate; i <= endDate; i = i.AddDays(1))
         {
             presentingDate = i;
@@ -342,11 +351,12 @@ public class TimelinePlayer : MonoBehaviour
 
             yield return new WaitForSeconds(_animationLengthForADay);
         }
-        TransferToStopped(false);
+        TransferToStoppedWithoutReset();
     }
 
     void VisualizeSingleDayData(DateTime targetDate)
     {
+        OnVisualizationStart.Invoke();
         foreach (DataVisualizer dataVisualizer in _dataVisualizers)
         {
             StartCoroutine(dataVisualizer.VisualizeDatumByHeight(caseDataTypePresenting, dataVisualizer.neighbourhoodRepresenting.placeDays[targetDate], _animationLengthForADay));
