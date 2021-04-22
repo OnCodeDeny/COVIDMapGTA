@@ -1580,7 +1580,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Map Settings
+  m_text: Map Settings(Preview)
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
@@ -6243,7 +6243,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b43805b646baceb4d9f28507342754b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _urlFormatString: https://api.mapbox.com/styles/v1/zipc/ckm38vcw02xhc17qrz4psvfe6/draft/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiemlwYyIsImEiOiJja2dnNmJ5cWUweWlmMnhwZHI2Z2x1YTcxIn0.A91cAQJMXDgvUkRl23XEwQ
+  _urlFormatString: https://api.mapbox.com/styles/v1/zipc/ckm38vcw02xhc17qrz4psvfe6/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiemlwYyIsImEiOiJja2dnNmJ5cWUweWlmMnhwZHI2Z2x1YTcxIn0.A91cAQJMXDgvUkRl23XEwQ
   _subdomains: []
 --- !u!114 &891002285
 MonoBehaviour:
@@ -6523,7 +6523,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  m_IsOn: 1
+  m_IsOn: 0
 --- !u!1 &920545715
 GameObject:
   m_ObjectHideFlags: 0
@@ -10344,7 +10344,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 10, y: -10}
-  m_SizeDelta: {x: 259.66345, y: 36.713013}
+  m_SizeDelta: {x: 421.38116, y: 54.976135}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1371520004
 MonoBehaviour:
@@ -10372,13 +10372,15 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 2
     m_MaxSize: 40
-    m_Alignment: 4
+    m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Toronto COVID Map V.1.1
+  m_Text: 'Toronto COVID Map V.1.1
+
+    FOR INTERNAL USE & PUBLIC DEMO ONLY'
 --- !u!222 &1371520005
 CanvasRenderer:
   m_ObjectHideFlags: 0
