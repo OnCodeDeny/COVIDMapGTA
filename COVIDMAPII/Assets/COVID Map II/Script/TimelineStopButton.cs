@@ -14,6 +14,9 @@ public class TimelineStopButton : MonoBehaviour
 
     public void StopTimeline()
     {
-        _timelinePlayer.TransferToStoppedWithReset();
+        if (_timelinePlayer.timelineInUse)
+        {
+            _timelinePlayer.TransferToStoppedWithReset();
+        }
     }
 }

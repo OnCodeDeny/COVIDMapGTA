@@ -16,6 +16,8 @@ public class TimelinePlayer : MonoBehaviour
         Paused
     }
 
+    public bool timelineInUse;
+
     public TimelineState currentTimelineState = TimelineState.Stopped;
     public Neighbourhood.DailyCaseDataType caseDataTypePresenting;
     public DateTime presentingDate;
@@ -287,9 +289,10 @@ public class TimelinePlayer : MonoBehaviour
     public void TransferToStoppedWithReset(bool resetVisualization = true)
     {
         currentTimelineState = TimelineState.Stopped;
-        StopCoroutine(_visualizeHistoryDaysData);
+        StopAllCoroutines();
         pPButtonText.text = "PLAY";
 
+        timelineInUse = false;
         presentingDate = default;
         OnDayChange.Invoke();
         dateText.text = "MM/DD/YYYY";
@@ -302,7 +305,7 @@ public class TimelinePlayer : MonoBehaviour
     public void TransferToStoppedWithoutReset()
     {
         currentTimelineState = TimelineState.Stopped;
-        StopCoroutine(_visualizeHistoryDaysData);
+        StopAllCoroutines();
         pPButtonText.text = "PLAY";
     }
 
@@ -336,6 +339,7 @@ public class TimelinePlayer : MonoBehaviour
 
     IEnumerator VisualizeHistoryDaysData(DateTime startDate, DateTime endDate)
     {
+        timelineInUse = true;
         OnVisualizationStart.Invoke();
         for (DateTime i = startDate; i <= endDate; i = i.AddDays(1))
         {
@@ -356,6 +360,7 @@ public class TimelinePlayer : MonoBehaviour
 
     void VisualizeSingleDayData(DateTime targetDate)
     {
+        timelineInUse = true;
         OnVisualizationStart.Invoke();
         foreach (DataVisualizer dataVisualizer in _dataVisualizers)
         {

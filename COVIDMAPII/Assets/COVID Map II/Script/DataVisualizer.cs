@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class DataVisualizer : MonoBehaviour
 {
-    [SerializeField]
-    bool _visualized;
-
     public Neighbourhood neighbourhoodRepresenting;
 
     public GameObject visualizationAgent;
@@ -31,7 +28,6 @@ public class DataVisualizer : MonoBehaviour
 
     public IEnumerator VisualizeDatumByHeight(Neighbourhood.DailyCaseDataType caseType, PlaceDay day, float animationLength)
     {
-        _visualized = true;
         int caseTypeIndex = (int)caseType;
 
         float timeElapsedInAnimation = 0;
@@ -46,7 +42,7 @@ public class DataVisualizer : MonoBehaviour
             //Enable renderer and animate to target
             _agentRenderer.enabled = true;
 
-            while (progressPercentage < 1 && _visualized)
+            while (progressPercentage < 1)
             {
                 timeElapsedInAnimation += Time.deltaTime;
                 progressPercentage = timeElapsedInAnimation / animationLength;
@@ -73,7 +69,6 @@ public class DataVisualizer : MonoBehaviour
 
     public IEnumerator VisualizeDatumByColour(Neighbourhood.DailyCaseDataType caseType, PlaceDay day, float animationLength)
     {
-        _visualized = true;
         int caseTypeIndex = (int)caseType;
 
         float timeElapsedInAnimation = 0;
@@ -88,7 +83,7 @@ public class DataVisualizer : MonoBehaviour
             //Enable renderer and animate to target
             _agentRenderer.enabled = true;
 
-            while (progressPercentage < 1 && _visualized)
+            while (progressPercentage < 1)
             {
                 timeElapsedInAnimation += Time.deltaTime;
                 progressPercentage = timeElapsedInAnimation / animationLength;
@@ -112,7 +107,6 @@ public class DataVisualizer : MonoBehaviour
 
     public IEnumerator VisualizeDatumByHeight(Neighbourhood.LatestCaseDataType caseType)
     {
-        _visualized = true;
         _agentRenderer.enabled = true;
         int caseTypeIndex = (int)caseType;
 
@@ -124,7 +118,7 @@ public class DataVisualizer : MonoBehaviour
         //Detect if animation is needed
         if (initialAgentLocalScale != targetAgentLocalScale)
         {
-            while (timeElapsedInAnimation < scaleCurve[scaleCurve.length - 1].time && _visualized)
+            while (timeElapsedInAnimation < scaleCurve[scaleCurve.length - 1].time)
             {
                 if (gameObject.activeSelf)
                 {
@@ -152,7 +146,6 @@ public class DataVisualizer : MonoBehaviour
 
     public IEnumerator VisualizeDatumByColour(Neighbourhood.LatestCaseDataType caseType)
     {
-        _visualized = true;
         _agentRenderer.enabled = true;
         int caseTypeIndex = (int)caseType;
 
@@ -164,7 +157,7 @@ public class DataVisualizer : MonoBehaviour
         //Detect if animation is needed
         if (initialAgentColour != targetAgentColour)
         {
-            while (timeElapsedInAnimation < colourCurve[colourCurve.length - 1].time && _visualized)
+            while (timeElapsedInAnimation < colourCurve[colourCurve.length - 1].time)
             {
                 if (gameObject.activeSelf)
                 {
@@ -194,6 +187,5 @@ public class DataVisualizer : MonoBehaviour
         _agentLabelTransform.localPosition = new Vector3(0, _agentLabelTransform.localScale.y / 2, 0);
         visualizationAgent.GetComponent<Renderer>().material.color = Color.cyan;
         _agentRenderer.enabled = true;
-        _visualized = false;
     }
 }

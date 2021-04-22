@@ -9,8 +9,6 @@ using UnityEngine.Events;
 public class LatestDataSelection : MonoBehaviour
 {
     DataVisualizer[] _dataVisualizers;
-    Coroutine[] _visualizeDatumByHeightRoutines;
-    Coroutine[] _visualizeDatumByColourRoutines;
 
     public GameObject latestDataListTogglePrefab;
     public Transform populatingSpace;
@@ -27,8 +25,6 @@ public class LatestDataSelection : MonoBehaviour
         {
             _dataVisualizers[i] = mapPinLayer.MapPins[i].GetComponent<DataVisualizer>();
         }
-        _visualizeDatumByHeightRoutines = new Coroutine[_dataVisualizers.Length];
-        _visualizeDatumByColourRoutines = new Coroutine[_dataVisualizers.Length];
 
         _latestDataSelectionToggleGroup = GetComponent<ToggleGroup>();
         Populate();

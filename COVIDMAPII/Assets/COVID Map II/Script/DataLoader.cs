@@ -19,10 +19,19 @@ public class DataLoader : MonoBehaviour
         _caseDataFilePath = Path.Combine(Application.persistentDataPath, "TorontoCOVID19Cases.tsv");
         if (File.Exists(_caseDataFilePath))
         {
-            ReadCaseDataFile();
+            if (CaseDataFileUpToDate())
+            {
+                ReadCaseDataFile();
+            }
+            else 
+            {
+                StartCoroutine(DownloadCaseDataToFile());
+            }
         }
         else
+        {
             StartCoroutine(DownloadCaseDataToFile());
+        }
     }
 
     IEnumerator DownloadCaseDataToFile()
@@ -39,6 +48,15 @@ public class DataLoader : MonoBehaviour
         }
     }
 
+    private bool CaseDataFileUpToDate()
+    {
+        if (DateTime.UtcNow.Subtract(File.GetLastWriteTimeUtc(_caseDataFilePath)) >= TimeSpan.FromDays(7))
+        {
+            return false;
+        }
+        return true;
+    }
+
     private void ReadCaseDataFile()
     {
         LoadRawDataset();
@@ -52,9 +70,8 @@ public class DataLoader : MonoBehaviour
         DateTime lastEpisodeDate = Neighbourhood.lastEpisodeDate;
         DateTime firstEpisodeDate = Neighbourhood.firstEpisodeDate;
 
-        string caseDataFileContents = File.ReadAllText(_caseDataFilePath);
+        string[] lines = File.ReadAllLines(_caseDataFilePath);
 
-        string[] lines = caseDataFileContents.Split('\n');
         for (int i = 1; i < lines.Length; i++)
         {
             string[] singleCaseData = lines[i].Split('\t');
@@ -133,7 +150,7 @@ public class DataLoader : MonoBehaviour
         Neighbourhood.totalPlaceDays = lastEpisodeDate.Subtract(firstEpisodeDate).Days;
     }
 
-    //Calculate and assign case data value for each episode day in each neighbourhood
+    //Calculate and assign case data value for each place day in each neighbourhood
     private void CalculatePlaceDaysData()
     {
         foreach (Neighbourhood neighbourhood in Neighbourhood.allNeighbourhoodsInNumericalOrder)
@@ -143,7 +160,7 @@ public class DataLoader : MonoBehaviour
 
             for (DateTime i = Neighbourhood.firstEpisodeDate; i <= Neighbourhood.lastEpisodeDate; i = i.AddDays(1))
             {
-                //Fill empty episode days with generated days
+                //Fill episode day gap with generated place days
                 if (!neighbourhood.placeDays.ContainsKey(i))
                 {
                     neighbourhood.placeDays[i] = new PlaceDay(neighbourhood);
