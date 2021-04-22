@@ -13,7 +13,7 @@ public class TimelineCaseTypeSelection : MonoBehaviour
     {
         _timelinePlayer = transform.parent.GetComponent<TimelinePlayer>();
 
-        _dropdown = transform.GetComponent<TMP_Dropdown>();
+        _dropdown = transform.GetComponentInChildren<TMP_Dropdown>();
 
         List<string> options = new List<string>();
         options.AddRange(new string[3]);
